@@ -3263,13 +3263,11 @@ IS
 
             RETURN w_nombre;
         ELSE
-            SELECT   cmp_nam
-              INTO   w_nombre
-              FROM   uncmptab
-             WHERE   cmp_cod = w_sad_exporter
-                     AND ser_sta = (SELECT   MAX (ser_sta)
-                                      FROM   uncmptab
-                                     WHERE   cmp_cod = w_sad_exporter);
+            SELECT distinct a.ope_razonsocial
+                              INTO w_nombre
+                              FROM ops$asy.bo_oce_opecab a
+                             where a.ope_numerodoc = w_sad_exporter
+                               and a.ope_num = 0;
 
             RETURN w_nombre;
         END IF;
@@ -3315,13 +3313,19 @@ IS
 
             RETURN w_nombre;
         ELSE
-            SELECT   cmp_adr || ' ' || cmp_ad3
-              INTO   w_nombre
-              FROM   uncmptab
-             WHERE   cmp_cod = w_sad_exporter
-                     AND ser_sta = (SELECT   MAX (ser_sta)
-                                      FROM   uncmptab
-                                     WHERE   cmp_cod = w_sad_exporter);
+            SELECT a.ope_direccion
+                     || ', N'
+                     || CHR (186)
+                     || ' '
+                     || a.ope_nrodireccion
+                     || ', ZONA '
+                     || a.ope_zona
+                     || ', '
+                     || a.ope_ciudad
+                              INTO w_nombre
+                              FROM ops$asy.bo_oce_opecab a
+                             where a.ope_numerodoc = w_sad_exporter
+                               and a.ope_num = 0;
 
             RETURN w_nombre;
         END IF;
@@ -3439,10 +3443,11 @@ IS
                     THEN
                         IF w_nombre IS NULL
                         THEN
-                            SELECT   DISTINCT cmp_nam
-                              INTO   w_nombre
-                              FROM   uncmptab
-                             WHERE   cmp_cod = w_consignee AND lst_ope = 'U';
+                            SELECT distinct a.ope_razonsocial
+                              into w_nombre
+                              FROM ops$asy.bo_oce_opecab a
+                             where a.ope_numerodoc = w_consignee
+                               and a.ope_num = 0;
 
                             RETURN w_nombre;
                         END IF;

@@ -778,7 +778,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             cmp.cmp_nam)
+                             nvl(cmp.ope_razonsocial,' '))
                          AS importador,
                      pkg_sicodif.devuelve_fecha_levante (f.fis_key_year,
                                                          f.fis_key_cuo,
@@ -804,7 +804,7 @@ IS
               FROM   cd_fiscalizacion f,
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
-                     ops$asy.uncmptab cmp
+                     ops$asy.bo_oce_opecab cmp
              WHERE                /*  a.sad_flw = 1
                                 AND */
                   a      .lst_ope = 'U'
@@ -820,8 +820,8 @@ IS
                      AND a.key_nber = cns.key_nber(+)
                      AND a.sad_num = cns.sad_num(+)
                      AND cns.sad_num(+) = '0'
-                     AND a.sad_consignee = cmp.cmp_cod(+)
-                     AND cmp.lst_ope(+) = 'U'
+                     AND a.sad_consignee = cmp.ope_numerodoc(+)
+                     AND cmp.ope_num(+) = 0
                      AND f.fis_gerencia = prm_gerencia
                      --AND f.fis_fec_asignacion IS NULL
                      AND (   f.fis_estado = 'REGISTRADO'
@@ -843,7 +843,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             cmp.cmp_nam)
+                             nvl(cmp.ope_razonsocial,' '))
                          AS importador,
                      pkg_sicodif.devuelve_fecha_levante (f.fis_key_year,
                                                          f.fis_key_cuo,
@@ -869,10 +869,10 @@ IS
               FROM   cd_fiscalizacion f,
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
-                     ops$asy.uncmptab cmp
+                     ops$asy.bo_oce_opecab cmp
              WHERE                /*  a.sad_flw = 1
                                 AND */
-                  a      .lst_ope = 'U'
+                         a.lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
                      AND a.key_cuo = f.fis_key_cuo
@@ -884,8 +884,8 @@ IS
                      AND a.key_nber = cns.key_nber(+)
                      AND a.sad_num = cns.sad_num(+)
                      AND cns.sad_num(+) = '0'
-                     AND a.sad_consignee = cmp.cmp_cod(+)
-                     AND cmp.lst_ope(+) = 'U'
+                     AND a.sad_consignee = cmp.ope_numerodoc(+)
+                     AND cmp.ope_num(+) = 0
                      AND f.fis_gerencia = prm_gerencia
                      --AND f.fis_fec_asignacion IS NULL
                      AND (   f.fis_estado = 'REGISTRADO'
@@ -922,7 +922,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             cmp.cmp_nam)
+                             nvl(cmp.ope_razonsocial,' '))
                          AS importador,
                      pkg_sicodif.devuelve_fecha_levante (f.fis_key_year,
                                                          f.fis_key_cuo,
@@ -946,7 +946,7 @@ IS
               FROM   cd_fiscalizacion f,
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
-                     ops$asy.uncmptab cmp
+                     ops$asy.bo_oce_opecab cmp
              WHERE                    /*a.sad_flw = 1
                                   AND */
                   a      .lst_ope = 'U'
@@ -962,8 +962,8 @@ IS
                      AND a.key_nber = cns.key_nber(+)
                      AND a.sad_num = cns.sad_num(+)
                      AND cns.sad_num(+) = '0'
-                     AND a.sad_consignee = cmp.cmp_cod(+)
-                     AND cmp.lst_ope(+) = 'U'
+                     AND a.sad_consignee = cmp.ope_numerodoc(+)
+                     AND cmp.ope_num(+) = 0
                      AND f.fis_fiscalizador = prm_fiscalizador
                      AND f.fis_fec_asignacion IS NOT NULL
                      AND f.fis_lst_ope = 'U'
@@ -982,7 +982,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             cmp.cmp_nam)
+                             nvl(cmp.ope_razonsocial,' '))
                          AS importador,
                      pkg_sicodif.devuelve_fecha_levante (f.fis_key_year,
                                                          f.fis_key_cuo,
@@ -1006,7 +1006,7 @@ IS
               FROM   cd_fiscalizacion f,
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
-                     ops$asy.uncmptab cmp
+                     ops$asy.bo_oce_opecab cmp
              WHERE                    /*a.sad_flw = 1
                                   AND */
                   a      .lst_ope = 'U'
@@ -1021,8 +1021,8 @@ IS
                      AND a.key_nber = cns.key_nber(+)
                      AND a.sad_num = cns.sad_num(+)
                      AND cns.sad_num(+) = '0'
-                     AND a.sad_consignee = cmp.cmp_cod(+)
-                     AND cmp.lst_ope(+) = 'U'
+                     AND a.sad_consignee = cmp.ope_numerodoc(+)
+                     AND cmp.ope_num(+) = 0
                      AND f.fis_fiscalizador = prm_fiscalizador
                      AND f.fis_fec_asignacion IS NOT NULL
                      AND f.fis_lst_ope = 'U'
@@ -1078,7 +1078,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             cmp.cmp_nam)
+                             nvl(cmp.ope_razonsocial,' '))
                          AS importador,
                      --'direccion',
                      /*NVL (
@@ -1121,7 +1121,7 @@ IS
               FROM   cd_fiscalizacion f,
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
-                     ops$asy.uncmptab cmp
+                     ops$asy.bo_oce_opecab cmp
              WHERE       a.lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -1135,8 +1135,8 @@ IS
                      AND a.key_nber = cns.key_nber(+)
                      AND a.sad_num = cns.sad_num(+)
                      AND cns.sad_num(+) = '0'
-                     AND a.sad_consignee = cmp.cmp_cod(+)
-                     AND cmp.lst_ope(+) = 'U'
+                     AND a.sad_consignee = cmp.ope_numerodoc(+)
+                     AND cmp.ope_num(+) = 0
                      AND f.sad_reg_year = prm_key_year
                      AND f.fis_key_cuo = prm_key_cuo
                      AND f.sad_reg_nber = prm_reg_serial
@@ -1175,7 +1175,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             cmp.cmp_nam)
+                             nvl(cmp.ope_razonsocial,' '))
                          AS importador,
                      --'direccion',
                      /*NVL (
@@ -1218,7 +1218,7 @@ IS
               FROM   cd_fiscalizacion f,
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
-                     ops$asy.uncmptab cmp
+                     ops$asy.bo_oce_opecab cmp
              WHERE       a.lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -1231,8 +1231,8 @@ IS
                      AND a.key_nber = cns.key_nber(+)
                      AND a.sad_num = cns.sad_num(+)
                      AND cns.sad_num(+) = '0'
-                     AND a.sad_consignee = cmp.cmp_cod(+)
-                     AND cmp.lst_ope(+) = 'U'
+                     AND a.sad_consignee = cmp.ope_numerodoc(+)
+                     AND cmp.ope_num(+) = 0
                      AND f.sad_reg_year = prm_key_year
                      AND f.fis_key_cuo = prm_key_cuo
                      AND f.sad_reg_nber = prm_reg_serial
@@ -2893,7 +2893,7 @@ IS
                     FROM   ops$asy.sad_gen gen,
                            ops$asy.sad_itm itm,
                            ops$asy.sad_occ_cns cns,
-                           ops$asy.uncmptab cmp,
+                           ops$asy.bo_oce_opecab cmp,
                            ops$asy.undectab de,
                            ops$asy.unctytab cty,
                            ops$asy.sad_spy spy,
@@ -2929,8 +2929,8 @@ IS
                            AND spy3.spy_act(+) = 71
                            AND itm.saditm_cty_origcod = cty.cty_cod
                            AND cty.lst_ope = 'U'
-                           AND gen.sad_consignee = cmp.cmp_cod(+)
-                           AND cmp.lst_ope(+) = 'U'
+                           AND gen.sad_consignee = cmp.ope_numerodoc(+)
+                     AND cmp.ope_num(+) = 0
                            AND gen.key_year = v_key_year
                            AND gen.key_cuo = v_key_cuo
                            AND gen.key_dec = v_key_dec
@@ -2942,7 +2942,7 @@ IS
                     FROM   ops$asy.sad_gen gen,
                            ops$asy.sad_itm itm,
                            ops$asy.sad_occ_cns cns,
-                           ops$asy.uncmptab cmp,
+                           ops$asy.bo_oce_opecab cmp,
                            ops$asy.sad_occ_dec deo,
                            ops$asy.unctytab cty,
                            ops$asy.sad_spy spy,
@@ -2982,8 +2982,8 @@ IS
                            AND spy3.spy_act(+) = 71
                            AND itm.saditm_cty_origcod = cty.cty_cod
                            AND cty.lst_ope = 'U'
-                           AND gen.sad_consignee = cmp.cmp_cod(+)
-                           AND cmp.lst_ope(+) = 'U'
+                           AND gen.sad_consignee = cmp.ope_numerodoc(+)
+                     AND cmp.ope_num(+) = 0
                            AND gen.key_year = v_key_year
                            AND gen.key_cuo = v_key_cuo
                            --AND gen.key_dec = v_key_dec
@@ -3005,7 +3005,7 @@ IS
                          || ':'
                          || DECODE (gen.sad_consignee,
                                     NULL, cns.sad_con_nam,
-                                    cmp.cmp_nam)
+                                    nvl(cmp.ope_razonsocial,' '))
                              importador,
                          gen.key_dec || ':' || de.dec_nam declarante,
                          TO_CHAR (gen.sad_reg_date, 'dd/mm/yyyy')
@@ -3142,7 +3142,7 @@ IS
                   FROM   ops$asy.sad_gen gen,
                          ops$asy.sad_itm itm,
                          ops$asy.sad_occ_cns cns,
-                         ops$asy.uncmptab cmp,
+                         ops$asy.bo_oce_opecab cmp,
                          ops$asy.undectab de,
                          ops$asy.unctytab cty,
                          ops$asy.sad_spy spy,
@@ -3192,8 +3192,8 @@ IS
                          AND spy4.spy_act(+) = 25
                          AND itm.saditm_cty_origcod = cty.cty_cod
                          AND cty.lst_ope = 'U'
-                         AND gen.sad_consignee = cmp.cmp_cod(+)
-                         AND cmp.lst_ope(+) = 'U'
+                         AND gen.sad_consignee = cmp.ope_numerodoc(+)
+                         AND cmp.ope_num(+) = 0
                          AND gen.key_year = v_key_year
                          AND gen.key_cuo = v_key_cuo
                          AND gen.key_dec = v_key_dec
@@ -3212,7 +3212,7 @@ IS
                          || ':'
                          || DECODE (gen.sad_consignee,
                                     NULL, cns.sad_con_nam,
-                                    cmp.cmp_nam)
+                                    nvl(cmp.ope_razonsocial,' '))
                              importador,
                          gen.key_dec || ':' || deo.sad_dec_nam declarante,
                          TO_CHAR (gen.sad_reg_date, 'dd/mm/yyyy')
@@ -3332,7 +3332,7 @@ IS
                   FROM   ops$asy.sad_gen gen,
                          ops$asy.sad_itm itm,
                          ops$asy.sad_occ_cns cns,
-                         ops$asy.uncmptab cmp,
+                         ops$asy.bo_oce_opecab cmp,
                          ops$asy.sad_occ_dec deo,
                          ops$asy.unctytab cty,
                          ops$asy.sad_spy spy,
@@ -3386,8 +3386,8 @@ IS
                          AND spy4.spy_act(+) = 25
                          AND itm.saditm_cty_origcod = cty.cty_cod
                          AND cty.lst_ope = 'U'
-                         AND gen.sad_consignee = cmp.cmp_cod(+)
-                         AND cmp.lst_ope(+) = 'U'
+                         AND gen.sad_consignee = cmp.ope_numerodoc(+)
+                         AND cmp.ope_num(+) = 0
                          AND gen.key_dec IS NULL
                          AND gen.key_year = v_key_year
                          AND gen.key_cuo = v_key_cuo
