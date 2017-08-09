@@ -1,6 +1,6 @@
 CREATE OR REPLACE 
 PACKAGE pkg_reporte
-/* Formatted on 12-oct.-2016 15:27:41 (QP5 v5.126) */
+/* Formatted on 19/07/2017 20:44:55 (QP5 v5.126) */
 IS
     TYPE cursortype IS REF CURSOR;
 
@@ -8,29 +8,18 @@ IS
     FUNCTION nomadu (prm_key_cuo IN VARCHAR2)
         RETURN VARCHAR2;
 
-    FUNCTION reportebase (prm_gerencia   IN     VARCHAR2,
-                          prm_fec_ini    IN     VARCHAR2,
-                          prm_fec_fin    IN     VARCHAR2,
-                          prm_nit        IN     varchar2,
-                          ct                OUT cursortype)
+
+
+    FUNCTION crt_cabecera (w_key_year   IN ops$asy.sad_gen.key_year%TYPE,
+                           w_key_cuo    IN ops$asy.sad_gen.key_cuo%TYPE,
+                           w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
+                           w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE)
         RETURN VARCHAR2;
 
-    FUNCTION reportebasedui (prm_gestion   IN     VARCHAR2,
-                             prm_aduana    IN     VARCHAR2,
-                             prm_numero    IN     VARCHAR2,
-                             ct            OUT    cursortype)
-        RETURN VARCHAR2;
-
-    FUNCTION crt_cabecera (w_key_year   IN sad_gen.key_year%TYPE,
-                           w_key_cuo    IN sad_gen.key_cuo%TYPE,
-                           w_key_dec    IN sad_gen.key_dec%TYPE,
-                           w_key_nber   IN sad_gen.key_nber%TYPE)
-        RETURN VARCHAR2;
-
-    FUNCTION sicodif_25 (anio        IN sad_spy.key_year%TYPE,
-                         cod_adu     IN sad_spy.key_cuo%TYPE,
-                         w_key_dec   IN sad_spy.key_dec%TYPE,
-                         nuber       IN sad_spy.key_nber%TYPE)
+    FUNCTION sicodif_25 (anio        IN ops$asy.sad_spy.key_year%TYPE,
+                         cod_adu     IN ops$asy.sad_spy.key_cuo%TYPE,
+                         w_key_dec   IN ops$asy.sad_spy.key_dec%TYPE,
+                         nuber       IN ops$asy.sad_spy.key_nber%TYPE)
         RETURN VARCHAR2;
 
     FUNCTION sicodif_contra_adu (gesti         IN VARCHAR2,
@@ -64,57 +53,57 @@ IS
                           nro_control   IN VARCHAR2)
         RETURN NUMBER;
 
-    FUNCTION fob_cabecera (anio        IN sad_itm_vim.key_year%TYPE,
-                           cod_adu     IN sad_itm_vim.key_cuo%TYPE,
-                           w_key_dec   IN sad_itm_vim.key_dec%TYPE,
-                           key_nuber   IN sad_itm_vim.key_nber%TYPE,
+    FUNCTION fob_cabecera (anio        IN ops$asy.sad_itm_vim.key_year%TYPE,
+                           cod_adu     IN ops$asy.sad_itm_vim.key_cuo%TYPE,
+                           w_key_dec   IN ops$asy.sad_itm_vim.key_dec%TYPE,
+                           key_nuber   IN ops$asy.sad_itm_vim.key_nber%TYPE,
                            sw          IN VARCHAR2)
         RETURN NUMBER;
 
-    FUNCTION mercancia (w_key_year   IN sad_gen.key_year%TYPE,
-                        w_key_cuo    IN sad_gen.key_cuo%TYPE,
-                        w_key_dec    IN sad_gen.key_dec%TYPE,
-                        w_key_nber   IN sad_gen.key_nber%TYPE)
+    FUNCTION mercancia (w_key_year   IN ops$asy.sad_gen.key_year%TYPE,
+                        w_key_cuo    IN ops$asy.sad_gen.key_cuo%TYPE,
+                        w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
+                        w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE)
         RETURN VARCHAR2;
 
-    FUNCTION nomprov (w_sad_exporter   IN sad_gen.sad_exporter%TYPE,
-                      w_key_year       IN sad_gen.key_year%TYPE,
-                      w_key_cuo        IN sad_gen.key_cuo%TYPE,
-                      w_key_dec        IN sad_gen.key_dec%TYPE,
-                      w_key_nber       IN sad_gen.key_nber%TYPE,
-                      w_sad_num        IN sad_gen.sad_num%TYPE)
+    FUNCTION nomprov (w_sad_exporter   IN ops$asy.sad_gen.sad_exporter%TYPE,
+                      w_key_year       IN ops$asy.sad_gen.key_year%TYPE,
+                      w_key_cuo        IN ops$asy.sad_gen.key_cuo%TYPE,
+                      w_key_dec        IN ops$asy.sad_gen.key_dec%TYPE,
+                      w_key_nber       IN ops$asy.sad_gen.key_nber%TYPE,
+                      w_sad_num        IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2;
 
-    FUNCTION dirprov (w_sad_exporter   IN sad_gen.sad_exporter%TYPE,
-                      w_key_year       IN sad_gen.key_year%TYPE,
-                      w_key_cuo        IN sad_gen.key_cuo%TYPE,
-                      w_key_dec        IN sad_gen.key_dec%TYPE,
-                      w_key_nber       IN sad_gen.key_nber%TYPE,
-                      w_sad_num        IN sad_gen.sad_num%TYPE)
+    FUNCTION dirprov (w_sad_exporter   IN ops$asy.sad_gen.sad_exporter%TYPE,
+                      w_key_year       IN ops$asy.sad_gen.key_year%TYPE,
+                      w_key_cuo        IN ops$asy.sad_gen.key_cuo%TYPE,
+                      w_key_dec        IN ops$asy.sad_gen.key_dec%TYPE,
+                      w_key_nber       IN ops$asy.sad_gen.key_nber%TYPE,
+                      w_sad_num        IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2;
 
     FUNCTION nomage (w_dec        IN CHAR,
-                     w_key_year   IN sad_gen.key_year%TYPE,
-                     w_key_cuo    IN sad_gen.key_cuo%TYPE,
-                     w_key_dec    IN sad_gen.key_dec%TYPE,
-                     w_key_nber   IN sad_gen.key_nber%TYPE,
-                     w_sad_num    IN sad_gen.sad_num%TYPE)
+                     w_key_year   IN ops$asy.sad_gen.key_year%TYPE,
+                     w_key_cuo    IN ops$asy.sad_gen.key_cuo%TYPE,
+                     w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
+                     w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE,
+                     w_sad_num    IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2;
 
-    FUNCTION nomimp (w_consignee   IN sad_gen.sad_consignee%TYPE,
-                     w_key_year    IN sad_gen.key_year%TYPE,
-                     w_key_cuo     IN sad_gen.key_cuo%TYPE,
-                     w_key_dec     IN sad_gen.key_dec%TYPE,
-                     w_key_nber    IN sad_gen.key_nber%TYPE,
-                     w_sad_num     IN sad_gen.sad_num%TYPE)
+    FUNCTION nomimp (w_consignee   IN ops$asy.sad_gen.sad_consignee%TYPE,
+                     w_key_year    IN ops$asy.sad_gen.key_year%TYPE,
+                     w_key_cuo     IN ops$asy.sad_gen.key_cuo%TYPE,
+                     w_key_dec     IN ops$asy.sad_gen.key_dec%TYPE,
+                     w_key_nber    IN ops$asy.sad_gen.key_nber%TYPE,
+                     w_sad_num     IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2;
 
-    FUNCTION numid (w_consignee   IN sad_gen.sad_consignee%TYPE,
-                    w_key_year    IN sad_gen.key_year%TYPE,
-                    w_key_cuo     IN sad_gen.key_cuo%TYPE,
-                    w_key_dec     IN sad_gen.key_dec%TYPE,
-                    w_key_nber    IN sad_gen.key_nber%TYPE,
-                    w_sad_num     IN sad_gen.sad_num%TYPE)
+    FUNCTION numid (w_consignee   IN ops$asy.sad_gen.sad_consignee%TYPE,
+                    w_key_year    IN ops$asy.sad_gen.key_year%TYPE,
+                    w_key_cuo     IN ops$asy.sad_gen.key_cuo%TYPE,
+                    w_key_dec     IN ops$asy.sad_gen.key_dec%TYPE,
+                    w_key_nber    IN ops$asy.sad_gen.key_nber%TYPE,
+                    w_sad_num     IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2;
 
     FUNCTION sicodif_contra_contravencional (gesti         IN VARCHAR2,
@@ -134,11 +123,7 @@ IS
                                 ct                OUT cursortype)
         RETURN VARCHAR2;
 
-    FUNCTION reporte_det_recauda (prm_gerencia   IN     VARCHAR2,
-                                  prm_fec_ini    IN     VARCHAR2,
-                                  prm_fec_fin    IN     VARCHAR2,
-                                  ct                OUT cursortype)
-        RETURN VARCHAR2;
+
 
     FUNCTION roundsidunea (p_numero IN NUMBER, p_preci IN NUMBER)
         RETURN NUMBER;
@@ -146,27 +131,69 @@ IS
     FUNCTION tipocambio (fecha IN DATE, tipo IN VARCHAR2)
         RETURN NUMBER;
 
-    FUNCTION reporte_concesionario (  prm_nit        IN     VARCHAR2,
-                                      prm_fec_ini    IN     VARCHAR2,
-                                      prm_fec_fin    IN     VARCHAR2,
-                                      prm_key_year    IN     VARCHAR2,
-                                      prm_key_cuo    IN     VARCHAR2,
-                                      prm_reg_serial IN     VARCHAR2,
-                                      prm_tipo       IN     VARCHAR2,
-                                      ct                OUT cursortype)
+    FUNCTION reporte_concesionario (prm_nit          IN     VARCHAR2,
+                                    prm_fec_ini      IN     VARCHAR2,
+                                    prm_fec_fin      IN     VARCHAR2,
+                                    prm_key_year     IN     VARCHAR2,
+                                    prm_key_cuo      IN     VARCHAR2,
+                                    prm_reg_serial   IN     VARCHAR2,
+                                    prm_tipo         IN     VARCHAR2,
+                                    ct                  OUT cursortype)
         RETURN VARCHAR2;
 
-     FUNCTION SIDUNEA_control (gestion      IN VARCHAR2,
-                    aduana       IN VARCHAR2,
-                    numero       IN VARCHAR2,
-                    usuario      IN VARCHAR2)
-    RETURN VARCHAR2;
+    FUNCTION sidunea_control (gestion   IN VARCHAR2,
+                              aduana    IN VARCHAR2,
+                              numero    IN VARCHAR2,
+                              usuario   IN VARCHAR2)
+        RETURN VARCHAR2;
+
+    FUNCTION reporte_det_recauda (prm_gerencia   IN     VARCHAR2,
+                                  prm_fec_ini    IN     VARCHAR2,
+                                  prm_fec_fin    IN     VARCHAR2,
+                                  ct                OUT cursortype)
+        RETURN VARCHAR2;
+
+    FUNCTION reportebasedui (prm_gestion   IN     VARCHAR2,
+                             prm_aduana    IN     VARCHAR2,
+                             prm_numero    IN     VARCHAR2,
+                             ct               OUT cursortype)
+        RETURN VARCHAR2;
+
+    FUNCTION reportebase (prm_gerencia   IN     VARCHAR2,
+                          prm_fec_ini    IN     VARCHAR2,
+                          prm_fec_fin    IN     VARCHAR2,
+                          prm_nit        IN     VARCHAR2,
+                          ct                OUT cursortype)
+        RETURN VARCHAR2;
+
+    FUNCTION reporteblock (prm_aduana    IN     VARCHAR2,
+                           prm_fec_ini   IN     VARCHAR2,
+                           prm_fec_fin   IN     VARCHAR2,
+                           ct               OUT cursortype)
+        RETURN VARCHAR2;
+
+    FUNCTION reporteblockdui (prm_gestion   IN     VARCHAR2,
+                              prm_aduana    IN     VARCHAR2,
+                              prm_numero    IN     VARCHAR2,
+                              ct               OUT cursortype)
+        RETURN VARCHAR2;
+
+    FUNCTION reporteconcierre (prm_fec_ini   IN     VARCHAR2,
+                               prm_fec_fin   IN     VARCHAR2,
+                               ct               OUT cursortype)
+        RETURN VARCHAR2;
+
+    FUNCTION reportependientes (prm_gerencia   IN     VARCHAR2,
+                                prm_fec_ini    IN     VARCHAR2,
+                                prm_fec_fin    IN     VARCHAR2,
+                                ct                OUT cursortype)
+        RETURN VARCHAR2;
 END;
 /
 
 CREATE OR REPLACE 
 PACKAGE BODY pkg_reporte
-/* Formatted on 10-abr.-2017 16:11:20 (QP5 v5.126) */
+/* Formatted on 20-jul.-2017 17:43:01 (QP5 v5.126) */
 IS
     FUNCTION nomadu (prm_key_cuo IN VARCHAR2)
         RETURN VARCHAR2
@@ -181,2526 +208,12 @@ IS
         RETURN w_nombre;
     END;
 
-    FUNCTION reportebase (prm_gerencia   IN     VARCHAR2,
-                          prm_fec_ini    IN     VARCHAR2,
-                          prm_fec_fin    IN     VARCHAR2,
-                          prm_nit        IN     VARCHAR2,
-                          ct                OUT cursortype)
-        RETURN VARCHAR2
-    IS
-        res    VARCHAR2 (50) := 'CORRECTO';
-        cont   NUMBER (10);
-    BEGIN
-        -- ALTER SESSION SET NLS_TERRITORY=america;
-
-        IF prm_nit IS NULL
-        THEN
-            OPEN ct FOR
-                SELECT   DISTINCT
-                         TO_NUMBER (a.fis_gestion) gestion,
-                         DECODE (a.fis_gerencia,
-                                 'GRLP', 'LA PAZ',
-                                 'GRCB', 'COCHABAMBA',
-                                 'GRSC', 'SANTA CRUZ',
-                                 'GROR', 'ORURO',
-                                 'GRTJ', 'TARIJA',
-                                 'GRPT', 'POTOSI',
-                                 'GNF-DIA')
-                             gerencia,
-                         a.fis_nro_control nro_correlativo,
-                         TO_CHAR (a.fis_fec_registro) fecha_orden_control,
-                         s.key_cuo aduana,
-                         nomadu (s.key_cuo) "DESC ADUANA",
-                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
-                            s.sad_reg_year
-                         || '/'
-                         || s.key_cuo
-                         || '/'
-                         || s.sad_reg_serial
-                         || '-'
-                         || s.sad_reg_nber
-                             "TRAMITE",
-                         DECODE (spy1.sad_clr,
-                                 0,
-                                 'VERDE',
-                                 1,
-                                 'AZUL',
-                                 2,
-                                 'AMARILLO',
-                                 3,
-                                 'ROJO')
-                             "CANAL",
-                         numid (s.sad_consignee,
-                                s.key_year,
-                                s.key_cuo,
-                                s.key_dec,
-                                s.key_nber,
-                                s.sad_num)
-                             "DOC IMP",
-                         NVL (nomimp (s.sad_consignee,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
-                         NVL (nomage (s.key_dec,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "DECLARANTE",
-                         NVL (dirprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "DIREC PROVEEDOR",
-                         NVL (nomprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "PROVEEDOR",
-                         fob_cabecera (s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       0)
-                             fob_funcion,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ga,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IVA'
-                                       AND st.sad_num = '0'),
-                             0)
-                             iva,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'ICE'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ice,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IHD'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ihd,
-                         ----SUMATORIAS DE TRIBUTOS
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IVA'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'ICE'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IHD'
-                                         AND st.sad_num = '0'),
-                               0)
-                             total_tributos,
-                         --ASIGNACION CONTROL DIFERIDO
-                         NVL (a.fis_fiscalizador, '-') fiscalizador,
-                         NVL (a.fis_usuario_asignacion, '-')
-                             usuario_asignacion,
-                         --NOTIFICACION
-                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_NOTIFICACION",
-                         NVL (a.fis_obs_notificacion, '-')
-                             "OBSERVACION_NOTIFICACION",
-                         NVL (a.fis_tipo_notificacion, '-')
-                             "TIPO_NOTIFICACION",
-                         NVL (a.fis_usuario_notificacion, '-')
-                             "USUARIO_NOTIFICACION",
-                         --RESULTADO CONTROL DIFERIDO
-                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
-                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_LIQUIDACION",
-                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
-                             "TRIBUTO_OMITIDO_GA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
-                             "TRIBUTO_OMITIDO_IVA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
-                             "TRIBUTO_OMITIDO_ICE",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
-                             "TRIBUTO_OMITIDO_IEHD",
-                         NVL (
-                               TO_NUMBER (a.fis_tributo_omitido_ga)
-                             + TO_NUMBER (a.fis_tributo_omitido_iva)
-                             + TO_NUMBER (a.fis_tributo_omitido_ice)
-                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
-                             0)
-                             "TOTAL_TRIBUTO_OMITIDO",
-                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
-                             sancion_omision,
-                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
-                             multa_contravencion,
-                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
-                             "MULTA_CONTRA_CONTRA",
-                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
-                             multa_contrabando_delito,
-                         NVL (a.fis_usuario_resultados, '-')
-                             usuarios_registrados,
-                         --ACEPTACION DE PAGO
-                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_aceptacion_pago,
-                         NVL (a.fis_usuario_aceptacion, '-')
-                             usuario_aceptacion,
-                         --CONCLUSION DEL CONTROL DIFERIDO
-                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
-                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
-                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
-                             "FECHA_INFORME",
-                         NVL (a.fis_reg_nro_doc_con, '-')
-                             "NRO_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_FINALIZACION",
-                         NVL (a.fis_usuario_finalizacion, '-')
-                             "USUARIO_REGISTRO_FINALIZACION",
-                         --OBSERVACIONES ENCONTRADAS
-                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
-                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
-                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
-                         DECODE (a.fis_osinobs, 'on', 'X', '-')
-                             "SIN_OBSERVACION",
-                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
-                         DECODE (a.fis_comision, 'on', 'X', '-')
-                             "OMISION_PAGO",
-                         DECODE (a.fis_ccondel, 'on', 'X', '-')
-                             "CONTRABANDO_DELITO",
-                         DECODE (a.fis_cconcon, 'on', 'X', '-')
-                             "CONTRABANDO_CONTRAVENCIONAL",
-                         DECODE (a.fis_cconadu, 'on', 'X', '-')
-                             "CONTRAVENCION_ADUANERA",
-                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
-                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_notificacion_conclusion,
-                         NVL (a.fis_reg_tip_not_doc, '-')
-                             tipo_notificacion_conclusion,
-                         NVL (a.fis_usuario_not_doc_con, '-')
-                             usuario_registro_notificacion,
-                         --ENVIO A LA UNIDAD LEGAL
-                         NVL (
-                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
-                             '-')
-                             "FECHA_ENVIO",
-                         NVL (a.fis_reg_nro_env_legal, '-')
-                             "NRO_DOC_REMISION",
-                         NVL (a.fis_usuario_env_legal, '-')
-                             "USUARIO_UNIDAD_LEGAL",
-                         --ESTADO
-                         fis_estado "ESTADO",
-                         --valores
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                             ga_recuperado,
-                         NVL (
-                             sicodif_iva (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             iva_recuperado,
-                         NVL (
-                             sicodif_ice (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ice_recuperado,
-                         NVL (
-                             sicodif_ihd (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ihd_recuperado,
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                         + NVL (
-                               sicodif_iva (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ice (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ihd (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                             total_tributo,
-                         NVL (
-                             sicodif_sancionop (a.fis_gestion,
-                                                a.fis_gerencia,
-                                                a.fis_nro_control),
-                             0)
-                             sancionop_recuperado,
-                         --MULTA CONTRAVENCIONAL ADUANERA
-                         NVL (
-                             sicodif_contra_adu (a.fis_gestion,
-                                                 a.fis_gerencia,
-                                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_adu,
-                         --MULTA CONTRABANDO CONTRAVENCIONAL
-                         --FALTA
-                         NVL (
-                             sicodif_contra_contravencional (
-                                 a.fis_gestion,
-                                 a.fis_gerencia,
-                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_contravencional,
-                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
-
-                         NVL (a.fis_usuario_resultados, '-'),
-                         fis_origen_control control_origen,
-                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
-                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
-                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
-                              '-')
-                             fecha_control,
-                         --OTROS DATOS
-                         CASE
-                             WHEN sicodif_25 (s.key_year,
-                                              s.key_cuo,
-                                              s.key_dec,
-                                              s.key_nber) IS NOT NULL
-                             THEN
-                                 sicodif_25 (s.key_year,
-                                             s.key_cuo,
-                                             s.key_dec,
-                                             s.key_nber)
-                             ELSE
-                                 '-'
-                         END
-                             AS pase_salida,
-                         mercancia (s.key_year,
-                                    s.key_cuo,
-                                    s.key_dec,
-                                    s.key_nber)
-                             mercancias,
-                         NVL (crt_cabecera (s.key_year,
-                                            s.key_cuo,
-                                            s.key_dec,
-                                            s.key_nber), 'ALEATORIO')
-                             criterio_nivel_cab,
-                         --MULTA CONTRABANDO DELITO
-                         --FALTA
-                         NVL (
-                             sicodif_contra_delito (a.fis_gestion,
-                                                    a.fis_gerencia,
-                                                    a.fis_nro_control),
-                             0)
-                             sancion_contra_delito
-                  FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
-                 WHERE       s.sad_flw = '1'
-                         AND s.sad_asmt_serial IS NOT NULL
-                         AND s.lst_ope = 'U'
-                         AND s.sad_num = '0'
-                         AND fis_numver = '0'
-                         AND fis_lst_ope = 'U'
-                         AND fis_estado <> 'REGULARIZACION'
-                         AND s.key_year = spy1.key_year(+)
-                         AND s.key_cuo = spy1.key_cuo(+)
-                         AND s.key_dec IS NULL
-                         AND spy1.key_dec(+) IS NULL
-                         AND s.key_nber = spy1.key_nber(+)
-                         AND spy1.spy_sta(+) = '10'
-                         AND spy1.spy_act(+) = '24'
-                         AND s.key_year = a.fis_key_year
-                         AND s.key_cuo = a.fis_key_cuo
-                         AND a.fis_key_dec IS NULL
-                         AND s.key_nber = a.fis_key_nber
-                         AND a.fis_gerencia LIKE prm_gerencia
-                         AND TRUNC (a.fis_fec_asignacion) BETWEEN TO_DATE (
-                                                                      prm_fec_ini,
-                                                                      'dd/mm/yyyy')
-                                                              AND  TO_DATE (
-                                                                       prm_fec_fin,
-                                                                       'dd/mm/yyyy')
-                UNION
-                SELECT   DISTINCT
-                         TO_NUMBER (a.fis_gestion) gestion,
-                         DECODE (a.fis_gerencia,
-                                 'GRLP', 'LA PAZ',
-                                 'GRCB', 'COCHABAMBA',
-                                 'GRSC', 'SANTA CRUZ',
-                                 'GROR', 'ORURO',
-                                 'GRTJ', 'TARIJA',
-                                 'GRPT', 'POTOSI',
-                                 'GNF-DIA')
-                             gerencia,
-                         a.fis_nro_control nro_correlativo,
-                         TO_CHAR (a.fis_fec_registro) fecha_orden_control,
-                         s.key_cuo aduana,
-                         nomadu (s.key_cuo) "DESC ADUANA",
-                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
-                            s.sad_reg_year
-                         || '/'
-                         || s.key_cuo
-                         || '/'
-                         || s.sad_reg_serial
-                         || '-'
-                         || s.sad_reg_nber
-                             "TRAMITE",
-                         DECODE (spy1.sad_clr,
-                                 0,
-                                 'VERDE',
-                                 1,
-                                 'AZUL',
-                                 2,
-                                 'AMARILLO',
-                                 3,
-                                 'ROJO')
-                             "CANAL",
-                         numid (s.sad_consignee,
-                                s.key_year,
-                                s.key_cuo,
-                                s.key_dec,
-                                s.key_nber,
-                                s.sad_num)
-                             "DOC IMP",
-                         NVL (nomimp (s.sad_consignee,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
-                         NVL (nomage (s.key_dec,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "DECLARANTE",
-                         NVL (dirprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "DIREC PROVEEDOR",
-                         NVL (nomprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "PROVEEDOR",
-                         fob_cabecera (s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       0)
-                             fob_funcion,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ga,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IVA'
-                                       AND st.sad_num = '0'),
-                             0)
-                             iva,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'ICE'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ice,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IHD'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ihd,
-                         ----SUMATORIAS DE TRIBUTOS
 
 
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IVA'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'ICE'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IHD'
-                                         AND st.sad_num = '0'),
-                               0)
-                             total_tributos,
-                         --ASIGNACION CONTROL DIFERIDO
-                         NVL (a.fis_fiscalizador, '-') fiscalizador,
-                         NVL (a.fis_usuario_asignacion, '-')
-                             usuario_asignacion,
-                         --NOTIFICACION
-                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_NOTIFICACION",
-                         NVL (a.fis_obs_notificacion, '-')
-                             "OBSERVACION_NOTIFICACION",
-                         NVL (a.fis_tipo_notificacion, '-')
-                             "TIPO_NOTIFICACION",
-                         NVL (a.fis_usuario_notificacion, '-')
-                             "USUARIO_NOTIFICACION",
-                         --RESULTADO CONTROL DIFERIDO
-                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
-                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_LIQUIDACION",
-                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
-                             "TRIBUTO_OMITIDO_GA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
-                             "TRIBUTO_OMITIDO_IVA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
-                             "TRIBUTO_OMITIDO_ICE",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
-                             "TRIBUTO_OMITIDO_IEHD",
-                         NVL (
-                               TO_NUMBER (a.fis_tributo_omitido_ga)
-                             + TO_NUMBER (a.fis_tributo_omitido_iva)
-                             + TO_NUMBER (a.fis_tributo_omitido_ice)
-                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
-                             0)
-                             "TOTAL_TRIBUTO_OMITIDO",
-                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
-                             sancion_omision,
-                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
-                             multa_contravencion,
-                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
-                             "MULTA_CONTRA_CONTRA",
-                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
-                             multa_contrabando_delito,
-                         NVL (a.fis_usuario_resultados, '-')
-                             usuarios_registrados,
-                         --ACEPTACION DE PAGO
-                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_aceptacion_pago,
-                         NVL (a.fis_usuario_aceptacion, '-')
-                             usuario_aceptacion,
-                         --CONCLUSION DEL CONTROL DIFERIDO
-                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
-                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
-                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
-                             "FECHA_INFORME",
-                         NVL (a.fis_reg_nro_doc_con, '-')
-                             "NRO_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_FINALIZACION",
-                         NVL (a.fis_usuario_finalizacion, '-')
-                             "USUARIO_REGISTRO_FINALIZACION",
-                         --OBSERVACIONES ENCONTRADAS
-                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
-                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
-                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
-                         DECODE (a.fis_osinobs, 'on', 'X', '-')
-                             "SIN_OBSERVACION",
-                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
-                         DECODE (a.fis_comision, 'on', 'X', '-')
-                             "OMISION_PAGO",
-                         DECODE (a.fis_ccondel, 'on', 'X', '-')
-                             "CONTRABANDO_DELITO",
-                         DECODE (a.fis_cconcon, 'on', 'X', '-')
-                             "CONTRABANDO_CONTRAVENCIONAL",
-                         DECODE (a.fis_cconadu, 'on', 'X', '-')
-                             "CONTRAVENCION_ADUANERA",
-                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
-                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_notificacion_conclusion,
-                         NVL (a.fis_reg_tip_not_doc, '-')
-                             tipo_notificacion_conclusion,
-                         NVL (a.fis_usuario_not_doc_con, '-')
-                             usuario_registro_notificacion,
-                         --ENVIO A LA UNIDAD LEGAL
-                         NVL (
-                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
-                             '-')
-                             "FECHA_ENVIO",
-                         NVL (a.fis_reg_nro_env_legal, '-')
-                             "NRO_DOC_REMISION",
-                         NVL (a.fis_usuario_env_legal, '-')
-                             "USUARIO_UNIDAD_LEGAL",
-                         --ESTADO
-                         fis_estado "ESTADO",
-                         --valores
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                             ga_recuperado,
-                         NVL (
-                             sicodif_iva (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             iva_recuperado,
-                         NVL (
-                             sicodif_ice (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ice_recuperado,
-                         NVL (
-                             sicodif_ihd (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ihd_recuperado,
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                         + NVL (
-                               sicodif_iva (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ice (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ihd (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                             total_tributo,
-                         NVL (
-                             sicodif_sancionop (a.fis_gestion,
-                                                a.fis_gerencia,
-                                                a.fis_nro_control),
-                             0)
-                             sancionop_recuperado,
-                         --MULTA CONTRAVENCIONAL ADUANERA
-                         NVL (
-                             sicodif_contra_adu (a.fis_gestion,
-                                                 a.fis_gerencia,
-                                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_adu,
-                         --MULTA CONTRABANDO CONTRAVENCIONAL
-                         --FALTA
-                         NVL (
-                             sicodif_contra_contravencional (
-                                 a.fis_gestion,
-                                 a.fis_gerencia,
-                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_contravencional,
-                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
-
-                         NVL (a.fis_usuario_resultados, '-'),
-                         fis_origen_control control_origen,
-                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
-                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
-                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
-                              '-')
-                             fecha_control,
-                         --OTROS DATOS
-                         CASE
-                             WHEN sicodif_25 (s.key_year,
-                                              s.key_cuo,
-                                              s.key_dec,
-                                              s.key_nber) IS NOT NULL
-                             THEN
-                                 sicodif_25 (s.key_year,
-                                             s.key_cuo,
-                                             s.key_dec,
-                                             s.key_nber)
-                             ELSE
-                                 '-'
-                         END
-                             AS pase_salida,
-                         mercancia (s.key_year,
-                                    s.key_cuo,
-                                    s.key_dec,
-                                    s.key_nber)
-                             mercancias,
-                         NVL (crt_cabecera (s.key_year,
-                                            s.key_cuo,
-                                            s.key_dec,
-                                            s.key_nber), 'ALEATORIO')
-                             criterio_nivel_cab,
-                         --MULTA CONTRABANDO DELITO
-                         --FALTA
-                         NVL (
-                             sicodif_contra_delito (a.fis_gestion,
-                                                    a.fis_gerencia,
-                                                    a.fis_nro_control),
-                             0)
-                             sancion_contra_delito
-                  FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
-                 WHERE       s.sad_flw = '1'
-                         AND s.sad_asmt_serial IS NOT NULL
-                         AND s.lst_ope = 'U'
-                         AND s.sad_num = '0'
-                         AND fis_numver = '0'
-                         AND fis_lst_ope = 'U'
-                         AND fis_estado <> 'REGULARIZACION'
-                         AND s.key_year = spy1.key_year(+)
-                         AND s.key_cuo = spy1.key_cuo(+)
-                         AND s.key_dec = spy1.key_dec(+)
-                         AND s.key_nber = spy1.key_nber(+)
-                         AND spy1.spy_sta(+) = '10'
-                         AND spy1.spy_act(+) = '24'
-                         AND s.key_year = a.fis_key_year
-                         AND s.key_cuo = a.fis_key_cuo
-                         AND s.key_dec = a.fis_key_dec
-                         AND s.key_nber = a.fis_key_nber
-                         AND a.fis_gerencia LIKE prm_gerencia
-                         AND TRUNC (a.fis_fec_asignacion) BETWEEN TO_DATE (
-                                                                      prm_fec_ini,
-                                                                      'dd/mm/yyyy')
-                                                              AND  TO_DATE (
-                                                                       prm_fec_fin,
-                                                                       'dd/mm/yyyy');
-        ELSE
-            OPEN ct FOR
-                SELECT   DISTINCT
-                         TO_NUMBER (a.fis_gestion) gestion,
-                         DECODE (a.fis_gerencia,
-                                 'GRLP', 'LA PAZ',
-                                 'GRCB', 'COCHABAMBA',
-                                 'GRSC', 'SANTA CRUZ',
-                                 'GROR', 'ORURO',
-                                 'GRTJ', 'TARIJA',
-                                 'GRPT', 'POTOSI',
-                                 'GNF-DIA')
-                             gerencia,
-                         a.fis_nro_control nro_correlativo,
-                         TO_CHAR (a.fis_fec_registro) fecha_orden_control,
-                         s.key_cuo aduana,
-                         nomadu (s.key_cuo) "DESC ADUANA",
-                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
-                            s.sad_reg_year
-                         || '/'
-                         || s.key_cuo
-                         || '/'
-                         || s.sad_reg_serial
-                         || '-'
-                         || s.sad_reg_nber
-                             "TRAMITE",
-                         DECODE (spy1.sad_clr,
-                                 0,
-                                 'VERDE',
-                                 1,
-                                 'AZUL',
-                                 2,
-                                 'AMARILLO',
-                                 3,
-                                 'ROJO')
-                             "CANAL",
-                         numid (s.sad_consignee,
-                                s.key_year,
-                                s.key_cuo,
-                                s.key_dec,
-                                s.key_nber,
-                                s.sad_num)
-                             "DOC IMP",
-                         NVL (nomimp (s.sad_consignee,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
-                         NVL (nomage (s.key_dec,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "DECLARANTE",
-                         NVL (dirprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "DIREC PROVEEDOR",
-                         NVL (nomprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "PROVEEDOR",
-                         fob_cabecera (s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       0)
-                             fob_funcion,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ga,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IVA'
-                                       AND st.sad_num = '0'),
-                             0)
-                             iva,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'ICE'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ice,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IHD'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ihd,
-                         ----SUMATORIAS DE TRIBUTOS
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IVA'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'ICE'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IHD'
-                                         AND st.sad_num = '0'),
-                               0)
-                             total_tributos,
-                         --ASIGNACION CONTROL DIFERIDO
-                         NVL (a.fis_fiscalizador, '-') fiscalizador,
-                         NVL (a.fis_usuario_asignacion, '-')
-                             usuario_asignacion,
-                         --NOTIFICACION
-                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_NOTIFICACION",
-                         NVL (a.fis_obs_notificacion, '-')
-                             "OBSERVACION_NOTIFICACION",
-                         NVL (a.fis_tipo_notificacion, '-')
-                             "TIPO_NOTIFICACION",
-                         NVL (a.fis_usuario_notificacion, '-')
-                             "USUARIO_NOTIFICACION",
-                         --RESULTADO CONTROL DIFERIDO
-                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
-                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_LIQUIDACION",
-                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
-                             "TRIBUTO_OMITIDO_GA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
-                             "TRIBUTO_OMITIDO_IVA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
-                             "TRIBUTO_OMITIDO_ICE",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
-                             "TRIBUTO_OMITIDO_IEHD",
-                         NVL (
-                               TO_NUMBER (a.fis_tributo_omitido_ga)
-                             + TO_NUMBER (a.fis_tributo_omitido_iva)
-                             + TO_NUMBER (a.fis_tributo_omitido_ice)
-                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
-                             0)
-                             "TOTAL_TRIBUTO_OMITIDO",
-                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
-                             sancion_omision,
-                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
-                             multa_contravencion,
-                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
-                             "MULTA_CONTRA_CONTRA",
-                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
-                             multa_contrabando_delito,
-                         NVL (a.fis_usuario_resultados, '-')
-                             usuarios_registrados,
-                         --ACEPTACION DE PAGO
-                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_aceptacion_pago,
-                         NVL (a.fis_usuario_aceptacion, '-')
-                             usuario_aceptacion,
-                         --CONCLUSION DEL CONTROL DIFERIDO
-                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
-                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
-                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
-                             "FECHA_INFORME",
-                         NVL (a.fis_reg_nro_doc_con, '-')
-                             "NRO_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_FINALIZACION",
-                         NVL (a.fis_usuario_finalizacion, '-')
-                             "USUARIO_REGISTRO_FINALIZACION",
-                         --OBSERVACIONES ENCONTRADAS
-                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
-                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
-                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
-                         DECODE (a.fis_osinobs, 'on', 'X', '-')
-                             "SIN_OBSERVACION",
-                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
-                         DECODE (a.fis_comision, 'on', 'X', '-')
-                             "OMISION_PAGO",
-                         DECODE (a.fis_ccondel, 'on', 'X', '-')
-                             "CONTRABANDO_DELITO",
-                         DECODE (a.fis_cconcon, 'on', 'X', '-')
-                             "CONTRABANDO_CONTRAVENCIONAL",
-                         DECODE (a.fis_cconadu, 'on', 'X', '-')
-                             "CONTRAVENCION_ADUANERA",
-                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
-                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_notificacion_conclusion,
-                         NVL (a.fis_reg_tip_not_doc, '-')
-                             tipo_notificacion_conclusion,
-                         NVL (a.fis_usuario_not_doc_con, '-')
-                             usuario_registro_notificacion,
-                         --ENVIO A LA UNIDAD LEGAL
-                         NVL (
-                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
-                             '-')
-                             "FECHA_ENVIO",
-                         NVL (a.fis_reg_nro_env_legal, '-')
-                             "NRO_DOC_REMISION",
-                         NVL (a.fis_usuario_env_legal, '-')
-                             "USUARIO_UNIDAD_LEGAL",
-                         --ESTADO
-                         fis_estado "ESTADO",
-                         --valores
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                             ga_recuperado,
-                         NVL (
-                             sicodif_iva (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             iva_recuperado,
-                         NVL (
-                             sicodif_ice (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ice_recuperado,
-                         NVL (
-                             sicodif_ihd (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ihd_recuperado,
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                         + NVL (
-                               sicodif_iva (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ice (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ihd (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                             total_tributo,
-                         NVL (
-                             sicodif_sancionop (a.fis_gestion,
-                                                a.fis_gerencia,
-                                                a.fis_nro_control),
-                             0)
-                             sancionop_recuperado,
-                         --MULTA CONTRAVENCIONAL ADUANERA
-                         NVL (
-                             sicodif_contra_adu (a.fis_gestion,
-                                                 a.fis_gerencia,
-                                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_adu,
-                         --MULTA CONTRABANDO CONTRAVENCIONAL
-                         --FALTA
-                         NVL (
-                             sicodif_contra_contravencional (
-                                 a.fis_gestion,
-                                 a.fis_gerencia,
-                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_contravencional,
-                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
-
-                         NVL (a.fis_usuario_resultados, '-'),
-                         fis_origen_control control_origen,
-                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
-                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
-                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
-                              '-')
-                             fecha_control,
-                         --OTROS DATOS
-                         CASE
-                             WHEN sicodif_25 (s.key_year,
-                                              s.key_cuo,
-                                              s.key_dec,
-                                              s.key_nber) IS NOT NULL
-                             THEN
-                                 sicodif_25 (s.key_year,
-                                             s.key_cuo,
-                                             s.key_dec,
-                                             s.key_nber)
-                             ELSE
-                                 '-'
-                         END
-                             AS pase_salida,
-                         mercancia (s.key_year,
-                                    s.key_cuo,
-                                    s.key_dec,
-                                    s.key_nber)
-                             mercancias,
-                         NVL (crt_cabecera (s.key_year,
-                                            s.key_cuo,
-                                            s.key_dec,
-                                            s.key_nber), 'ALEATORIO')
-                             criterio_nivel_cab,
-                         --MULTA CONTRABANDO DELITO
-                         --FALTA
-                         NVL (
-                             sicodif_contra_delito (a.fis_gestion,
-                                                    a.fis_gerencia,
-                                                    a.fis_nro_control),
-                             0)
-                             sancion_contra_delito
-                  FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
-                 WHERE       s.sad_flw = '1'
-                         AND s.sad_asmt_serial IS NOT NULL
-                         AND s.lst_ope = 'U'
-                         AND s.sad_num = '0'
-                         AND fis_numver = '0'
-                         AND fis_lst_ope = 'U'
-                         AND fis_estado <> 'REGULARIZACION'
-                         AND s.key_year = spy1.key_year(+)
-                         AND s.key_cuo = spy1.key_cuo(+)
-                         AND s.key_dec IS NULL
-                         AND spy1.key_dec(+) IS NULL
-                         AND s.key_nber = spy1.key_nber(+)
-                         AND spy1.spy_sta(+) = '10'
-                         AND spy1.spy_act(+) = '24'
-                         AND s.key_year = a.fis_key_year
-                         AND s.key_cuo = a.fis_key_cuo
-                         AND a.fis_key_dec IS NULL
-                         AND s.key_nber = a.fis_key_nber
-                         AND numid (s.sad_consignee,
-                                    s.key_year,
-                                    s.key_cuo,
-                                    s.key_dec,
-                                    s.key_nber,
-                                    s.sad_num) = prm_nit
-                         AND a.fis_gerencia LIKE prm_gerencia
-                         AND TRUNC (a.fis_fec_asignacion) BETWEEN TO_DATE (
-                                                                      prm_fec_ini,
-                                                                      'dd/mm/yyyy')
-                                                              AND  TO_DATE (
-                                                                       prm_fec_fin,
-                                                                       'dd/mm/yyyy')
-                UNION
-                SELECT   DISTINCT
-                         TO_NUMBER (a.fis_gestion) gestion,
-                         DECODE (a.fis_gerencia,
-                                 'GRLP', 'LA PAZ',
-                                 'GRCB', 'COCHABAMBA',
-                                 'GRSC', 'SANTA CRUZ',
-                                 'GROR', 'ORURO',
-                                 'GRTJ', 'TARIJA',
-                                 'GRPT', 'POTOSI',
-                                 'GNF-DIA')
-                             gerencia,
-                         a.fis_nro_control nro_correlativo,
-                         TO_CHAR (a.fis_fec_registro) fecha_orden_control,
-                         s.key_cuo aduana,
-                         nomadu (s.key_cuo) "DESC ADUANA",
-                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
-                            s.sad_reg_year
-                         || '/'
-                         || s.key_cuo
-                         || '/'
-                         || s.sad_reg_serial
-                         || '-'
-                         || s.sad_reg_nber
-                             "TRAMITE",
-                         DECODE (spy1.sad_clr,
-                                 0,
-                                 'VERDE',
-                                 1,
-                                 'AZUL',
-                                 2,
-                                 'AMARILLO',
-                                 3,
-                                 'ROJO')
-                             "CANAL",
-                         numid (s.sad_consignee,
-                                s.key_year,
-                                s.key_cuo,
-                                s.key_dec,
-                                s.key_nber,
-                                s.sad_num)
-                             "DOC IMP",
-                         NVL (nomimp (s.sad_consignee,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
-                         NVL (nomage (s.key_dec,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "DECLARANTE",
-                         NVL (dirprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "DIREC PROVEEDOR",
-                         NVL (nomprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "PROVEEDOR",
-                         fob_cabecera (s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       0)
-                             fob_funcion,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ga,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IVA'
-                                       AND st.sad_num = '0'),
-                             0)
-                             iva,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'ICE'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ice,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IHD'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ihd,
-                         ----SUMATORIAS DE TRIBUTOS
-
-
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IVA'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'ICE'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IHD'
-                                         AND st.sad_num = '0'),
-                               0)
-                             total_tributos,
-                         --ASIGNACION CONTROL DIFERIDO
-                         NVL (a.fis_fiscalizador, '-') fiscalizador,
-                         NVL (a.fis_usuario_asignacion, '-')
-                             usuario_asignacion,
-                         --NOTIFICACION
-                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_NOTIFICACION",
-                         NVL (a.fis_obs_notificacion, '-')
-                             "OBSERVACION_NOTIFICACION",
-                         NVL (a.fis_tipo_notificacion, '-')
-                             "TIPO_NOTIFICACION",
-                         NVL (a.fis_usuario_notificacion, '-')
-                             "USUARIO_NOTIFICACION",
-                         --RESULTADO CONTROL DIFERIDO
-                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
-                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_LIQUIDACION",
-                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
-                             "TRIBUTO_OMITIDO_GA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
-                             "TRIBUTO_OMITIDO_IVA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
-                             "TRIBUTO_OMITIDO_ICE",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
-                             "TRIBUTO_OMITIDO_IEHD",
-                         NVL (
-                               TO_NUMBER (a.fis_tributo_omitido_ga)
-                             + TO_NUMBER (a.fis_tributo_omitido_iva)
-                             + TO_NUMBER (a.fis_tributo_omitido_ice)
-                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
-                             0)
-                             "TOTAL_TRIBUTO_OMITIDO",
-                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
-                             sancion_omision,
-                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
-                             multa_contravencion,
-                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
-                             "MULTA_CONTRA_CONTRA",
-                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
-                             multa_contrabando_delito,
-                         NVL (a.fis_usuario_resultados, '-')
-                             usuarios_registrados,
-                         --ACEPTACION DE PAGO
-                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_aceptacion_pago,
-                         NVL (a.fis_usuario_aceptacion, '-')
-                             usuario_aceptacion,
-                         --CONCLUSION DEL CONTROL DIFERIDO
-                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
-                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
-                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
-                             "FECHA_INFORME",
-                         NVL (a.fis_reg_nro_doc_con, '-')
-                             "NRO_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_FINALIZACION",
-                         NVL (a.fis_usuario_finalizacion, '-')
-                             "USUARIO_REGISTRO_FINALIZACION",
-                         --OBSERVACIONES ENCONTRADAS
-                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
-                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
-                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
-                         DECODE (a.fis_osinobs, 'on', 'X', '-')
-                             "SIN_OBSERVACION",
-                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
-                         DECODE (a.fis_comision, 'on', 'X', '-')
-                             "OMISION_PAGO",
-                         DECODE (a.fis_ccondel, 'on', 'X', '-')
-                             "CONTRABANDO_DELITO",
-                         DECODE (a.fis_cconcon, 'on', 'X', '-')
-                             "CONTRABANDO_CONTRAVENCIONAL",
-                         DECODE (a.fis_cconadu, 'on', 'X', '-')
-                             "CONTRAVENCION_ADUANERA",
-                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
-                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_notificacion_conclusion,
-                         NVL (a.fis_reg_tip_not_doc, '-')
-                             tipo_notificacion_conclusion,
-                         NVL (a.fis_usuario_not_doc_con, '-')
-                             usuario_registro_notificacion,
-                         --ENVIO A LA UNIDAD LEGAL
-                         NVL (
-                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
-                             '-')
-                             "FECHA_ENVIO",
-                         NVL (a.fis_reg_nro_env_legal, '-')
-                             "NRO_DOC_REMISION",
-                         NVL (a.fis_usuario_env_legal, '-')
-                             "USUARIO_UNIDAD_LEGAL",
-                         --ESTADO
-                         fis_estado "ESTADO",
-                         --valores
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                             ga_recuperado,
-                         NVL (
-                             sicodif_iva (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             iva_recuperado,
-                         NVL (
-                             sicodif_ice (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ice_recuperado,
-                         NVL (
-                             sicodif_ihd (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ihd_recuperado,
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                         + NVL (
-                               sicodif_iva (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ice (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ihd (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                             total_tributo,
-                         NVL (
-                             sicodif_sancionop (a.fis_gestion,
-                                                a.fis_gerencia,
-                                                a.fis_nro_control),
-                             0)
-                             sancionop_recuperado,
-                         --MULTA CONTRAVENCIONAL ADUANERA
-                         NVL (
-                             sicodif_contra_adu (a.fis_gestion,
-                                                 a.fis_gerencia,
-                                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_adu,
-                         --MULTA CONTRABANDO CONTRAVENCIONAL
-                         --FALTA
-                         NVL (
-                             sicodif_contra_contravencional (
-                                 a.fis_gestion,
-                                 a.fis_gerencia,
-                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_contravencional,
-                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
-
-                         NVL (a.fis_usuario_resultados, '-'),
-                         fis_origen_control control_origen,
-                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
-                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
-                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
-                              '-')
-                             fecha_control,
-                         --OTROS DATOS
-                         CASE
-                             WHEN sicodif_25 (s.key_year,
-                                              s.key_cuo,
-                                              s.key_dec,
-                                              s.key_nber) IS NOT NULL
-                             THEN
-                                 sicodif_25 (s.key_year,
-                                             s.key_cuo,
-                                             s.key_dec,
-                                             s.key_nber)
-                             ELSE
-                                 '-'
-                         END
-                             AS pase_salida,
-                         mercancia (s.key_year,
-                                    s.key_cuo,
-                                    s.key_dec,
-                                    s.key_nber)
-                             mercancias,
-                         NVL (crt_cabecera (s.key_year,
-                                            s.key_cuo,
-                                            s.key_dec,
-                                            s.key_nber), 'ALEATORIO')
-                             criterio_nivel_cab,
-                         --MULTA CONTRABANDO DELITO
-                         --FALTA
-                         NVL (
-                             sicodif_contra_delito (a.fis_gestion,
-                                                    a.fis_gerencia,
-                                                    a.fis_nro_control),
-                             0)
-                             sancion_contra_delito
-                  FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
-                 WHERE       s.sad_flw = '1'
-                         AND s.sad_asmt_serial IS NOT NULL
-                         AND s.lst_ope = 'U'
-                         AND s.sad_num = '0'
-                         AND fis_numver = '0'
-                         AND fis_lst_ope = 'U'
-                         AND fis_estado <> 'REGULARIZACION'
-                         AND s.key_year = spy1.key_year(+)
-                         AND s.key_cuo = spy1.key_cuo(+)
-                         AND s.key_dec = spy1.key_dec(+)
-                         AND s.key_nber = spy1.key_nber(+)
-                         AND spy1.spy_sta(+) = '10'
-                         AND spy1.spy_act(+) = '24'
-                         AND s.key_year = a.fis_key_year
-                         AND s.key_cuo = a.fis_key_cuo
-                         AND s.key_dec = a.fis_key_dec
-                         AND s.key_nber = a.fis_key_nber
-                         AND numid (s.sad_consignee,
-                                    s.key_year,
-                                    s.key_cuo,
-                                    s.key_dec,
-                                    s.key_nber,
-                                    s.sad_num) = prm_nit
-                         AND a.fis_gerencia LIKE prm_gerencia
-                         AND TRUNC (a.fis_fec_asignacion) BETWEEN TO_DATE (
-                                                                      prm_fec_ini,
-                                                                      'dd/mm/yyyy')
-                                                              AND  TO_DATE (
-                                                                       prm_fec_fin,
-                                                                       'dd/mm/yyyy');
-        END IF;
-
-
-        RETURN res;
-    END;
-
-
-    FUNCTION reportebasedui (prm_gestion   IN     VARCHAR2,
-                             prm_aduana    IN     VARCHAR2,
-                             prm_numero    IN     VARCHAR2,
-                             ct               OUT cursortype)
-        RETURN VARCHAR2
-    IS
-        res    VARCHAR2 (50) := 'CORRECTO';
-        cont   NUMBER (10);
-    BEGIN
-        -- ALTER SESSION SET NLS_TERRITORY=america;
-        /*SELECT   COUNT (1)
-          INTO   cont
-          FROM   (SELECT   a.fis_gestion
-                    FROM   sicodif.cd_fiscalizacion a,
-                           sad_spy spy1,
-                           sad_gen s
-                   WHERE       s.sad_flw = '1'
-                           AND s.sad_asmt_serial IS NOT NULL
-                           AND s.lst_ope = 'U'
-                           AND s.sad_num = '0'
-                           AND fis_numver = '0'
-                           AND fis_lst_ope = 'U'
-                           AND fis_estado <> 'REGULARIZACION'
-                           AND s.key_year = spy1.key_year(+)
-                           AND s.key_cuo = spy1.key_cuo(+)
-                           AND s.key_dec IS NULL
-                           AND spy1.key_dec(+) IS NULL
-                           AND s.key_nber = spy1.key_nber(+)
-                           AND spy1.spy_sta(+) = '10'
-                           AND spy1.spy_act(+) = '24'
-                           AND s.key_year = a.fis_key_year
-                           AND s.key_cuo = a.fis_key_cuo
-                           AND a.fis_key_dec IS NULL
-                           AND s.key_nber = a.fis_key_nber
-                           AND a.sad_reg_year = prm_gestion
-                           AND a.fis_key_cuo = prm_aduana
-                           AND a.sad_reg_serial = 'C'
-                           AND a.sad_reg_nber = prm_numero
-                  UNION
-                  SELECT   a.fis_gestion
-                    FROM   sicodif.cd_fiscalizacion a,
-                           sad_spy spy1,
-                           sad_gen s
-                   WHERE       s.sad_flw = '1'
-                           AND s.sad_asmt_serial IS NOT NULL
-                           AND s.lst_ope = 'U'
-                           AND s.sad_num = '0'
-                           AND fis_numver = '0'
-                           AND fis_lst_ope = 'U'
-                           AND fis_estado <> 'REGULARIZACION'
-                           AND s.key_year = spy1.key_year(+)
-                           AND s.key_cuo = spy1.key_cuo(+)
-                           AND s.key_dec = spy1.key_dec(+)
-                           AND s.key_nber = spy1.key_nber(+)
-                           AND spy1.spy_sta(+) = '10'
-                           AND spy1.spy_act(+) = '24'
-                           AND s.key_year = a.fis_key_year
-                           AND s.key_cuo = a.fis_key_cuo
-                           AND s.key_dec = a.fis_key_dec
-                           AND s.key_nber = a.fis_key_nber
-                           AND a.sad_reg_year = prm_gestion
-                           AND a.fis_key_cuo = prm_aduana
-                           AND a.sad_reg_serial = 'C'
-                           AND a.sad_reg_nber = prm_numero) tbl;
-
-        IF (cont = 0)
-        THEN
-            res := 'VACIO';
-        ELSE
-        */
-            OPEN ct FOR
-                SELECT   DISTINCT
-                         TO_NUMBER (a.fis_gestion) gestion,
-                         DECODE (a.fis_gerencia,
-                                 'GRLP', 'LA PAZ',
-                                 'GRCB', 'COCHABAMBA',
-                                 'GRSC', 'SANTA CRUZ',
-                                 'GROR', 'ORURO',
-                                 'GRTJ', 'TARIJA',
-                                 'GRPT', 'POTOSI',
-                                 'GNF-DIA')
-                             gerencia,
-                         a.fis_nro_control nro_correlativo,
-                         TO_CHAR (a.fis_fec_registro) fecha_orden_control,
-                         s.key_cuo aduana,
-                         nomadu (s.key_cuo) "DESC ADUANA",
-                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
-                            s.sad_reg_year
-                         || '/'
-                         || s.key_cuo
-                         || '/'
-                         || s.sad_reg_serial
-                         || '-'
-                         || s.sad_reg_nber
-                             "TRAMITE",
-                         DECODE (spy1.sad_clr,
-                                 0,
-                                 'VERDE',
-                                 1,
-                                 'AZUL',
-                                 2,
-                                 'AMARILLO',
-                                 3,
-                                 'ROJO')
-                             "CANAL",
-                         numid (s.sad_consignee,
-                                s.key_year,
-                                s.key_cuo,
-                                s.key_dec,
-                                s.key_nber,
-                                s.sad_num)
-                             "DOC IMP",
-                         NVL (nomimp (s.sad_consignee,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
-                         NVL (nomage (s.key_dec,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "DECLARANTE",
-                         NVL (dirprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "DIREC PROVEEDOR",
-                         NVL (nomprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "PROVEEDOR",
-                         fob_cabecera (s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       0)
-                             fob_funcion,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ga,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IVA'
-                                       AND st.sad_num = '0'),
-                             0)
-                             iva,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'ICE'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ice,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IHD'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ihd,
-                         ----SUMATORIAS DE TRIBUTOS
-
-
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND st.key_dec IS NULL
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IVA'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'ICE'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND st.key_dec IS NULL
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IHD'
-                                         AND st.sad_num = '0'),
-                               0)
-                             total_tributos,
-                         --ASIGNACION CONTROL DIFERIDO
-                         NVL (a.fis_fiscalizador, '-') fiscalizador,
-                         NVL (a.fis_usuario_asignacion, '-')
-                             usuario_asignacion,
-                         --NOTIFICACION
-                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_NOTIFICACION",
-                         NVL (a.fis_obs_notificacion, '-')
-                             "OBSERVACION_NOTIFICACION",
-                         NVL (a.fis_tipo_notificacion, '-')
-                             "TIPO_NOTIFICACION",
-                         NVL (a.fis_usuario_notificacion, '-')
-                             "USUARIO_NOTIFICACION",
-                         --RESULTADO CONTROL DIFERIDO
-                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
-                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_LIQUIDACION",
-                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
-                             "TRIBUTO_OMITIDO_GA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
-                             "TRIBUTO_OMITIDO_IVA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
-                             "TRIBUTO_OMITIDO_ICE",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
-                             "TRIBUTO_OMITIDO_IEHD",
-                         NVL (
-                               TO_NUMBER (a.fis_tributo_omitido_ga)
-                             + TO_NUMBER (a.fis_tributo_omitido_iva)
-                             + TO_NUMBER (a.fis_tributo_omitido_ice)
-                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
-                             0)
-                             "TOTAL_TRIBUTO_OMITIDO",
-                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
-                             sancion_omision,
-                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
-                             multa_contravencion,
-                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
-                             "MULTA_CONTRA_CONTRA",
-                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
-                             multa_contrabando_delito,
-                         NVL (a.fis_usuario_resultados, '-')
-                             usuarios_registrados,
-                         --ACEPTACION DE PAGO
-                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_aceptacion_pago,
-                         NVL (a.fis_usuario_aceptacion, '-')
-                             usuario_aceptacion,
-                         --CONCLUSION DEL CONTROL DIFERIDO
-                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
-                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
-                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
-                             "FECHA_INFORME",
-                         NVL (a.fis_reg_nro_doc_con, '-')
-                             "NRO_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_FINALIZACION",
-                         NVL (a.fis_usuario_finalizacion, '-')
-                             "USUARIO_REGISTRO_FINALIZACION",
-                         --OBSERVACIONES ENCONTRADAS
-                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
-                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
-                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
-                         DECODE (a.fis_osinobs, 'on', 'X', '-')
-                             "SIN_OBSERVACION",
-                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
-                         DECODE (a.fis_comision, 'on', 'X', '-')
-                             "OMISION_PAGO",
-                         DECODE (a.fis_ccondel, 'on', 'X', '-')
-                             "CONTRABANDO_DELITO",
-                         DECODE (a.fis_cconcon, 'on', 'X', '-')
-                             "CONTRABANDO_CONTRAVENCIONAL",
-                         DECODE (a.fis_cconadu, 'on', 'X', '-')
-                             "CONTRAVENCION_ADUANERA",
-                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
-                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_notificacion_conclusion,
-                         NVL (a.fis_reg_tip_not_doc, '-')
-                             tipo_notificacion_conclusion,
-                         NVL (a.fis_usuario_not_doc_con, '-')
-                             usuario_registro_notificacion,
-                         --ENVIO A LA UNIDAD LEGAL
-                         NVL (
-                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
-                             '-')
-                             "FECHA_ENVIO",
-                         NVL (a.fis_reg_nro_env_legal, '-')
-                             "NRO_DOC_REMISION",
-                         NVL (a.fis_usuario_env_legal, '-')
-                             "USUARIO_UNIDAD_LEGAL",
-                         --ESTADO
-                         fis_estado "ESTADO",
-                         --valores
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                             ga_recuperado,
-                         NVL (
-                             sicodif_iva (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             iva_recuperado,
-                         NVL (
-                             sicodif_ice (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ice_recuperado,
-                         NVL (
-                             sicodif_ihd (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ihd_recuperado,
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                         + NVL (
-                               sicodif_iva (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ice (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ihd (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                             total_tributo,
-                         NVL (
-                             sicodif_sancionop (a.fis_gestion,
-                                                a.fis_gerencia,
-                                                a.fis_nro_control),
-                             0)
-                             sancionop_recuperado,
-                         --MULTA CONTRAVENCIONAL ADUANERA
-                         NVL (
-                             sicodif_contra_adu (a.fis_gestion,
-                                                 a.fis_gerencia,
-                                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_adu,
-                         --MULTA CONTRABANDO CONTRAVENCIONAL
-                         --FALTA
-                         NVL (
-                             sicodif_contra_contravencional (
-                                 a.fis_gestion,
-                                 a.fis_gerencia,
-                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_contravencional,
-                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
-
-                         NVL (a.fis_usuario_resultados, '-'),
-                         fis_origen_control control_origen,
-                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
-                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
-                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
-                              '-')
-                             fecha_control,
-                         --OTROS DATOS
-                         CASE
-                             WHEN sicodif_25 (s.key_year,
-                                              s.key_cuo,
-                                              s.key_dec,
-                                              s.key_nber) IS NOT NULL
-                             THEN
-                                 sicodif_25 (s.key_year,
-                                             s.key_cuo,
-                                             s.key_dec,
-                                             s.key_nber)
-                             ELSE
-                                 '-'
-                         END
-                             AS pase_salida,
-                         mercancia (s.key_year,
-                                    s.key_cuo,
-                                    s.key_dec,
-                                    s.key_nber)
-                             mercancias,
-                         NVL (crt_cabecera (s.key_year,
-                                            s.key_cuo,
-                                            s.key_dec,
-                                            s.key_nber), 'ALEATORIO')
-                             criterio_nivel_cab,
-                         --MULTA CONTRABANDO DELITO
-                         --FALTA
-                         NVL (
-                             sicodif_contra_delito (a.fis_gestion,
-                                                    a.fis_gerencia,
-                                                    a.fis_nro_control),
-                             0)
-                             sancion_contra_delito
-                  FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
-                 WHERE       s.sad_flw = '1'
-                         AND s.sad_asmt_serial IS NOT NULL
-                         AND s.lst_ope = 'U'
-                         AND s.sad_num = '0'
-                         AND fis_numver = '0'
-                         AND fis_lst_ope = 'U'
-                         AND fis_estado <> 'REGULARIZACION'
-                         AND s.key_year = spy1.key_year(+)
-                         AND s.key_cuo = spy1.key_cuo(+)
-                         AND s.key_dec IS NULL
-                         AND spy1.key_dec(+) IS NULL
-                         AND s.key_nber = spy1.key_nber(+)
-                         AND spy1.spy_sta(+) = '10'
-                         AND spy1.spy_act(+) = '24'
-                         AND s.key_year = a.fis_key_year
-                         AND s.key_cuo = a.fis_key_cuo
-                         AND a.fis_key_dec IS NULL
-                         AND s.key_nber = a.fis_key_nber
-                         AND a.sad_reg_year = prm_gestion
-                         AND a.fis_key_cuo = prm_aduana
-                         AND a.sad_reg_serial = 'C'
-                         AND a.sad_reg_nber = prm_numero
-                UNION
-                SELECT   DISTINCT
-                         TO_NUMBER (a.fis_gestion) gestion,
-                         DECODE (a.fis_gerencia,
-                                 'GRLP', 'LA PAZ',
-                                 'GRCB', 'COCHABAMBA',
-                                 'GRSC', 'SANTA CRUZ',
-                                 'GROR', 'ORURO',
-                                 'GRTJ', 'TARIJA',
-                                 'GRPT', 'POTOSI',
-                                 'GNF-DIA')
-                             gerencia,
-                         a.fis_nro_control nro_correlativo,
-                         TO_CHAR (a.fis_fec_registro) fecha_orden_control,
-                         s.key_cuo aduana,
-                         nomadu (s.key_cuo) "DESC ADUANA",
-                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
-                            s.sad_reg_year
-                         || '/'
-                         || s.key_cuo
-                         || '/'
-                         || s.sad_reg_serial
-                         || '-'
-                         || s.sad_reg_nber
-                             "TRAMITE",
-                         DECODE (spy1.sad_clr,
-                                 0,
-                                 'VERDE',
-                                 1,
-                                 'AZUL',
-                                 2,
-                                 'AMARILLO',
-                                 3,
-                                 'ROJO')
-                             "CANAL",
-                         numid (s.sad_consignee,
-                                s.key_year,
-                                s.key_cuo,
-                                s.key_dec,
-                                s.key_nber,
-                                s.sad_num)
-                             "DOC IMP",
-                         NVL (nomimp (s.sad_consignee,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
-                         NVL (nomage (s.key_dec,
-                                      s.key_year,
-                                      s.key_cuo,
-                                      s.key_dec,
-                                      s.key_nber,
-                                      s.sad_num), '-')
-                             "DECLARANTE",
-                         NVL (dirprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "DIREC PROVEEDOR",
-                         NVL (nomprov (s.sad_exporter,
-                                       s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       s.sad_num), '-')
-                             "PROVEEDOR",
-                         fob_cabecera (s.key_year,
-                                       s.key_cuo,
-                                       s.key_dec,
-                                       s.key_nber,
-                                       0)
-                             fob_funcion,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ga,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   ops$asy.sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IVA'
-                                       AND st.sad_num = '0'),
-                             0)
-                             iva,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'ICE'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ice,
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'IHD'
-                                       AND st.sad_num = '0'),
-                             0)
-                             ihd,
-                         ----SUMATORIAS DE TRIBUTOS
-
-
-                         NVL (
-                             (SELECT   SUM (saditm_tax_amount)
-                                FROM   sad_tax st
-                               WHERE       s.key_year = st.key_year
-                                       AND s.key_cuo = st.key_cuo
-                                       AND s.key_dec = st.key_dec
-                                       AND s.key_nber = st.key_nber
-                                       AND st.saditm_tax_code = 'GA'
-                                       AND st.saditm_tax_mop = '1'
-                                       AND st.sad_num = '0'),
-                             0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IVA'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'ICE'
-                                         AND st.sad_num = '0'),
-                               0)
-                         + NVL (
-                               (SELECT   SUM (saditm_tax_amount)
-                                  FROM   sad_tax st
-                                 WHERE       s.key_year = st.key_year
-                                         AND s.key_cuo = st.key_cuo
-                                         AND s.key_dec = st.key_dec
-                                         AND s.key_nber = st.key_nber
-                                         AND st.saditm_tax_code = 'IHD'
-                                         AND st.sad_num = '0'),
-                               0)
-                             total_tributos,
-                         --ASIGNACION CONTROL DIFERIDO
-                         NVL (a.fis_fiscalizador, '-') fiscalizador,
-                         NVL (a.fis_usuario_asignacion, '-')
-                             usuario_asignacion,
-                         --NOTIFICACION
-                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_NOTIFICACION",
-                         NVL (a.fis_obs_notificacion, '-')
-                             "OBSERVACION_NOTIFICACION",
-                         NVL (a.fis_tipo_notificacion, '-')
-                             "TIPO_NOTIFICACION",
-                         NVL (a.fis_usuario_notificacion, '-')
-                             "USUARIO_NOTIFICACION",
-                         --RESULTADO CONTROL DIFERIDO
-                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
-                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_LIQUIDACION",
-                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
-                             "TRIBUTO_OMITIDO_GA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
-                             "TRIBUTO_OMITIDO_IVA",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
-                             "TRIBUTO_OMITIDO_ICE",
-                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
-                             "TRIBUTO_OMITIDO_IEHD",
-                         NVL (
-                               TO_NUMBER (a.fis_tributo_omitido_ga)
-                             + TO_NUMBER (a.fis_tributo_omitido_iva)
-                             + TO_NUMBER (a.fis_tributo_omitido_ice)
-                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
-                             0)
-                             "TOTAL_TRIBUTO_OMITIDO",
-                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
-                             sancion_omision,
-                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
-                             multa_contravencion,
-                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
-                             "MULTA_CONTRA_CONTRA",
-                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
-                             multa_contrabando_delito,
-                         NVL (a.fis_usuario_resultados, '-')
-                             usuarios_registrados,
-                         --ACEPTACION DE PAGO
-                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_aceptacion_pago,
-                         NVL (a.fis_usuario_aceptacion, '-')
-                             usuario_aceptacion,
-                         --CONCLUSION DEL CONTROL DIFERIDO
-                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
-                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
-                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
-                             "FECHA_INFORME",
-                         NVL (a.fis_reg_nro_doc_con, '-')
-                             "NRO_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_DOC_CONCLUSION",
-                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
-                              '-')
-                             "FECHA_FINALIZACION",
-                         NVL (a.fis_usuario_finalizacion, '-')
-                             "USUARIO_REGISTRO_FINALIZACION",
-                         --OBSERVACIONES ENCONTRADAS
-                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
-                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
-                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
-                         DECODE (a.fis_osinobs, 'on', 'X', '-')
-                             "SIN_OBSERVACION",
-                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
-                         DECODE (a.fis_comision, 'on', 'X', '-')
-                             "OMISION_PAGO",
-                         DECODE (a.fis_ccondel, 'on', 'X', '-')
-                             "CONTRABANDO_DELITO",
-                         DECODE (a.fis_cconcon, 'on', 'X', '-')
-                             "CONTRABANDO_CONTRAVENCIONAL",
-                         DECODE (a.fis_cconadu, 'on', 'X', '-')
-                             "CONTRAVENCION_ADUANERA",
-                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
-                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
-                              '-')
-                             fecha_notificacion_conclusion,
-                         NVL (a.fis_reg_tip_not_doc, '-')
-                             tipo_notificacion_conclusion,
-                         NVL (a.fis_usuario_not_doc_con, '-')
-                             usuario_registro_notificacion,
-                         --ENVIO A LA UNIDAD LEGAL
-                         NVL (
-                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
-                             '-')
-                             "FECHA_ENVIO",
-                         NVL (a.fis_reg_nro_env_legal, '-')
-                             "NRO_DOC_REMISION",
-                         NVL (a.fis_usuario_env_legal, '-')
-                             "USUARIO_UNIDAD_LEGAL",
-                         --ESTADO
-                         fis_estado "ESTADO",
-                         --valores
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                             ga_recuperado,
-                         NVL (
-                             sicodif_iva (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             iva_recuperado,
-                         NVL (
-                             sicodif_ice (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ice_recuperado,
-                         NVL (
-                             sicodif_ihd (a.fis_gestion,
-                                          a.fis_gerencia,
-                                          a.fis_nro_control),
-                             0)
-                             ihd_recuperado,
-                         NVL (
-                             sicodif_ga (a.fis_gestion,
-                                         a.fis_gerencia,
-                                         a.fis_nro_control),
-                             0)
-                         + NVL (
-                               sicodif_iva (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ice (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                         + NVL (
-                               sicodif_ihd (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                               0)
-                             total_tributo,
-                         NVL (
-                             sicodif_sancionop (a.fis_gestion,
-                                                a.fis_gerencia,
-                                                a.fis_nro_control),
-                             0)
-                             sancionop_recuperado,
-                         --MULTA CONTRAVENCIONAL ADUANERA
-                         NVL (
-                             sicodif_contra_adu (a.fis_gestion,
-                                                 a.fis_gerencia,
-                                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_adu,
-                         --MULTA CONTRABANDO CONTRAVENCIONAL
-                         --FALTA
-                         NVL (
-                             sicodif_contra_contravencional (
-                                 a.fis_gestion,
-                                 a.fis_gerencia,
-                                 a.fis_nro_control),
-                             0)
-                             sancion_contra_contravencional,
-                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
-
-                         NVL (a.fis_usuario_resultados, '-'),
-                         fis_origen_control control_origen,
-                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
-                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
-                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
-                              '-')
-                             fecha_control,
-                         --OTROS DATOS
-                         CASE
-                             WHEN sicodif_25 (s.key_year,
-                                              s.key_cuo,
-                                              s.key_dec,
-                                              s.key_nber) IS NOT NULL
-                             THEN
-                                 sicodif_25 (s.key_year,
-                                             s.key_cuo,
-                                             s.key_dec,
-                                             s.key_nber)
-                             ELSE
-                                 '-'
-                         END
-                             AS pase_salida,
-                         mercancia (s.key_year,
-                                    s.key_cuo,
-                                    s.key_dec,
-                                    s.key_nber)
-                             mercancias,
-                         NVL (crt_cabecera (s.key_year,
-                                            s.key_cuo,
-                                            s.key_dec,
-                                            s.key_nber), 'ALEATORIO')
-                             criterio_nivel_cab,
-                         --MULTA CONTRABANDO DELITO
-                         --FALTA
-                         NVL (
-                             sicodif_contra_delito (a.fis_gestion,
-                                                    a.fis_gerencia,
-                                                    a.fis_nro_control),
-                             0)
-                             sancion_contra_delito
-                  FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
-                 WHERE       s.sad_flw = '1'
-                         AND s.sad_asmt_serial IS NOT NULL
-                         AND s.lst_ope = 'U'
-                         AND s.sad_num = '0'
-                         AND fis_numver = '0'
-                         AND fis_lst_ope = 'U'
-                         AND fis_estado <> 'REGULARIZACION'
-                         AND s.key_year = spy1.key_year(+)
-                         AND s.key_cuo = spy1.key_cuo(+)
-                         AND s.key_dec = spy1.key_dec(+)
-                         AND s.key_nber = spy1.key_nber(+)
-                         AND spy1.spy_sta(+) = '10'
-                         AND spy1.spy_act(+) = '24'
-                         AND s.key_year = a.fis_key_year
-                         AND s.key_cuo = a.fis_key_cuo
-                         AND s.key_dec = a.fis_key_dec
-                         AND s.key_nber = a.fis_key_nber
-                         AND a.sad_reg_year = prm_gestion
-                         AND a.fis_key_cuo = prm_aduana
-                         AND a.sad_reg_serial = 'C'
-                         AND a.sad_reg_nber = prm_numero;
-        /*END IF;*/
-
-        RETURN res;
-    END;
-
-
-
-    FUNCTION sicodif_25 (anio        IN sad_spy.key_year%TYPE,
-                         cod_adu     IN sad_spy.key_cuo%TYPE,
-                         w_key_dec   IN sad_spy.key_dec%TYPE,
-                         nuber       IN sad_spy.key_nber%TYPE)
+    FUNCTION sicodif_25 (anio        IN ops$asy.sad_spy.key_year%TYPE,
+                         cod_adu     IN ops$asy.sad_spy.key_cuo%TYPE,
+                         w_key_dec   IN ops$asy.sad_spy.key_dec%TYPE,
+                         nuber       IN ops$asy.sad_spy.key_nber%TYPE)
         RETURN VARCHAR2
     IS
         valor1   VARCHAR2 (30);
@@ -2714,7 +227,7 @@ IS
         THEN
             FOR c1
             IN (SELECT   upd_dat, upd_hor
-                  FROM   sad_spy spy
+                  FROM   ops$asy.sad_spy spy
                  WHERE       spy.key_year = anio
                          AND spy.key_cuo = cod_adu
                          AND spy.key_dec IS NULL
@@ -2732,7 +245,7 @@ IS
         ELSE
             FOR c1
             IN (SELECT   upd_dat, upd_hor
-                  FROM   sad_spy spy
+                  FROM   ops$asy.sad_spy spy
                  WHERE       spy.key_year = anio
                          AND spy.key_cuo = cod_adu
                          AND spy.key_dec = w_key_dec
@@ -3043,10 +556,10 @@ IS
             RETURN (0);
     END;
 
-    FUNCTION crt_cabecera (w_key_year   IN sad_gen.key_year%TYPE,
-                           w_key_cuo    IN sad_gen.key_cuo%TYPE,
-                           w_key_dec    IN sad_gen.key_dec%TYPE,
-                           w_key_nber   IN sad_gen.key_nber%TYPE)
+    FUNCTION crt_cabecera (w_key_year   IN ops$asy.sad_gen.key_year%TYPE,
+                           w_key_cuo    IN ops$asy.sad_gen.key_cuo%TYPE,
+                           w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
+                           w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE)
         RETURN VARCHAR2
     IS
         valor1   VARCHAR2 (200);
@@ -3086,10 +599,10 @@ IS
         RETURN (valor1);
     END;
 
-    FUNCTION mercancia (w_key_year   IN sad_gen.key_year%TYPE,
-                        w_key_cuo    IN sad_gen.key_cuo%TYPE,
-                        w_key_dec    IN sad_gen.key_dec%TYPE,
-                        w_key_nber   IN sad_gen.key_nber%TYPE)
+    FUNCTION mercancia (w_key_year   IN ops$asy.sad_gen.key_year%TYPE,
+                        w_key_cuo    IN ops$asy.sad_gen.key_cuo%TYPE,
+                        w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
+                        w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE)
         RETURN VARCHAR2
     IS
         valor1   VARCHAR2 (150);
@@ -3182,20 +695,20 @@ IS
             RETURN (0);
     END;
 
-    FUNCTION fob_cabecera (anio        IN sad_itm_vim.key_year%TYPE,
-                           cod_adu     IN sad_itm_vim.key_cuo%TYPE,
-                           w_key_dec   IN sad_itm_vim.key_dec%TYPE,
-                           key_nuber   IN sad_itm_vim.key_nber%TYPE,
+    FUNCTION fob_cabecera (anio        IN ops$asy.sad_itm_vim.key_year%TYPE,
+                           cod_adu     IN ops$asy.sad_itm_vim.key_cuo%TYPE,
+                           w_key_dec   IN ops$asy.sad_itm_vim.key_dec%TYPE,
+                           key_nuber   IN ops$asy.sad_itm_vim.key_nber%TYPE,
                            sw          IN VARCHAR2)
         RETURN NUMBER
     IS
-        valorfob   sad_itm_vim.sad_iitminv_valc%TYPE;
+        valorfob   ops$asy.sad_itm_vim.sad_iitminv_valc%TYPE;
     BEGIN
         IF w_key_dec IS NULL
         THEN
             SELECT   SUM (vim.sad_iitminv_valc)
               INTO   valorfob
-              FROM   sad_itm_vim vim
+              FROM   ops$asy.sad_itm_vim vim
              WHERE       vim.key_year = anio
                      AND vim.key_cuo = cod_adu
                      AND vim.key_dec IS NULL
@@ -3204,7 +717,7 @@ IS
         ELSE
             SELECT   SUM (vim.sad_iitminv_valc)
               INTO   valorfob
-              FROM   sad_itm_vim vim
+              FROM   ops$asy.sad_itm_vim vim
              WHERE       vim.key_year = anio
                      AND vim.key_cuo = cod_adu
                      AND vim.key_dec = w_key_dec
@@ -3228,15 +741,15 @@ IS
             RETURN (0);
     END;
 
-    FUNCTION nomprov (w_sad_exporter   IN sad_gen.sad_exporter%TYPE,
-                      w_key_year       IN sad_gen.key_year%TYPE,
-                      w_key_cuo        IN sad_gen.key_cuo%TYPE,
-                      w_key_dec        IN sad_gen.key_dec%TYPE,
-                      w_key_nber       IN sad_gen.key_nber%TYPE,
-                      w_sad_num        IN sad_gen.sad_num%TYPE)
+    FUNCTION nomprov (w_sad_exporter   IN ops$asy.sad_gen.sad_exporter%TYPE,
+                      w_key_year       IN ops$asy.sad_gen.key_year%TYPE,
+                      w_key_cuo        IN ops$asy.sad_gen.key_cuo%TYPE,
+                      w_key_dec        IN ops$asy.sad_gen.key_dec%TYPE,
+                      w_key_nber       IN ops$asy.sad_gen.key_nber%TYPE,
+                      w_sad_num        IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2
     IS
-        w_nombre   sad_occ_exp.sad_exp_nam%TYPE;
+        w_nombre   ops$asy.sad_occ_exp.sad_exp_nam%TYPE;
     BEGIN
         IF w_sad_exporter IS NULL
         THEN
@@ -3244,7 +757,7 @@ IS
             THEN
                 SELECT   sad_exp_nam
                   INTO   w_nombre
-                  FROM   sad_occ_exp a
+                  FROM   ops$asy.sad_occ_exp a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec IS NULL
@@ -3253,7 +766,7 @@ IS
             ELSE
                 SELECT   sad_exp_nam
                   INTO   w_nombre
-                  FROM   sad_occ_exp a
+                  FROM   ops$asy.sad_occ_exp a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec = w_key_dec
@@ -3263,11 +776,10 @@ IS
 
             RETURN w_nombre;
         ELSE
-            SELECT distinct a.ope_razonsocial
-                              INTO w_nombre
-                              FROM ops$asy.bo_oce_opecab a
-                             where a.ope_numerodoc = w_sad_exporter
-                               and a.ope_num = 0;
+            SELECT   DISTINCT a.ope_razonsocial
+              INTO   w_nombre
+              FROM   ops$asy.bo_oce_opecab a
+             WHERE   a.ope_numerodoc = w_sad_exporter AND a.ope_num = 0;
 
             RETURN w_nombre;
         END IF;
@@ -3277,12 +789,12 @@ IS
             RETURN ('NO REGISTRADO');
     END;
 
-    FUNCTION dirprov (w_sad_exporter   IN sad_gen.sad_exporter%TYPE,
-                      w_key_year       IN sad_gen.key_year%TYPE,
-                      w_key_cuo        IN sad_gen.key_cuo%TYPE,
-                      w_key_dec        IN sad_gen.key_dec%TYPE,
-                      w_key_nber       IN sad_gen.key_nber%TYPE,
-                      w_sad_num        IN sad_gen.sad_num%TYPE)
+    FUNCTION dirprov (w_sad_exporter   IN ops$asy.sad_gen.sad_exporter%TYPE,
+                      w_key_year       IN ops$asy.sad_gen.key_year%TYPE,
+                      w_key_cuo        IN ops$asy.sad_gen.key_cuo%TYPE,
+                      w_key_dec        IN ops$asy.sad_gen.key_dec%TYPE,
+                      w_key_nber       IN ops$asy.sad_gen.key_nber%TYPE,
+                      w_sad_num        IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2
     IS
         w_nombre   VARCHAR2 (80);
@@ -3293,7 +805,7 @@ IS
             THEN
                 SELECT   sad_exp_add1 || ' ' || sad_exp_add2
                   INTO   w_nombre
-                  FROM   sad_occ_exp a
+                  FROM   ops$asy.sad_occ_exp a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec IS NULL
@@ -3302,7 +814,7 @@ IS
             ELSE
                 SELECT   sad_exp_add1 || ' ' || sad_exp_add2
                   INTO   w_nombre
-                  FROM   sad_occ_exp a
+                  FROM   ops$asy.sad_occ_exp a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec = w_key_dec
@@ -3313,7 +825,7 @@ IS
 
             RETURN w_nombre;
         ELSE
-            SELECT a.ope_direccion
+            SELECT      a.ope_direccion
                      || ', N'
                      || CHR (186)
                      || ' '
@@ -3322,10 +834,9 @@ IS
                      || a.ope_zona
                      || ', '
                      || a.ope_ciudad
-                              INTO w_nombre
-                              FROM ops$asy.bo_oce_opecab a
-                             where a.ope_numerodoc = w_sad_exporter
-                               and a.ope_num = 0;
+              INTO   w_nombre
+              FROM   ops$asy.bo_oce_opecab a
+             WHERE   a.ope_numerodoc = w_sad_exporter AND a.ope_num = 0;
 
             RETURN w_nombre;
         END IF;
@@ -3336,11 +847,11 @@ IS
     END;
 
     FUNCTION nomage (w_dec        IN CHAR,
-                     w_key_year   IN sad_gen.key_year%TYPE,
-                     w_key_cuo    IN sad_gen.key_cuo%TYPE,
-                     w_key_dec    IN sad_gen.key_dec%TYPE,
-                     w_key_nber   IN sad_gen.key_nber%TYPE,
-                     w_sad_num    IN sad_gen.sad_num%TYPE)
+                     w_key_year   IN ops$asy.sad_gen.key_year%TYPE,
+                     w_key_cuo    IN ops$asy.sad_gen.key_cuo%TYPE,
+                     w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
+                     w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE,
+                     w_sad_num    IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2
     IS
         w_nombre   VARCHAR2 (50);
@@ -3351,7 +862,7 @@ IS
             THEN
                 SELECT   a.sad_dec_nam
                   INTO   w_nombre
-                  FROM   sad_occ_dec a
+                  FROM   ops$asy.sad_occ_dec a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec IS NULL
@@ -3360,7 +871,7 @@ IS
             ELSE
                 SELECT   a.sad_dec_nam
                   INTO   w_nombre
-                  FROM   sad_occ_dec a
+                  FROM   ops$asy.sad_occ_dec a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec = w_key_dec
@@ -3370,10 +881,10 @@ IS
         ELSE
             SELECT   dec_nam
               INTO   w_nombre
-              FROM   undectab
+              FROM   ops$asy.undectab
              WHERE   dec_cod = w_dec
                      AND ser_sta = (SELECT   MAX (ser_sta)
-                                      FROM   undectab
+                                      FROM   ops$asy.undectab
                                      WHERE   dec_cod = w_dec);
         END IF;
 
@@ -3383,15 +894,15 @@ IS
     --     RETURN (-100);
     END;
 
-    FUNCTION nomimp (w_consignee   IN sad_gen.sad_consignee%TYPE,
-                     w_key_year    IN sad_gen.key_year%TYPE,
-                     w_key_cuo     IN sad_gen.key_cuo%TYPE,
-                     w_key_dec     IN sad_gen.key_dec%TYPE,
-                     w_key_nber    IN sad_gen.key_nber%TYPE,
-                     w_sad_num     IN sad_gen.sad_num%TYPE)
+    FUNCTION nomimp (w_consignee   IN ops$asy.sad_gen.sad_consignee%TYPE,
+                     w_key_year    IN ops$asy.sad_gen.key_year%TYPE,
+                     w_key_cuo     IN ops$asy.sad_gen.key_cuo%TYPE,
+                     w_key_dec     IN ops$asy.sad_gen.key_dec%TYPE,
+                     w_key_nber    IN ops$asy.sad_gen.key_nber%TYPE,
+                     w_sad_num     IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2
     IS
-        w_nombre   ops$asy.bo_new_regope_desa.ope_razonsocialnsga%TYPE;
+        w_nombre   VARCHAR2 (150);
     BEGIN
         IF w_consignee IS NULL
         THEN
@@ -3399,7 +910,7 @@ IS
             THEN
                 SELECT   DISTINCT sad_con_nam
                   INTO   w_nombre
-                  FROM   sad_occ_cns a
+                  FROM   ops$asy.sad_occ_cns a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec IS NULL
@@ -3408,7 +919,7 @@ IS
             ELSE
                 SELECT   DISTINCT sad_con_nam
                   INTO   w_nombre
-                  FROM   sad_occ_cns a
+                  FROM   ops$asy.sad_occ_cns a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec = w_key_dec
@@ -3422,10 +933,8 @@ IS
         BEGIN
             SELECT   UNIQUE NVL (ope_razonsocialnsga, ope_razonsocial)
               INTO   w_nombre
-              FROM   ops$asy.bo_new_regope_desa
-             WHERE       ope_numerodoc = w_consignee
-                     AND ope_tipooperador = 'IMP'
-                     AND sad_num = 0;
+              FROM   ops$asy.bo_oce_opecab
+             WHERE   ope_numerodoc = w_consignee AND ope_num = 0;
 
             RETURN w_nombre;
         EXCEPTION
@@ -3443,11 +952,11 @@ IS
                     THEN
                         IF w_nombre IS NULL
                         THEN
-                            SELECT distinct a.ope_razonsocial
-                              into w_nombre
-                              FROM ops$asy.bo_oce_opecab a
-                             where a.ope_numerodoc = w_consignee
-                               and a.ope_num = 0;
+                            SELECT   DISTINCT a.ope_razonsocial
+                              INTO   w_nombre
+                              FROM   ops$asy.bo_oce_opecab a
+                             WHERE   a.ope_numerodoc = w_consignee
+                                     AND a.ope_num = 0;
 
                             RETURN w_nombre;
                         END IF;
@@ -3459,11 +968,11 @@ IS
     END;
 
 
-    FUNCTION crt (w_key_year   IN sad_gen.key_year%TYPE,
-                  w_key_cuo    IN sad_gen.key_cuo%TYPE,
-                  w_key_dec    IN sad_gen.key_dec%TYPE,
-                  w_key_nber   IN sad_gen.key_nber%TYPE,
-                  w_itm_nber   IN sad_itm_ped.itm_nber%TYPE,
+    FUNCTION crt (w_key_year   IN ops$asy.sad_gen.key_year%TYPE,
+                  w_key_cuo    IN ops$asy.sad_gen.key_cuo%TYPE,
+                  w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
+                  w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE,
+                  w_itm_nber   IN ops$asy.sad_itm_ped.itm_nber%TYPE,
                   num          IN NUMBER)
         RETURN VARCHAR2
     IS
@@ -3477,7 +986,7 @@ IS
         THEN
             FOR c1
             IN (SELECT   a.ctr_cod
-                  FROM   sad_itm_ped a
+                  FROM   ops$asy.sad_itm_ped a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec IS NULL
@@ -3494,7 +1003,7 @@ IS
         ELSE
             FOR c1
             IN (SELECT   a.ctr_cod
-                  FROM   sad_itm_ped a
+                  FROM   ops$asy.sad_itm_ped a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec = w_key_dec
@@ -3517,15 +1026,15 @@ IS
 
 
 
-    FUNCTION numid (w_consignee   IN sad_gen.sad_consignee%TYPE,
-                    w_key_year    IN sad_gen.key_year%TYPE,
-                    w_key_cuo     IN sad_gen.key_cuo%TYPE,
-                    w_key_dec     IN sad_gen.key_dec%TYPE,
-                    w_key_nber    IN sad_gen.key_nber%TYPE,
-                    w_sad_num     IN sad_gen.sad_num%TYPE)
+    FUNCTION numid (w_consignee   IN ops$asy.sad_gen.sad_consignee%TYPE,
+                    w_key_year    IN ops$asy.sad_gen.key_year%TYPE,
+                    w_key_cuo     IN ops$asy.sad_gen.key_cuo%TYPE,
+                    w_key_dec     IN ops$asy.sad_gen.key_dec%TYPE,
+                    w_key_nber    IN ops$asy.sad_gen.key_nber%TYPE,
+                    w_sad_num     IN ops$asy.sad_gen.sad_num%TYPE)
         RETURN VARCHAR2
     IS
-        w_docid   sad_occ_cns.sad_con_zip%TYPE;
+        w_docid   ops$asy.sad_occ_cns.sad_con_zip%TYPE;
     BEGIN
         IF w_consignee IS NULL
         THEN
@@ -3535,7 +1044,7 @@ IS
                                  INSTR (sad_con_zip, ' ') + 1,
                                  LENGTH (sad_con_zip))
                   INTO   w_docid
-                  FROM   sad_occ_cns a
+                  FROM   ops$asy.sad_occ_cns a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec IS NULL
@@ -3546,7 +1055,7 @@ IS
                                  INSTR (sad_con_zip, ' ') + 1,
                                  LENGTH (sad_con_zip))
                   INTO   w_docid
-                  FROM   sad_occ_cns a
+                  FROM   ops$asy.sad_occ_cns a
                  WHERE       a.key_year = w_key_year
                          AND a.key_cuo = w_key_cuo
                          AND a.key_dec = w_key_dec
@@ -3623,7 +1132,9 @@ IS
                          '-')
                          fecha_levante,
                      a.fis_estado
-              FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy spy1,
+                     ops$asy.sad_gen s
              WHERE       s.sad_flw = '1'
                      AND s.sad_asmt_serial IS NOT NULL
                      AND s.lst_ope = 'U'
@@ -3695,7 +1206,9 @@ IS
                          '-')
                          fecha_levante,
                      a.fis_estado
-              FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy spy1,
+                     ops$asy.sad_gen s
              WHERE       s.sad_flw = '1'
                      AND s.sad_asmt_serial IS NOT NULL
                      AND s.lst_ope = 'U'
@@ -3726,796 +1239,7 @@ IS
         RETURN res;
     END;
 
-    ----------------------------------------------
-    --REPORTE DETALLE DE RECAUDACIONES
-    ----------------------------------------------
-    FUNCTION reporte_det_recauda (prm_gerencia   IN     VARCHAR2,
-                                  prm_fec_ini    IN     VARCHAR2,
-                                  prm_fec_fin    IN     VARCHAR2,
-                                  ct                OUT cursortype)
-        RETURN VARCHAR2
-    IS
-        res    VARCHAR2 (50) := 'CORRECTO';
-        cont   NUMBER (10);
-    BEGIN
-        -- ALTER SESSION SET NLS_TERRITORY=america;
 
-        OPEN ct FOR
-            SELECT   DISTINCT
-                     TO_NUMBER (a.fis_gestion) gestion,
-                     DECODE (a.fis_gerencia,
-                             'GRLP', 'LA PAZ',
-                             'GRCB', 'COCHABAMBA',
-                             'GRSC', 'SANTA CRUZ',
-                             'GROR', 'ORURO',
-                             'GRTJ', 'TARIJA',
-                             'GRPT', 'POTOSI',
-                             'GNF-DIA')
-                         gerencia,
-                     a.fis_nro_control nro_correlativo,
-                     TO_CHAR (a.fis_fec_registro) fecha_orden_control,
-                     s.key_cuo aduana,
-                     nomadu (s.key_cuo) "DESC ADUANA",
-                        --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
-                        s.sad_reg_year
-                     || '/'
-                     || s.key_cuo
-                     || '/'
-                     || s.sad_reg_serial
-                     || '-'
-                     || s.sad_reg_nber
-                         "TRAMITE",
-                     DECODE (spy1.sad_clr,
-                             0,
-                             'VERDE',
-                             1,
-                             'AZUL',
-                             2,
-                             'AMARILLO',
-                             3,
-                             'ROJO')
-                         "CANAL",
-                     numid (s.sad_consignee,
-                            s.key_year,
-                            s.key_cuo,
-                            s.key_dec,
-                            s.key_nber,
-                            s.sad_num)
-                         "DOC IMP",
-                     NVL (nomimp (s.sad_consignee,
-                                  s.key_year,
-                                  s.key_cuo,
-                                  s.key_dec,
-                                  s.key_nber,
-                                  s.sad_num), '-')
-                         "IMPORTADOR",
-                     NVL (s.key_dec, ' ') "DOC_DECL",
-                     NVL (nomage (s.key_dec,
-                                  s.key_year,
-                                  s.key_cuo,
-                                  s.key_dec,
-                                  s.key_nber,
-                                  s.sad_num), '-')
-                         "DECLARANTE",
-                     NVL (dirprov (s.sad_exporter,
-                                   s.key_year,
-                                   s.key_cuo,
-                                   s.key_dec,
-                                   s.key_nber,
-                                   s.sad_num), '-')
-                         "DIREC PROVEEDOR",
-                     NVL (nomprov (s.sad_exporter,
-                                   s.key_year,
-                                   s.key_cuo,
-                                   s.key_dec,
-                                   s.key_nber,
-                                   s.sad_num), '-')
-                         "PROVEEDOR",
-                     fob_cabecera (s.key_year,
-                                   s.key_cuo,
-                                   s.key_dec,
-                                   s.key_nber,
-                                   0)
-                         fob_funcion,
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   ops$asy.sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND st.key_dec IS NULL
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'GA'
-                                   AND st.saditm_tax_mop = '1'
-                                   AND st.sad_num = '0'),
-                         0)
-                         ga,
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   ops$asy.sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND st.key_dec IS NULL
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'IVA'
-                                   AND st.sad_num = '0'),
-                         0)
-                         iva,
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND st.key_dec IS NULL
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'ICE'
-                                   AND st.sad_num = '0'),
-                         0)
-                         ice,
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND st.key_dec IS NULL
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'IHD'
-                                   AND st.sad_num = '0'),
-                         0)
-                         ihd,
-                     ----SUMATORIAS DE TRIBUTOS
-
-
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND st.key_dec IS NULL
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'GA'
-                                   AND st.saditm_tax_mop = '1'
-                                   AND st.sad_num = '0'),
-                         0)
-                     + NVL (
-                           (SELECT   SUM (saditm_tax_amount)
-                              FROM   sad_tax st
-                             WHERE       s.key_year = st.key_year
-                                     AND s.key_cuo = st.key_cuo
-                                     AND st.key_dec IS NULL
-                                     AND s.key_nber = st.key_nber
-                                     AND st.saditm_tax_code = 'IVA'
-                                     AND st.sad_num = '0'),
-                           0)
-                     + NVL (
-                           (SELECT   SUM (saditm_tax_amount)
-                              FROM   sad_tax st
-                             WHERE       s.key_year = st.key_year
-                                     AND s.key_cuo = st.key_cuo
-                                     AND st.key_dec IS NULL
-                                     AND s.key_nber = st.key_nber
-                                     AND st.saditm_tax_code = 'ICE'
-                                     AND st.sad_num = '0'),
-                           0)
-                     + NVL (
-                           (SELECT   SUM (saditm_tax_amount)
-                              FROM   sad_tax st
-                             WHERE       s.key_year = st.key_year
-                                     AND s.key_cuo = st.key_cuo
-                                     AND st.key_dec IS NULL
-                                     AND s.key_nber = st.key_nber
-                                     AND st.saditm_tax_code = 'IHD'
-                                     AND st.sad_num = '0'),
-                           0)
-                         total_tributos,
-                     --ASIGNACION CONTROL DIFERIDO
-                     NVL (a.fis_fiscalizador, '-') fiscalizador,
-                     NVL (a.fis_usuario_asignacion, '-') usuario_asignacion,
-                     --NOTIFICACION
-                     NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
-                          '-')
-                         "FECHA_NOTIFICACION",
-                     NVL (a.fis_obs_notificacion, '-')
-                         "OBSERVACION_NOTIFICACION",
-                     NVL (a.fis_tipo_notificacion, '-') "TIPO_NOTIFICACION",
-                     NVL (a.fis_usuario_notificacion, '-')
-                         "USUARIO_NOTIFICACION",
-                     --RESULTADO CONTROL DIFERIDO
-                     NVL (a.fis_fob_final, 0) fob_fiscalizador,
-                     NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'), '-')
-                         "FECHA_LIQUIDACION",
-                     NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
-                     NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
-                         "TRIBUTO_OMITIDO_GA",
-                     NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
-                         "TRIBUTO_OMITIDO_IVA",
-                     NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
-                         "TRIBUTO_OMITIDO_ICE",
-                     NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
-                         "TRIBUTO_OMITIDO_IEHD",
-                     NVL (
-                           TO_NUMBER (a.fis_tributo_omitido_ga)
-                         + TO_NUMBER (a.fis_tributo_omitido_iva)
-                         + TO_NUMBER (a.fis_tributo_omitido_ice)
-                         + TO_NUMBER (a.fis_tributo_omitido_iehd),
-                         0)
-                         "TOTAL_TRIBUTO_OMITIDO",
-                     NVL (TO_NUMBER (a.fis_sancion_omision), 0)
-                         sancion_omision,
-                     NVL (TO_NUMBER (a.fis_multa_contrava), 0)
-                         multa_contravencion,
-                     NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
-                         "MULTA_CONTRA_CONTRA",
-                     NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
-                         multa_contrabando_delito,
-                     NVL (a.fis_usuario_resultados, '-') usuarios_registrados,
-                     --ACEPTACION DE PAGO
-                     NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'), '-')
-                         fecha_aceptacion_pago,
-                     NVL (a.fis_usuario_aceptacion, '-') usuario_aceptacion,
-                     --CONCLUSION DEL CONTROL DIFERIDO
-                     NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
-                     NVL (a.fis_reg_nro_inf, '-') numero_informe,
-                     NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
-                         "FECHA_INFORME",
-                     NVL (a.fis_reg_nro_doc_con, '-') "NRO_DOC_CONCLUSION",
-                     NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'), '-')
-                         "FECHA_DOC_CONCLUSION",
-                     NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
-                          '-')
-                         "FECHA_FINALIZACION",
-                     NVL (a.fis_usuario_finalizacion, '-')
-                         "USUARIO_REGISTRO_FINALIZACION",
-                     --OBSERVACIONES ENCONTRADAS
-                     DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
-                     DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
-                     DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
-                     DECODE (a.fis_osinobs, 'on', 'X', '-') "SIN_OBSERVACION",
-                     --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
-                     DECODE (a.fis_comision, 'on', 'X', '-') "OMISION_PAGO",
-                     DECODE (a.fis_ccondel, 'on', 'X', '-')
-                         "CONTRABANDO_DELITO",
-                     DECODE (a.fis_cconcon, 'on', 'X', '-')
-                         "CONTRABANDO_CONTRAVENCIONAL",
-                     DECODE (a.fis_cconadu, 'on', 'X', '-')
-                         "CONTRAVENCION_ADUANERA",
-                     --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
-                     NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'), '-')
-                         fecha_notificacion_conclusion,
-                     NVL (a.fis_reg_tip_not_doc, '-')
-                         tipo_notificacion_conclusion,
-                     NVL (a.fis_usuario_not_doc_con, '-')
-                         usuario_registro_notificacion,
-                     --ENVIO A LA UNIDAD LEGAL
-                     NVL (TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
-                          '-')
-                         "FECHA_ENVIO",
-                     NVL (a.fis_reg_nro_env_legal, '-') "NRO_DOC_REMISION",
-                     NVL (a.fis_usuario_env_legal, '-')
-                         "USUARIO_UNIDAD_LEGAL",
-                     --ESTADO
-                     fis_estado "ESTADO",
-                     --valores
-                     NVL (
-                         sicodif_ga (a.fis_gestion,
-                                     a.fis_gerencia,
-                                     a.fis_nro_control),
-                         0)
-                         ga_recuperado,
-                     NVL (
-                         sicodif_iva (a.fis_gestion,
-                                      a.fis_gerencia,
-                                      a.fis_nro_control),
-                         0)
-                         iva_recuperado,
-                     NVL (
-                         sicodif_ice (a.fis_gestion,
-                                      a.fis_gerencia,
-                                      a.fis_nro_control),
-                         0)
-                         ice_recuperado,
-                     NVL (
-                         sicodif_ihd (a.fis_gestion,
-                                      a.fis_gerencia,
-                                      a.fis_nro_control),
-                         0)
-                         ihd_recuperado,
-                     NVL (
-                         sicodif_ga (a.fis_gestion,
-                                     a.fis_gerencia,
-                                     a.fis_nro_control),
-                         0)
-                     + NVL (
-                           sicodif_iva (a.fis_gestion,
-                                        a.fis_gerencia,
-                                        a.fis_nro_control),
-                           0)
-                     + NVL (
-                           sicodif_ice (a.fis_gestion,
-                                        a.fis_gerencia,
-                                        a.fis_nro_control),
-                           0)
-                     + NVL (
-                           sicodif_ihd (a.fis_gestion,
-                                        a.fis_gerencia,
-                                        a.fis_nro_control),
-                           0)
-                         total_tributo,
-                     NVL (
-                         sicodif_sancionop (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                         0)
-                         sancionop_recuperado,
-                     --MULTA CONTRAVENCIONAL ADUANERA
-                     NVL (
-                         sicodif_contra_adu (a.fis_gestion,
-                                             a.fis_gerencia,
-                                             a.fis_nro_control),
-                         0)
-                         sancion_contra_adu,
-                     --MULTA CONTRABANDO CONTRAVENCIONAL
-                     --FALTA
-                     NVL (
-                         sicodif_contra_contravencional (a.fis_gestion,
-                                                         a.fis_gerencia,
-                                                         a.fis_nro_control),
-                         0)
-                         sancion_contra_contravencional,
-                     --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
-
-                     NVL (a.fis_usuario_resultados, '-'),
-                     fis_origen_control control_origen,
-                     --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
-                     --to_date(a.fis_fec_registro,'dd/mm/yyyy')
-                     NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'), '-')
-                         fecha_control,
-                     --OTROS DATOS
-                     CASE
-                         WHEN sicodif_25 (s.key_year,
-                                          s.key_cuo,
-                                          s.key_dec,
-                                          s.key_nber) IS NOT NULL
-                         THEN
-                             sicodif_25 (s.key_year,
-                                         s.key_cuo,
-                                         s.key_dec,
-                                         s.key_nber)
-                         ELSE
-                             '-'
-                     END
-                         AS pase_salida,
-                     mercancia (s.key_year,
-                                s.key_cuo,
-                                s.key_dec,
-                                s.key_nber)
-                         mercancias,
-                     NVL (crt_cabecera (s.key_year,
-                                        s.key_cuo,
-                                        s.key_dec,
-                                        s.key_nber), 'ALEATORIO')
-                         criterio_nivel_cab,
-                     --MULTA CONTRABANDO DELITO
-                     --FALTA
-                     NVL (
-                         sicodif_contra_delito (a.fis_gestion,
-                                                a.fis_gerencia,
-                                                a.fis_nro_control),
-                         0)
-                         sancion_contra_delito
-              FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
-             WHERE       s.sad_flw = '1'
-                     AND s.sad_asmt_serial IS NOT NULL
-                     AND s.lst_ope = 'U'
-                     AND s.sad_num = '0'
-                     AND fis_numver = '0'
-                     AND fis_lst_ope = 'U'
-                     AND fis_estado <> 'REGULARIZACION'
-                     AND s.key_year = spy1.key_year(+)
-                     AND s.key_cuo = spy1.key_cuo(+)
-                     AND spy1.key_dec(+) IS NULL
-                     AND s.key_nber = spy1.key_nber(+)
-                     AND spy1.spy_sta(+) = '10'
-                     AND spy1.spy_act(+) = '24'
-                     AND s.key_year = a.fis_key_year
-                     AND s.key_cuo = a.fis_key_cuo
-                     AND s.key_dec IS NULL
-                     AND a.fis_key_dec IS NULL
-                     AND s.key_nber = a.fis_key_nber
-                     AND a.fis_gerencia LIKE prm_gerencia
-                     AND a.fis_reg_fec_doc_con BETWEEN TO_DATE (prm_fec_ini,
-                                                                'dd/mm/yyyy')
-                                                   AND  TO_DATE (
-                                                            prm_fec_fin,
-                                                            'dd/mm/yyyy')
-            UNION
-            SELECT   DISTINCT
-                     TO_NUMBER (a.fis_gestion) gestion,
-                     DECODE (a.fis_gerencia,
-                             'GRLP', 'LA PAZ',
-                             'GRCB', 'COCHABAMBA',
-                             'GRSC', 'SANTA CRUZ',
-                             'GROR', 'ORURO',
-                             'GRTJ', 'TARIJA',
-                             'GRPT', 'POTOSI',
-                             'GNF-DIA')
-                         gerencia,
-                     a.fis_nro_control nro_correlativo,
-                     TO_CHAR (a.fis_fec_registro) fecha_orden_control,
-                     s.key_cuo aduana,
-                     nomadu (s.key_cuo) "DESC ADUANA",
-                        --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
-                        s.sad_reg_year
-                     || '/'
-                     || s.key_cuo
-                     || '/'
-                     || s.sad_reg_serial
-                     || '-'
-                     || s.sad_reg_nber
-                         "TRAMITE",
-                     DECODE (spy1.sad_clr,
-                             0,
-                             'VERDE',
-                             1,
-                             'AZUL',
-                             2,
-                             'AMARILLO',
-                             3,
-                             'ROJO')
-                         "CANAL",
-                     numid (s.sad_consignee,
-                            s.key_year,
-                            s.key_cuo,
-                            s.key_dec,
-                            s.key_nber,
-                            s.sad_num)
-                         "DOC IMP",
-                     NVL (nomimp (s.sad_consignee,
-                                  s.key_year,
-                                  s.key_cuo,
-                                  s.key_dec,
-                                  s.key_nber,
-                                  s.sad_num), '-')
-                         "IMPORTADOR",
-                     NVL (s.key_dec, ' ') "DOC_DECL",
-                     NVL (nomage (s.key_dec,
-                                  s.key_year,
-                                  s.key_cuo,
-                                  s.key_dec,
-                                  s.key_nber,
-                                  s.sad_num), '-')
-                         "DECLARANTE",
-                     NVL (dirprov (s.sad_exporter,
-                                   s.key_year,
-                                   s.key_cuo,
-                                   s.key_dec,
-                                   s.key_nber,
-                                   s.sad_num), '-')
-                         "DIREC PROVEEDOR",
-                     NVL (nomprov (s.sad_exporter,
-                                   s.key_year,
-                                   s.key_cuo,
-                                   s.key_dec,
-                                   s.key_nber,
-                                   s.sad_num), '-')
-                         "PROVEEDOR",
-                     fob_cabecera (s.key_year,
-                                   s.key_cuo,
-                                   s.key_dec,
-                                   s.key_nber,
-                                   0)
-                         fob_funcion,
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   ops$asy.sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND s.key_dec = st.key_dec
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'GA'
-                                   AND st.saditm_tax_mop = '1'
-                                   AND st.sad_num = '0'),
-                         0)
-                         ga,
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   ops$asy.sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND s.key_dec = st.key_dec
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'IVA'
-                                   AND st.sad_num = '0'),
-                         0)
-                         iva,
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND s.key_dec = st.key_dec
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'ICE'
-                                   AND st.sad_num = '0'),
-                         0)
-                         ice,
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND s.key_dec = st.key_dec
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'IHD'
-                                   AND st.sad_num = '0'),
-                         0)
-                         ihd,
-                     ----SUMATORIAS DE TRIBUTOS
-
-
-                     NVL (
-                         (SELECT   SUM (saditm_tax_amount)
-                            FROM   sad_tax st
-                           WHERE       s.key_year = st.key_year
-                                   AND s.key_cuo = st.key_cuo
-                                   AND s.key_dec = st.key_dec
-                                   AND s.key_nber = st.key_nber
-                                   AND st.saditm_tax_code = 'GA'
-                                   AND st.saditm_tax_mop = '1'
-                                   AND st.sad_num = '0'),
-                         0)
-                     + NVL (
-                           (SELECT   SUM (saditm_tax_amount)
-                              FROM   sad_tax st
-                             WHERE       s.key_year = st.key_year
-                                     AND s.key_cuo = st.key_cuo
-                                     AND s.key_dec = st.key_dec
-                                     AND s.key_nber = st.key_nber
-                                     AND st.saditm_tax_code = 'IVA'
-                                     AND st.sad_num = '0'),
-                           0)
-                     + NVL (
-                           (SELECT   SUM (saditm_tax_amount)
-                              FROM   sad_tax st
-                             WHERE       s.key_year = st.key_year
-                                     AND s.key_cuo = st.key_cuo
-                                     AND s.key_dec = st.key_dec
-                                     AND s.key_nber = st.key_nber
-                                     AND st.saditm_tax_code = 'ICE'
-                                     AND st.sad_num = '0'),
-                           0)
-                     + NVL (
-                           (SELECT   SUM (saditm_tax_amount)
-                              FROM   sad_tax st
-                             WHERE       s.key_year = st.key_year
-                                     AND s.key_cuo = st.key_cuo
-                                     AND s.key_dec = st.key_dec
-                                     AND s.key_nber = st.key_nber
-                                     AND st.saditm_tax_code = 'IHD'
-                                     AND st.sad_num = '0'),
-                           0)
-                         total_tributos,
-                     --ASIGNACION CONTROL DIFERIDO
-                     NVL (a.fis_fiscalizador, '-') fiscalizador,
-                     NVL (a.fis_usuario_asignacion, '-') usuario_asignacion,
-                     --NOTIFICACION
-                     NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
-                          '-')
-                         "FECHA_NOTIFICACION",
-                     NVL (a.fis_obs_notificacion, '-')
-                         "OBSERVACION_NOTIFICACION",
-                     NVL (a.fis_tipo_notificacion, '-') "TIPO_NOTIFICACION",
-                     NVL (a.fis_usuario_notificacion, '-')
-                         "USUARIO_NOTIFICACION",
-                     --RESULTADO CONTROL DIFERIDO
-                     NVL (a.fis_fob_final, 0) fob_fiscalizador,
-                     NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'), '-')
-                         "FECHA_LIQUIDACION",
-                     NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
-                     NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
-                         "TRIBUTO_OMITIDO_GA",
-                     NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
-                         "TRIBUTO_OMITIDO_IVA",
-                     NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
-                         "TRIBUTO_OMITIDO_ICE",
-                     NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
-                         "TRIBUTO_OMITIDO_IEHD",
-                     NVL (
-                           TO_NUMBER (a.fis_tributo_omitido_ga)
-                         + TO_NUMBER (a.fis_tributo_omitido_iva)
-                         + TO_NUMBER (a.fis_tributo_omitido_ice)
-                         + TO_NUMBER (a.fis_tributo_omitido_iehd),
-                         0)
-                         "TOTAL_TRIBUTO_OMITIDO",
-                     NVL (TO_NUMBER (a.fis_sancion_omision), 0)
-                         sancion_omision,
-                     NVL (TO_NUMBER (a.fis_multa_contrava), 0)
-                         multa_contravencion,
-                     NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
-                         "MULTA_CONTRA_CONTRA",
-                     NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
-                         multa_contrabando_delito,
-                     NVL (a.fis_usuario_resultados, '-') usuarios_registrados,
-                     --ACEPTACION DE PAGO
-                     NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'), '-')
-                         fecha_aceptacion_pago,
-                     NVL (a.fis_usuario_aceptacion, '-') usuario_aceptacion,
-                     --CONCLUSION DEL CONTROL DIFERIDO
-                     NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
-                     NVL (a.fis_reg_nro_inf, '-') numero_informe,
-                     NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
-                         "FECHA_INFORME",
-                     NVL (a.fis_reg_nro_doc_con, '-') "NRO_DOC_CONCLUSION",
-                     NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'), '-')
-                         "FECHA_DOC_CONCLUSION",
-                     NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
-                          '-')
-                         "FECHA_FINALIZACION",
-                     NVL (a.fis_usuario_finalizacion, '-')
-                         "USUARIO_REGISTRO_FINALIZACION",
-                     --OBSERVACIONES ENCONTRADAS
-                     DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
-                     DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
-                     DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
-                     DECODE (a.fis_osinobs, 'on', 'X', '-') "SIN_OBSERVACION",
-                     --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
-                     DECODE (a.fis_comision, 'on', 'X', '-') "OMISION_PAGO",
-                     DECODE (a.fis_ccondel, 'on', 'X', '-')
-                         "CONTRABANDO_DELITO",
-                     DECODE (a.fis_cconcon, 'on', 'X', '-')
-                         "CONTRABANDO_CONTRAVENCIONAL",
-                     DECODE (a.fis_cconadu, 'on', 'X', '-')
-                         "CONTRAVENCION_ADUANERA",
-                     --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
-                     NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'), '-')
-                         fecha_notificacion_conclusion,
-                     NVL (a.fis_reg_tip_not_doc, '-')
-                         tipo_notificacion_conclusion,
-                     NVL (a.fis_usuario_not_doc_con, '-')
-                         usuario_registro_notificacion,
-                     --ENVIO A LA UNIDAD LEGAL
-                     NVL (TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
-                          '-')
-                         "FECHA_ENVIO",
-                     NVL (a.fis_reg_nro_env_legal, '-') "NRO_DOC_REMISION",
-                     NVL (a.fis_usuario_env_legal, '-')
-                         "USUARIO_UNIDAD_LEGAL",
-                     --ESTADO
-                     fis_estado "ESTADO",
-                     --valores
-                     NVL (
-                         sicodif_ga (a.fis_gestion,
-                                     a.fis_gerencia,
-                                     a.fis_nro_control),
-                         0)
-                         ga_recuperado,
-                     NVL (
-                         sicodif_iva (a.fis_gestion,
-                                      a.fis_gerencia,
-                                      a.fis_nro_control),
-                         0)
-                         iva_recuperado,
-                     NVL (
-                         sicodif_ice (a.fis_gestion,
-                                      a.fis_gerencia,
-                                      a.fis_nro_control),
-                         0)
-                         ice_recuperado,
-                     NVL (
-                         sicodif_ihd (a.fis_gestion,
-                                      a.fis_gerencia,
-                                      a.fis_nro_control),
-                         0)
-                         ihd_recuperado,
-                     NVL (
-                         sicodif_ga (a.fis_gestion,
-                                     a.fis_gerencia,
-                                     a.fis_nro_control),
-                         0)
-                     + NVL (
-                           sicodif_iva (a.fis_gestion,
-                                        a.fis_gerencia,
-                                        a.fis_nro_control),
-                           0)
-                     + NVL (
-                           sicodif_ice (a.fis_gestion,
-                                        a.fis_gerencia,
-                                        a.fis_nro_control),
-                           0)
-                     + NVL (
-                           sicodif_ihd (a.fis_gestion,
-                                        a.fis_gerencia,
-                                        a.fis_nro_control),
-                           0)
-                         total_tributo,
-                     NVL (
-                         sicodif_sancionop (a.fis_gestion,
-                                            a.fis_gerencia,
-                                            a.fis_nro_control),
-                         0)
-                         sancionop_recuperado,
-                     --MULTA CONTRAVENCIONAL ADUANERA
-                     NVL (
-                         sicodif_contra_adu (a.fis_gestion,
-                                             a.fis_gerencia,
-                                             a.fis_nro_control),
-                         0)
-                         sancion_contra_adu,
-                     --MULTA CONTRABANDO CONTRAVENCIONAL
-                     --FALTA
-                     NVL (
-                         sicodif_contra_contravencional (a.fis_gestion,
-                                                         a.fis_gerencia,
-                                                         a.fis_nro_control),
-                         0)
-                         sancion_contra_contravencional,
-                     --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
-
-                     NVL (a.fis_usuario_resultados, '-'),
-                     fis_origen_control control_origen,
-                     --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
-                     --to_date(a.fis_fec_registro,'dd/mm/yyyy')
-                     NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'), '-')
-                         fecha_control,
-                     --OTROS DATOS
-                     CASE
-                         WHEN sicodif_25 (s.key_year,
-                                          s.key_cuo,
-                                          s.key_dec,
-                                          s.key_nber) IS NOT NULL
-                         THEN
-                             sicodif_25 (s.key_year,
-                                         s.key_cuo,
-                                         s.key_dec,
-                                         s.key_nber)
-                         ELSE
-                             '-'
-                     END
-                         AS pase_salida,
-                     mercancia (s.key_year,
-                                s.key_cuo,
-                                s.key_dec,
-                                s.key_nber)
-                         mercancias,
-                     NVL (crt_cabecera (s.key_year,
-                                        s.key_cuo,
-                                        s.key_dec,
-                                        s.key_nber), 'ALEATORIO')
-                         criterio_nivel_cab,
-                     --MULTA CONTRABANDO DELITO
-                     --FALTA
-                     NVL (
-                         sicodif_contra_delito (a.fis_gestion,
-                                                a.fis_gerencia,
-                                                a.fis_nro_control),
-                         0)
-                         sancion_contra_delito
-              FROM   sicodif.cd_fiscalizacion a, sad_spy spy1, sad_gen s
-             WHERE       s.sad_flw = '1'
-                     AND s.sad_asmt_serial IS NOT NULL
-                     AND s.lst_ope = 'U'
-                     AND s.sad_num = '0'
-                     AND fis_numver = '0'
-                     AND fis_lst_ope = 'U'
-                     AND fis_estado <> 'REGULARIZACION'
-                     AND s.key_year = spy1.key_year(+)
-                     AND s.key_cuo = spy1.key_cuo(+)
-                     AND s.key_dec = spy1.key_dec(+)
-                     AND s.key_nber = spy1.key_nber(+)
-                     AND spy1.spy_sta(+) = '10'
-                     AND spy1.spy_act(+) = '24'
-                     AND s.key_year = a.fis_key_year
-                     AND s.key_cuo = a.fis_key_cuo
-                     AND s.key_dec = a.fis_key_dec
-                     AND s.key_nber = a.fis_key_nber
-                     AND a.fis_gerencia LIKE prm_gerencia
-                     AND a.fis_reg_fec_doc_con BETWEEN TO_DATE (prm_fec_ini,
-                                                                'dd/mm/yyyy')
-                                                   AND  TO_DATE (
-                                                            prm_fec_fin,
-                                                            'dd/mm/yyyy');
-
-        RETURN res;
-    END;
 
     FUNCTION roundsidunea (p_numero IN NUMBER, p_preci IN NUMBER)
         RETURN NUMBER
@@ -4549,7 +1273,7 @@ IS
     BEGIN
         SELECT   rat_exc
           INTO   v_valor
-          FROM   unrattab
+          FROM   ops$asy.unrattab
          WHERE       lst_ope = 'U'
                  AND cur_cod = tipo
                  AND eea_dov <= fecha
@@ -4655,8 +1379,8 @@ IS
                                    END
                                        AS pase_salida
                             FROM   sicodif.cd_fiscalizacion a,
-                                   sad_spy spy1,
-                                   sad_gen s,
+                                   ops$asy.sad_spy spy1,
+                                   ops$asy.sad_gen s,
                                    ops$asy.sad_gen_vim v
                            WHERE       s.sad_flw = '1'
                                    AND s.sad_asmt_serial IS NOT NULL
@@ -4761,8 +1485,8 @@ IS
                                    END
                                        AS pase_salida
                             FROM   sicodif.cd_fiscalizacion a,
-                                   sad_spy spy1,
-                                   sad_gen s,
+                                   ops$asy.sad_spy spy1,
+                                   ops$asy.sad_gen s,
                                    ops$asy.sad_gen_vim v
                            WHERE       s.sad_flw = '1'
                                    AND s.sad_asmt_serial IS NOT NULL
@@ -4870,8 +1594,8 @@ IS
                          END
                              AS pase_salida
                   FROM   sicodif.cd_fiscalizacion a,
-                         sad_spy spy1,
-                         sad_gen s,
+                         ops$asy.sad_spy spy1,
+                         ops$asy.sad_gen s,
                          ops$asy.sad_gen_vim v
                  WHERE       s.sad_flw = '1'
                          AND s.sad_asmt_serial IS NOT NULL
@@ -4969,8 +1693,8 @@ IS
                          END
                              AS pase_salida
                   FROM   sicodif.cd_fiscalizacion a,
-                         sad_spy spy1,
-                         sad_gen s,
+                         ops$asy.sad_spy spy1,
+                         ops$asy.sad_gen s,
                          ops$asy.sad_gen_vim v
                  WHERE       s.sad_flw = '1'
                          AND s.sad_asmt_serial IS NOT NULL
@@ -5156,6 +1880,3601 @@ IS
         THEN
             ROLLBACK;
             RETURN ('Error: ' || SQLERRM);
+    END;
+
+
+
+    ----------------------------------------------
+    --REPORTE DETALLE DE RECAUDACIONES
+    ----------------------------------------------
+    FUNCTION reporte_det_recauda (prm_gerencia   IN     VARCHAR2,
+                                  prm_fec_ini    IN     VARCHAR2,
+                                  prm_fec_fin    IN     VARCHAR2,
+                                  ct                OUT cursortype)
+        RETURN VARCHAR2
+    IS
+        res    VARCHAR2 (50) := 'CORRECTO';
+        cont   NUMBER (10);
+    BEGIN
+        -- ALTER SESSION SET NLS_TERRITORY=america;
+
+        OPEN ct FOR
+            SELECT   DISTINCT
+                     TO_NUMBER (a.fis_gestion) gestion,
+                     DECODE (a.fis_gerencia,
+                             'GRLP', 'LA PAZ',
+                             'GRCB', 'COCHABAMBA',
+                             'GRSC', 'SANTA CRUZ',
+                             'GROR', 'ORURO',
+                             'GRTJ', 'TARIJA',
+                             'GRPT', 'POTOSI',
+                             'GNF-DIA')
+                         gerencia,
+                     a.fis_nro_control nro_correlativo,
+                     TO_CHAR (a.fis_fec_registro) fecha_orden_control,
+                     s.key_cuo aduana,
+                     nomadu (s.key_cuo) "DESC ADUANA",
+                        --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
+                        s.sad_reg_year
+                     || '/'
+                     || s.key_cuo
+                     || '/'
+                     || s.sad_reg_serial
+                     || '-'
+                     || s.sad_reg_nber
+                         "TRAMITE",
+                     DECODE (spy1.sad_clr,
+                             0,
+                             'VERDE',
+                             1,
+                             'AZUL',
+                             2,
+                             'AMARILLO',
+                             3,
+                             'ROJO')
+                         "CANAL",
+                     numid (s.sad_consignee,
+                            s.key_year,
+                            s.key_cuo,
+                            s.key_dec,
+                            s.key_nber,
+                            s.sad_num)
+                         "DOC IMP",
+                     NVL (nomimp (s.sad_consignee,
+                                  s.key_year,
+                                  s.key_cuo,
+                                  s.key_dec,
+                                  s.key_nber,
+                                  s.sad_num), '-')
+                         "IMPORTADOR",
+                     NVL (s.key_dec, ' ') "DOC_DECL",
+                     NVL (nomage (s.key_dec,
+                                  s.key_year,
+                                  s.key_cuo,
+                                  s.key_dec,
+                                  s.key_nber,
+                                  s.sad_num), '-')
+                         "DECLARANTE",
+                     NVL (dirprov (s.sad_exporter,
+                                   s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   s.sad_num), '-')
+                         "DIREC PROVEEDOR",
+                     NVL (nomprov (s.sad_exporter,
+                                   s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   s.sad_num), '-')
+                         "PROVEEDOR",
+                     NVL (a.fis_fob_inicial, 0) fob_funcion,
+                     /*fob_cabecera (s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   0)
+                         fob_funcion,*/
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'GA'
+                                   AND st.saditm_tax_mop = '1'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ga,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'IVA'
+                                   AND st.sad_num = '0'),
+                         0)
+                         iva,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'ICE'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ice,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'IHD'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ihd,
+                     ----SUMATORIAS DE TRIBUTOS
+
+
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'GA'
+                                   AND st.saditm_tax_mop = '1'
+                                   AND st.sad_num = '0'),
+                         0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND st.key_dec IS NULL
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'IVA'
+                                     AND st.sad_num = '0'),
+                           0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND st.key_dec IS NULL
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'ICE'
+                                     AND st.sad_num = '0'),
+                           0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND st.key_dec IS NULL
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'IHD'
+                                     AND st.sad_num = '0'),
+                           0)
+                         total_tributos,
+                     --ASIGNACION CONTROL DIFERIDO
+                     NVL (a.fis_fiscalizador, '-') fiscalizador,
+                     NVL (a.fis_usuario_asignacion, '-') usuario_asignacion,
+                     --NOTIFICACION
+                     NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_NOTIFICACION",
+                     NVL (a.fis_obs_notificacion, '-')
+                         "OBSERVACION_NOTIFICACION",
+                     NVL (a.fis_tipo_notificacion, '-') "TIPO_NOTIFICACION",
+                     NVL (a.fis_usuario_notificacion, '-')
+                         "USUARIO_NOTIFICACION",
+                     --RESULTADO CONTROL DIFERIDO
+                     NVL (a.fis_fob_final, 0) fob_fiscalizador,
+                     NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'), '-')
+                         "FECHA_LIQUIDACION",
+                     NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
+                         "TRIBUTO_OMITIDO_GA",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
+                         "TRIBUTO_OMITIDO_IVA",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
+                         "TRIBUTO_OMITIDO_ICE",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
+                         "TRIBUTO_OMITIDO_IEHD",
+                     NVL (
+                           TO_NUMBER (a.fis_tributo_omitido_ga)
+                         + TO_NUMBER (a.fis_tributo_omitido_iva)
+                         + TO_NUMBER (a.fis_tributo_omitido_ice)
+                         + TO_NUMBER (a.fis_tributo_omitido_iehd),
+                         0)
+                         "TOTAL_TRIBUTO_OMITIDO",
+                     NVL (TO_NUMBER (a.fis_sancion_omision), 0)
+                         sancion_omision,
+                     NVL (TO_NUMBER (a.fis_multa_contrava), 0)
+                         multa_contravencion,
+                     NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
+                         "MULTA_CONTRA_CONTRA",
+                     NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
+                         multa_contrabando_delito,
+                     NVL (a.fis_usuario_resultados, '-') usuarios_registrados,
+                     --ACEPTACION DE PAGO
+                     NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'), '-')
+                         fecha_aceptacion_pago,
+                     NVL (a.fis_usuario_aceptacion, '-') usuario_aceptacion,
+                     --CONCLUSION DEL CONTROL DIFERIDO
+                     NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
+                     NVL (a.fis_reg_nro_inf, '-') numero_informe,
+                     NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
+                         "FECHA_INFORME",
+                     NVL (a.fis_reg_nro_doc_con, '-') "NRO_DOC_CONCLUSION",
+                     NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'), '-')
+                         "FECHA_DOC_CONCLUSION",
+                     NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_FINALIZACION",
+                     NVL (a.fis_usuario_finalizacion, '-')
+                         "USUARIO_REGISTRO_FINALIZACION",
+                     --OBSERVACIONES ENCONTRADAS
+                     DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
+                     DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
+                     DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
+                     DECODE (a.fis_osinobs, 'on', 'X', '-') "SIN_OBSERVACION",
+                     --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
+                     DECODE (a.fis_comision, 'on', 'X', '-') "OMISION_PAGO",
+                     DECODE (a.fis_ccondel, 'on', 'X', '-')
+                         "CONTRABANDO_DELITO",
+                     DECODE (a.fis_cconcon, 'on', 'X', '-')
+                         "CONTRABANDO_CONTRAVENCIONAL",
+                     DECODE (a.fis_cconadu, 'on', 'X', '-')
+                         "CONTRAVENCION_ADUANERA",
+                     --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
+                     NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'), '-')
+                         fecha_notificacion_conclusion,
+                     NVL (a.fis_reg_tip_not_doc, '-')
+                         tipo_notificacion_conclusion,
+                     NVL (a.fis_usuario_not_doc_con, '-')
+                         usuario_registro_notificacion,
+                     --ENVIO A LA UNIDAD LEGAL
+                     NVL (TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_ENVIO",
+                     NVL (a.fis_reg_nro_env_legal, '-') "NRO_DOC_REMISION",
+                     NVL (a.fis_usuario_env_legal, '-')
+                         "USUARIO_UNIDAD_LEGAL",
+                     --ESTADO
+                     fis_estado "ESTADO",
+                     --valores
+                     NVL (
+                         sicodif_ga (a.fis_gestion,
+                                     a.fis_gerencia,
+                                     a.fis_nro_control),
+                         0)
+                         ga_recuperado,
+                     NVL (
+                         sicodif_iva (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         iva_recuperado,
+                     NVL (
+                         sicodif_ice (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         ice_recuperado,
+                     NVL (
+                         sicodif_ihd (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         ihd_recuperado,
+                     NVL (
+                         sicodif_ga (a.fis_gestion,
+                                     a.fis_gerencia,
+                                     a.fis_nro_control),
+                         0)
+                     + NVL (
+                           sicodif_iva (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                     + NVL (
+                           sicodif_ice (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                     + NVL (
+                           sicodif_ihd (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                         total_tributo,
+                     NVL (
+                         sicodif_sancionop (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                         0)
+                         sancionop_recuperado,
+                     --MULTA CONTRAVENCIONAL ADUANERA
+                     NVL (
+                         sicodif_contra_adu (a.fis_gestion,
+                                             a.fis_gerencia,
+                                             a.fis_nro_control),
+                         0)
+                         sancion_contra_adu,
+                     --MULTA CONTRABANDO CONTRAVENCIONAL
+                     --FALTA
+                     NVL (
+                         sicodif_contra_contravencional (a.fis_gestion,
+                                                         a.fis_gerencia,
+                                                         a.fis_nro_control),
+                         0)
+                         sancion_contra_contravencional,
+                     --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
+
+                     NVL (a.fis_usuario_resultados, '-'),
+                     fis_origen_control control_origen,
+                     --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
+                     --to_date(a.fis_fec_registro,'dd/mm/yyyy')
+                     NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'), '-')
+                         fecha_control,
+                     --OTROS DATOS
+                     CASE
+                         WHEN sicodif_25 (s.key_year,
+                                          s.key_cuo,
+                                          s.key_dec,
+                                          s.key_nber) IS NOT NULL
+                         THEN
+                             sicodif_25 (s.key_year,
+                                         s.key_cuo,
+                                         s.key_dec,
+                                         s.key_nber)
+                         ELSE
+                             '-'
+                     END
+                         AS pase_salida,
+                     mercancia (s.key_year,
+                                s.key_cuo,
+                                s.key_dec,
+                                s.key_nber)
+                         mercancias,
+                     NVL (crt_cabecera (s.key_year,
+                                        s.key_cuo,
+                                        s.key_dec,
+                                        s.key_nber), 'ALEATORIO')
+                         criterio_nivel_cab,
+                     --MULTA CONTRABANDO DELITO
+                     --FALTA
+                     NVL (
+                         sicodif_contra_delito (a.fis_gestion,
+                                                a.fis_gerencia,
+                                                a.fis_nro_control),
+                         0)
+                         sancion_contra_delito
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy spy1,
+                     ops$asy.sad_gen s
+             WHERE       s.sad_flw = '1'
+                     AND s.sad_asmt_serial IS NOT NULL
+                     AND s.lst_ope = 'U'
+                     AND s.sad_num = '0'
+                     AND fis_numver = '0'
+                     AND fis_lst_ope = 'U'
+                     AND fis_estado <> 'REGULARIZACION'
+                     AND s.key_year = spy1.key_year(+)
+                     AND s.key_cuo = spy1.key_cuo(+)
+                     AND spy1.key_dec(+) IS NULL
+                     AND s.key_nber = spy1.key_nber(+)
+                     AND spy1.spy_sta(+) = '10'
+                     AND spy1.spy_act(+) = '24'
+                     AND s.key_year = a.fis_key_year
+                     AND s.key_cuo = a.fis_key_cuo
+                     AND s.key_dec IS NULL
+                     AND a.fis_key_dec IS NULL
+                     AND s.key_nber = a.fis_key_nber
+                     AND a.fis_gerencia LIKE prm_gerencia
+                     AND a.fis_reg_fec_doc_con BETWEEN TO_DATE (prm_fec_ini,
+                                                                'dd/mm/yyyy')
+                                                   AND  TO_DATE (
+                                                            prm_fec_fin,
+                                                            'dd/mm/yyyy')
+            UNION
+            SELECT   DISTINCT
+                     TO_NUMBER (a.fis_gestion) gestion,
+                     DECODE (a.fis_gerencia,
+                             'GRLP', 'LA PAZ',
+                             'GRCB', 'COCHABAMBA',
+                             'GRSC', 'SANTA CRUZ',
+                             'GROR', 'ORURO',
+                             'GRTJ', 'TARIJA',
+                             'GRPT', 'POTOSI',
+                             'GNF-DIA')
+                         gerencia,
+                     a.fis_nro_control nro_correlativo,
+                     TO_CHAR (a.fis_fec_registro) fecha_orden_control,
+                     s.key_cuo aduana,
+                     nomadu (s.key_cuo) "DESC ADUANA",
+                        --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
+                        s.sad_reg_year
+                     || '/'
+                     || s.key_cuo
+                     || '/'
+                     || s.sad_reg_serial
+                     || '-'
+                     || s.sad_reg_nber
+                         "TRAMITE",
+                     DECODE (spy1.sad_clr,
+                             0,
+                             'VERDE',
+                             1,
+                             'AZUL',
+                             2,
+                             'AMARILLO',
+                             3,
+                             'ROJO')
+                         "CANAL",
+                     numid (s.sad_consignee,
+                            s.key_year,
+                            s.key_cuo,
+                            s.key_dec,
+                            s.key_nber,
+                            s.sad_num)
+                         "DOC IMP",
+                     NVL (nomimp (s.sad_consignee,
+                                  s.key_year,
+                                  s.key_cuo,
+                                  s.key_dec,
+                                  s.key_nber,
+                                  s.sad_num), '-')
+                         "IMPORTADOR",
+                     NVL (s.key_dec, ' ') "DOC_DECL",
+                     NVL (nomage (s.key_dec,
+                                  s.key_year,
+                                  s.key_cuo,
+                                  s.key_dec,
+                                  s.key_nber,
+                                  s.sad_num), '-')
+                         "DECLARANTE",
+                     NVL (dirprov (s.sad_exporter,
+                                   s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   s.sad_num), '-')
+                         "DIREC PROVEEDOR",
+                     NVL (nomprov (s.sad_exporter,
+                                   s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   s.sad_num), '-')
+                         "PROVEEDOR",
+                     NVL (a.fis_fob_inicial, 0) fob_funcion,
+                     /*fob_cabecera (s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   0)
+                         fob_funcion,*/
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'GA'
+                                   AND st.saditm_tax_mop = '1'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ga,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'IVA'
+                                   AND st.sad_num = '0'),
+                         0)
+                         iva,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'ICE'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ice,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'IHD'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ihd,
+                     ----SUMATORIAS DE TRIBUTOS
+
+
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'GA'
+                                   AND st.saditm_tax_mop = '1'
+                                   AND st.sad_num = '0'),
+                         0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND s.key_dec = st.key_dec
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'IVA'
+                                     AND st.sad_num = '0'),
+                           0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND s.key_dec = st.key_dec
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'ICE'
+                                     AND st.sad_num = '0'),
+                           0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND s.key_dec = st.key_dec
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'IHD'
+                                     AND st.sad_num = '0'),
+                           0)
+                         total_tributos,
+                     --ASIGNACION CONTROL DIFERIDO
+                     NVL (a.fis_fiscalizador, '-') fiscalizador,
+                     NVL (a.fis_usuario_asignacion, '-') usuario_asignacion,
+                     --NOTIFICACION
+                     NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_NOTIFICACION",
+                     NVL (a.fis_obs_notificacion, '-')
+                         "OBSERVACION_NOTIFICACION",
+                     NVL (a.fis_tipo_notificacion, '-') "TIPO_NOTIFICACION",
+                     NVL (a.fis_usuario_notificacion, '-')
+                         "USUARIO_NOTIFICACION",
+                     --RESULTADO CONTROL DIFERIDO
+                     NVL (a.fis_fob_final, 0) fob_fiscalizador,
+                     NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'), '-')
+                         "FECHA_LIQUIDACION",
+                     NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
+                         "TRIBUTO_OMITIDO_GA",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
+                         "TRIBUTO_OMITIDO_IVA",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
+                         "TRIBUTO_OMITIDO_ICE",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
+                         "TRIBUTO_OMITIDO_IEHD",
+                     NVL (
+                           TO_NUMBER (a.fis_tributo_omitido_ga)
+                         + TO_NUMBER (a.fis_tributo_omitido_iva)
+                         + TO_NUMBER (a.fis_tributo_omitido_ice)
+                         + TO_NUMBER (a.fis_tributo_omitido_iehd),
+                         0)
+                         "TOTAL_TRIBUTO_OMITIDO",
+                     NVL (TO_NUMBER (a.fis_sancion_omision), 0)
+                         sancion_omision,
+                     NVL (TO_NUMBER (a.fis_multa_contrava), 0)
+                         multa_contravencion,
+                     NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
+                         "MULTA_CONTRA_CONTRA",
+                     NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
+                         multa_contrabando_delito,
+                     NVL (a.fis_usuario_resultados, '-') usuarios_registrados,
+                     --ACEPTACION DE PAGO
+                     NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'), '-')
+                         fecha_aceptacion_pago,
+                     NVL (a.fis_usuario_aceptacion, '-') usuario_aceptacion,
+                     --CONCLUSION DEL CONTROL DIFERIDO
+                     NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
+                     NVL (a.fis_reg_nro_inf, '-') numero_informe,
+                     NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
+                         "FECHA_INFORME",
+                     NVL (a.fis_reg_nro_doc_con, '-') "NRO_DOC_CONCLUSION",
+                     NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'), '-')
+                         "FECHA_DOC_CONCLUSION",
+                     NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_FINALIZACION",
+                     NVL (a.fis_usuario_finalizacion, '-')
+                         "USUARIO_REGISTRO_FINALIZACION",
+                     --OBSERVACIONES ENCONTRADAS
+                     DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
+                     DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
+                     DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
+                     DECODE (a.fis_osinobs, 'on', 'X', '-') "SIN_OBSERVACION",
+                     --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
+                     DECODE (a.fis_comision, 'on', 'X', '-') "OMISION_PAGO",
+                     DECODE (a.fis_ccondel, 'on', 'X', '-')
+                         "CONTRABANDO_DELITO",
+                     DECODE (a.fis_cconcon, 'on', 'X', '-')
+                         "CONTRABANDO_CONTRAVENCIONAL",
+                     DECODE (a.fis_cconadu, 'on', 'X', '-')
+                         "CONTRAVENCION_ADUANERA",
+                     --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
+                     NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'), '-')
+                         fecha_notificacion_conclusion,
+                     NVL (a.fis_reg_tip_not_doc, '-')
+                         tipo_notificacion_conclusion,
+                     NVL (a.fis_usuario_not_doc_con, '-')
+                         usuario_registro_notificacion,
+                     --ENVIO A LA UNIDAD LEGAL
+                     NVL (TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_ENVIO",
+                     NVL (a.fis_reg_nro_env_legal, '-') "NRO_DOC_REMISION",
+                     NVL (a.fis_usuario_env_legal, '-')
+                         "USUARIO_UNIDAD_LEGAL",
+                     --ESTADO
+                     fis_estado "ESTADO",
+                     --valores
+                     NVL (
+                         sicodif_ga (a.fis_gestion,
+                                     a.fis_gerencia,
+                                     a.fis_nro_control),
+                         0)
+                         ga_recuperado,
+                     NVL (
+                         sicodif_iva (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         iva_recuperado,
+                     NVL (
+                         sicodif_ice (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         ice_recuperado,
+                     NVL (
+                         sicodif_ihd (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         ihd_recuperado,
+                     NVL (
+                         sicodif_ga (a.fis_gestion,
+                                     a.fis_gerencia,
+                                     a.fis_nro_control),
+                         0)
+                     + NVL (
+                           sicodif_iva (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                     + NVL (
+                           sicodif_ice (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                     + NVL (
+                           sicodif_ihd (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                         total_tributo,
+                     NVL (
+                         sicodif_sancionop (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                         0)
+                         sancionop_recuperado,
+                     --MULTA CONTRAVENCIONAL ADUANERA
+                     NVL (
+                         sicodif_contra_adu (a.fis_gestion,
+                                             a.fis_gerencia,
+                                             a.fis_nro_control),
+                         0)
+                         sancion_contra_adu,
+                     --MULTA CONTRABANDO CONTRAVENCIONAL
+                     --FALTA
+                     NVL (
+                         sicodif_contra_contravencional (a.fis_gestion,
+                                                         a.fis_gerencia,
+                                                         a.fis_nro_control),
+                         0)
+                         sancion_contra_contravencional,
+                     --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
+
+                     NVL (a.fis_usuario_resultados, '-'),
+                     fis_origen_control control_origen,
+                     --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
+                     --to_date(a.fis_fec_registro,'dd/mm/yyyy')
+                     NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'), '-')
+                         fecha_control,
+                     --OTROS DATOS
+                     CASE
+                         WHEN sicodif_25 (s.key_year,
+                                          s.key_cuo,
+                                          s.key_dec,
+                                          s.key_nber) IS NOT NULL
+                         THEN
+                             sicodif_25 (s.key_year,
+                                         s.key_cuo,
+                                         s.key_dec,
+                                         s.key_nber)
+                         ELSE
+                             '-'
+                     END
+                         AS pase_salida,
+                     mercancia (s.key_year,
+                                s.key_cuo,
+                                s.key_dec,
+                                s.key_nber)
+                         mercancias,
+                     NVL (crt_cabecera (s.key_year,
+                                        s.key_cuo,
+                                        s.key_dec,
+                                        s.key_nber), 'ALEATORIO')
+                         criterio_nivel_cab,
+                     --MULTA CONTRABANDO DELITO
+                     --FALTA
+                     NVL (
+                         sicodif_contra_delito (a.fis_gestion,
+                                                a.fis_gerencia,
+                                                a.fis_nro_control),
+                         0)
+                         sancion_contra_delito
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy spy1,
+                     ops$asy.sad_gen s
+             WHERE       s.sad_flw = '1'
+                     AND s.sad_asmt_serial IS NOT NULL
+                     AND s.lst_ope = 'U'
+                     AND s.sad_num = '0'
+                     AND fis_numver = '0'
+                     AND fis_lst_ope = 'U'
+                     AND fis_estado <> 'REGULARIZACION'
+                     AND s.key_year = spy1.key_year(+)
+                     AND s.key_cuo = spy1.key_cuo(+)
+                     AND s.key_dec = spy1.key_dec(+)
+                     AND s.key_nber = spy1.key_nber(+)
+                     AND spy1.spy_sta(+) = '10'
+                     AND spy1.spy_act(+) = '24'
+                     AND s.key_year = a.fis_key_year
+                     AND s.key_cuo = a.fis_key_cuo
+                     AND s.key_dec = a.fis_key_dec
+                     AND s.key_nber = a.fis_key_nber
+                     AND a.fis_gerencia LIKE prm_gerencia
+                     AND a.fis_reg_fec_doc_con BETWEEN TO_DATE (prm_fec_ini,
+                                                                'dd/mm/yyyy')
+                                                   AND  TO_DATE (
+                                                            prm_fec_fin,
+                                                            'dd/mm/yyyy');
+
+        RETURN res;
+    END;
+
+
+
+    FUNCTION reportebasedui (prm_gestion   IN     VARCHAR2,
+                             prm_aduana    IN     VARCHAR2,
+                             prm_numero    IN     VARCHAR2,
+                             ct               OUT cursortype)
+        RETURN VARCHAR2
+    IS
+        res    VARCHAR2 (50) := 'CORRECTO';
+        cont   NUMBER (10);
+    BEGIN
+        OPEN ct FOR
+            SELECT   DISTINCT
+                     TO_NUMBER (a.fis_gestion) gestion,
+                     DECODE (a.fis_gerencia,
+                             'GRLP', 'LA PAZ',
+                             'GRCB', 'COCHABAMBA',
+                             'GRSC', 'SANTA CRUZ',
+                             'GROR', 'ORURO',
+                             'GRTJ', 'TARIJA',
+                             'GRPT', 'POTOSI',
+                             'GNF-DIA')
+                         gerencia,
+                     a.fis_nro_control nro_correlativo,
+                     TO_CHAR (a.fis_fec_registro,'dd/mm/yyyy') fecha_orden_control,
+                     s.key_cuo aduana,
+                     nomadu (s.key_cuo) "DESC ADUANA",
+                        --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
+                        s.sad_reg_year
+                     || '/'
+                     || s.key_cuo
+                     || '/'
+                     || s.sad_reg_serial
+                     || '-'
+                     || s.sad_reg_nber
+                         "TRAMITE",
+                     NVL(DECODE (spy1.sad_clr,
+                                 0,
+                                 'VERDE',
+                                 1,
+                                 'AZUL',
+                                 2,
+                                 'AMARILLO',
+                                 3,
+                                 'ROJO','-'),'-')
+                         "CANAL",
+                     numid (s.sad_consignee,
+                            s.key_year,
+                            s.key_cuo,
+                            s.key_dec,
+                            s.key_nber,
+                            s.sad_num)
+                         "DOC IMP",
+                     NVL (nomimp (s.sad_consignee,
+                                  s.key_year,
+                                  s.key_cuo,
+                                  s.key_dec,
+                                  s.key_nber,
+                                  s.sad_num), '-')
+                         "IMPORTADOR",
+                     NVL (s.key_dec, ' ') "DOC_DECL",
+                     NVL (nomage (s.key_dec,
+                                  s.key_year,
+                                  s.key_cuo,
+                                  s.key_dec,
+                                  s.key_nber,
+                                  s.sad_num), '-')
+                         "DECLARANTE",
+                     NVL (dirprov (s.sad_exporter,
+                                   s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   s.sad_num), '-')
+                         "DIREC PROVEEDOR",
+                     NVL (nomprov (s.sad_exporter,
+                                   s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   s.sad_num), '-')
+                         "PROVEEDOR",
+                     NVL (a.fis_fob_inicial, 0) fob_funcion,
+                     /*fob_cabecera (s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   0)
+                         fob_funcion,*/
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'GA'
+                                   AND st.saditm_tax_mop = '1'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ga,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'IVA'
+                                   AND st.sad_num = '0'),
+                         0)
+                         iva,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'ICE'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ice,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'IHD'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ihd,
+                     ----SUMATORIAS DE TRIBUTOS
+
+
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND st.key_dec IS NULL
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'GA'
+                                   AND st.saditm_tax_mop = '1'
+                                   AND st.sad_num = '0'),
+                         0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND st.key_dec IS NULL
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'IVA'
+                                     AND st.sad_num = '0'),
+                           0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND st.key_dec IS NULL
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'ICE'
+                                     AND st.sad_num = '0'),
+                           0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND st.key_dec IS NULL
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'IHD'
+                                     AND st.sad_num = '0'),
+                           0)
+                         total_tributos,
+                     --ASIGNACION CONTROL DIFERIDO
+                     NVL (a.fis_fiscalizador, '-') fiscalizador,
+                     NVL (a.fis_usuario_asignacion, '-') usuario_asignacion,
+                     --NOTIFICACION
+                     NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_NOTIFICACION",
+                     NVL (a.fis_obs_notificacion, '-')
+                         "OBSERVACION_NOTIFICACION",
+                     NVL (a.fis_tipo_notificacion, '-') "TIPO_NOTIFICACION",
+                     NVL (a.fis_usuario_notificacion, '-')
+                         "USUARIO_NOTIFICACION",
+                     --RESULTADO CONTROL DIFERIDO
+                     NVL (a.fis_fob_final, 0) fob_fiscalizador,
+                     NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'), '-')
+                         "FECHA_LIQUIDACION",
+                     NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
+                         "TRIBUTO_OMITIDO_GA",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
+                         "TRIBUTO_OMITIDO_IVA",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
+                         "TRIBUTO_OMITIDO_ICE",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
+                         "TRIBUTO_OMITIDO_IEHD",
+                     NVL (
+                           TO_NUMBER (a.fis_tributo_omitido_ga)
+                         + TO_NUMBER (a.fis_tributo_omitido_iva)
+                         + TO_NUMBER (a.fis_tributo_omitido_ice)
+                         + TO_NUMBER (a.fis_tributo_omitido_iehd),
+                         0)
+                         "TOTAL_TRIBUTO_OMITIDO",
+                     NVL (TO_NUMBER (a.fis_sancion_omision), 0)
+                         sancion_omision,
+                     NVL (TO_NUMBER (a.fis_multa_contrava), 0)
+                         multa_contravencion,
+                     NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
+                         "MULTA_CONTRA_CONTRA",
+                     NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
+                         multa_contrabando_delito,
+                     NVL (a.fis_usuario_resultados, '-') usuarios_registrados,
+                     --ACEPTACION DE PAGO
+                     NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'), '-')
+                         fecha_aceptacion_pago,
+                     NVL (a.fis_usuario_aceptacion, '-') usuario_aceptacion,
+                     --CONCLUSION DEL CONTROL DIFERIDO
+                     NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
+                     NVL (a.fis_reg_nro_inf, '-') numero_informe,
+                     NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
+                         "FECHA_INFORME",
+                     NVL (a.fis_reg_nro_doc_con, '-') "NRO_DOC_CONCLUSION",
+                     NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'), '-')
+                         "FECHA_DOC_CONCLUSION",
+                     NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_FINALIZACION",
+                     NVL (a.fis_usuario_finalizacion, '-')
+                         "USUARIO_REGISTRO_FINALIZACION",
+                     --OBSERVACIONES ENCONTRADAS
+                     DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
+                     DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
+                     DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
+                     DECODE (a.fis_osinobs, 'on', 'X', '-') "SIN_OBSERVACION",
+                     --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
+                     DECODE (a.fis_comision, 'on', 'X', '-') "OMISION_PAGO",
+                     DECODE (a.fis_ccondel, 'on', 'X', '-')
+                         "CONTRABANDO_DELITO",
+                     DECODE (a.fis_cconcon, 'on', 'X', '-')
+                         "CONTRABANDO_CONTRAVENCIONAL",
+                     DECODE (a.fis_cconadu, 'on', 'X', '-')
+                         "CONTRAVENCION_ADUANERA",
+                     --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
+                     NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'), '-')
+                         fecha_notificacion_conclusion,
+                     NVL (a.fis_reg_tip_not_doc, '-')
+                         tipo_notificacion_conclusion,
+                     NVL (a.fis_usuario_not_doc_con, '-')
+                         usuario_registro_notificacion,
+                     --ENVIO A LA UNIDAD LEGAL
+                     NVL (TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_ENVIO",
+                     NVL (a.fis_reg_nro_env_legal, '-') "NRO_DOC_REMISION",
+                     NVL (a.fis_usuario_env_legal, '-')
+                         "USUARIO_UNIDAD_LEGAL",
+                     --ESTADO
+                     fis_estado "ESTADO",
+                     --valores
+                     NVL (
+                         sicodif_ga (a.fis_gestion,
+                                     a.fis_gerencia,
+                                     a.fis_nro_control),
+                         0)
+                         ga_recuperado,
+                     NVL (
+                         sicodif_iva (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         iva_recuperado,
+                     NVL (
+                         sicodif_ice (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         ice_recuperado,
+                     NVL (
+                         sicodif_ihd (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         ihd_recuperado,
+                     NVL (
+                         sicodif_ga (a.fis_gestion,
+                                     a.fis_gerencia,
+                                     a.fis_nro_control),
+                         0)
+                     + NVL (
+                           sicodif_iva (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                     + NVL (
+                           sicodif_ice (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                     + NVL (
+                           sicodif_ihd (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                         total_tributo,
+                     NVL (
+                         sicodif_sancionop (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                         0)
+                         sancionop_recuperado,
+                     --MULTA CONTRAVENCIONAL ADUANERA
+                     NVL (
+                         sicodif_contra_adu (a.fis_gestion,
+                                             a.fis_gerencia,
+                                             a.fis_nro_control),
+                         0)
+                         sancion_contra_adu,
+                     --MULTA CONTRABANDO CONTRAVENCIONAL
+                     --FALTA
+                     NVL (
+                         sicodif_contra_contravencional (a.fis_gestion,
+                                                         a.fis_gerencia,
+                                                         a.fis_nro_control),
+                         0)
+                         sancion_contra_contravencional,
+                     --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
+
+                     NVL (a.fis_usuario_resultados, '-'),
+                     fis_origen_control control_origen,
+                     --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
+                     --to_date(a.fis_fec_registro,'dd/mm/yyyy')
+                     NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'), '-')
+                         fecha_control,
+                     --OTROS DATOS
+                     CASE
+                         WHEN sicodif_25 (s.key_year,
+                                          s.key_cuo,
+                                          s.key_dec,
+                                          s.key_nber) IS NOT NULL
+                         THEN
+                             sicodif_25 (s.key_year,
+                                         s.key_cuo,
+                                         s.key_dec,
+                                         s.key_nber)
+                         ELSE
+                             '-'
+                     END
+                         AS pase_salida,
+                     mercancia (s.key_year,
+                                s.key_cuo,
+                                s.key_dec,
+                                s.key_nber)
+                         mercancias,
+                     NVL (crt_cabecera (s.key_year,
+                                        s.key_cuo,
+                                        s.key_dec,
+                                        s.key_nber), 'ALEATORIO')
+                         criterio_nivel_cab,
+                     --MULTA CONTRABANDO DELITO
+                     --FALTA
+                     NVL (
+                         sicodif_contra_delito (a.fis_gestion,
+                                                a.fis_gerencia,
+                                                a.fis_nro_control),
+                         0)
+                         sancion_contra_delito
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy spy1,
+                     ops$asy.sad_gen s
+             WHERE       s.sad_flw = '1'
+                     AND s.sad_asmt_serial IS NOT NULL
+                     AND s.lst_ope = 'U'
+                     AND s.sad_num = '0'
+                     AND fis_numver = '0'
+                     AND fis_lst_ope = 'U'
+                     AND fis_estado <> 'REGULARIZACION'
+                     AND s.key_year = spy1.key_year(+)
+                     AND s.key_cuo = spy1.key_cuo(+)
+                     AND s.key_dec IS NULL
+                     AND spy1.key_dec(+) IS NULL
+                     AND s.key_nber = spy1.key_nber(+)
+                     AND spy1.spy_sta(+) = '10'
+                     AND spy1.spy_act(+) = '24'
+                     AND s.key_year = a.fis_key_year
+                     AND s.key_cuo = a.fis_key_cuo
+                     AND a.fis_key_dec IS NULL
+                     AND s.key_nber = a.fis_key_nber
+                     AND a.sad_reg_year = prm_gestion
+                     AND a.fis_key_cuo = prm_aduana
+                     AND a.sad_reg_serial = 'C'
+                     AND a.sad_reg_nber = prm_numero
+            UNION
+            SELECT   DISTINCT
+                     TO_NUMBER (a.fis_gestion) gestion,
+                     DECODE (a.fis_gerencia,
+                             'GRLP', 'LA PAZ',
+                             'GRCB', 'COCHABAMBA',
+                             'GRSC', 'SANTA CRUZ',
+                             'GROR', 'ORURO',
+                             'GRTJ', 'TARIJA',
+                             'GRPT', 'POTOSI',
+                             'GNF-DIA')
+                         gerencia,
+                     a.fis_nro_control nro_correlativo,
+                     TO_CHAR (a.fis_fec_registro,'dd/mm/yyyy') fecha_orden_control,
+                     s.key_cuo aduana,
+                     nomadu (s.key_cuo) "DESC ADUANA",
+                        --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
+                        s.sad_reg_year
+                     || '/'
+                     || s.key_cuo
+                     || '/'
+                     || s.sad_reg_serial
+                     || '-'
+                     || s.sad_reg_nber
+                         "TRAMITE",
+                     NVL(DECODE (spy1.sad_clr,
+                                 0,
+                                 'VERDE',
+                                 1,
+                                 'AZUL',
+                                 2,
+                                 'AMARILLO',
+                                 3,
+                                 'ROJO','-'),'-')
+                         "CANAL",
+                     numid (s.sad_consignee,
+                            s.key_year,
+                            s.key_cuo,
+                            s.key_dec,
+                            s.key_nber,
+                            s.sad_num)
+                         "DOC IMP",
+                     NVL (nomimp (s.sad_consignee,
+                                  s.key_year,
+                                  s.key_cuo,
+                                  s.key_dec,
+                                  s.key_nber,
+                                  s.sad_num), '-')
+                         "IMPORTADOR",
+                     NVL (s.key_dec, ' ') "DOC_DECL",
+                     NVL (nomage (s.key_dec,
+                                  s.key_year,
+                                  s.key_cuo,
+                                  s.key_dec,
+                                  s.key_nber,
+                                  s.sad_num), '-')
+                         "DECLARANTE",
+                     NVL (dirprov (s.sad_exporter,
+                                   s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   s.sad_num), '-')
+                         "DIREC PROVEEDOR",
+                     NVL (nomprov (s.sad_exporter,
+                                   s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   s.sad_num), '-')
+                         "PROVEEDOR",
+                     NVL (a.fis_fob_inicial, 0) fob_funcion,
+                     /*fob_cabecera (s.key_year,
+                                   s.key_cuo,
+                                   s.key_dec,
+                                   s.key_nber,
+                                   0)
+                         fob_funcion,*/
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'GA'
+                                   AND st.saditm_tax_mop = '1'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ga,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'IVA'
+                                   AND st.sad_num = '0'),
+                         0)
+                         iva,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'ICE'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ice,
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'IHD'
+                                   AND st.sad_num = '0'),
+                         0)
+                         ihd,
+                     ----SUMATORIAS DE TRIBUTOS
+
+
+                     NVL (
+                         (SELECT   SUM (saditm_tax_amount)
+                            FROM   ops$asy.sad_tax st
+                           WHERE       s.key_year = st.key_year
+                                   AND s.key_cuo = st.key_cuo
+                                   AND s.key_dec = st.key_dec
+                                   AND s.key_nber = st.key_nber
+                                   AND st.saditm_tax_code = 'GA'
+                                   AND st.saditm_tax_mop = '1'
+                                   AND st.sad_num = '0'),
+                         0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND s.key_dec = st.key_dec
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'IVA'
+                                     AND st.sad_num = '0'),
+                           0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND s.key_dec = st.key_dec
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'ICE'
+                                     AND st.sad_num = '0'),
+                           0)
+                     + NVL (
+                           (SELECT   SUM (saditm_tax_amount)
+                              FROM   ops$asy.sad_tax st
+                             WHERE       s.key_year = st.key_year
+                                     AND s.key_cuo = st.key_cuo
+                                     AND s.key_dec = st.key_dec
+                                     AND s.key_nber = st.key_nber
+                                     AND st.saditm_tax_code = 'IHD'
+                                     AND st.sad_num = '0'),
+                           0)
+                         total_tributos,
+                     --ASIGNACION CONTROL DIFERIDO
+                     NVL (a.fis_fiscalizador, '-') fiscalizador,
+                     NVL (a.fis_usuario_asignacion, '-') usuario_asignacion,
+                     --NOTIFICACION
+                     NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_NOTIFICACION",
+                     NVL (a.fis_obs_notificacion, '-')
+                         "OBSERVACION_NOTIFICACION",
+                     NVL (a.fis_tipo_notificacion, '-') "TIPO_NOTIFICACION",
+                     NVL (a.fis_usuario_notificacion, '-')
+                         "USUARIO_NOTIFICACION",
+                     --RESULTADO CONTROL DIFERIDO
+                     NVL (a.fis_fob_final, 0) fob_fiscalizador,
+                     NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'), '-')
+                         "FECHA_LIQUIDACION",
+                     NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
+                         "TRIBUTO_OMITIDO_GA",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
+                         "TRIBUTO_OMITIDO_IVA",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
+                         "TRIBUTO_OMITIDO_ICE",
+                     NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
+                         "TRIBUTO_OMITIDO_IEHD",
+                     NVL (
+                           TO_NUMBER (a.fis_tributo_omitido_ga)
+                         + TO_NUMBER (a.fis_tributo_omitido_iva)
+                         + TO_NUMBER (a.fis_tributo_omitido_ice)
+                         + TO_NUMBER (a.fis_tributo_omitido_iehd),
+                         0)
+                         "TOTAL_TRIBUTO_OMITIDO",
+                     NVL (TO_NUMBER (a.fis_sancion_omision), 0)
+                         sancion_omision,
+                     NVL (TO_NUMBER (a.fis_multa_contrava), 0)
+                         multa_contravencion,
+                     NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
+                         "MULTA_CONTRA_CONTRA",
+                     NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
+                         multa_contrabando_delito,
+                     NVL (a.fis_usuario_resultados, '-') usuarios_registrados,
+                     --ACEPTACION DE PAGO
+                     NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'), '-')
+                         fecha_aceptacion_pago,
+                     NVL (a.fis_usuario_aceptacion, '-') usuario_aceptacion,
+                     --CONCLUSION DEL CONTROL DIFERIDO
+                     NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
+                     NVL (a.fis_reg_nro_inf, '-') numero_informe,
+                     NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
+                         "FECHA_INFORME",
+                     NVL (a.fis_reg_nro_doc_con, '-') "NRO_DOC_CONCLUSION",
+                     NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'), '-')
+                         "FECHA_DOC_CONCLUSION",
+                     NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_FINALIZACION",
+                     NVL (a.fis_usuario_finalizacion, '-')
+                         "USUARIO_REGISTRO_FINALIZACION",
+                     --OBSERVACIONES ENCONTRADAS
+                     DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
+                     DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
+                     DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
+                     DECODE (a.fis_osinobs, 'on', 'X', '-') "SIN_OBSERVACION",
+                     --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
+                     DECODE (a.fis_comision, 'on', 'X', '-') "OMISION_PAGO",
+                     DECODE (a.fis_ccondel, 'on', 'X', '-')
+                         "CONTRABANDO_DELITO",
+                     DECODE (a.fis_cconcon, 'on', 'X', '-')
+                         "CONTRABANDO_CONTRAVENCIONAL",
+                     DECODE (a.fis_cconadu, 'on', 'X', '-')
+                         "CONTRAVENCION_ADUANERA",
+                     --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
+                     NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'), '-')
+                         fecha_notificacion_conclusion,
+                     NVL (a.fis_reg_tip_not_doc, '-')
+                         tipo_notificacion_conclusion,
+                     NVL (a.fis_usuario_not_doc_con, '-')
+                         usuario_registro_notificacion,
+                     --ENVIO A LA UNIDAD LEGAL
+                     NVL (TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
+                          '-')
+                         "FECHA_ENVIO",
+                     NVL (a.fis_reg_nro_env_legal, '-') "NRO_DOC_REMISION",
+                     NVL (a.fis_usuario_env_legal, '-')
+                         "USUARIO_UNIDAD_LEGAL",
+                     --ESTADO
+                     fis_estado "ESTADO",
+                     --valores
+                     NVL (
+                         sicodif_ga (a.fis_gestion,
+                                     a.fis_gerencia,
+                                     a.fis_nro_control),
+                         0)
+                         ga_recuperado,
+                     NVL (
+                         sicodif_iva (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         iva_recuperado,
+                     NVL (
+                         sicodif_ice (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         ice_recuperado,
+                     NVL (
+                         sicodif_ihd (a.fis_gestion,
+                                      a.fis_gerencia,
+                                      a.fis_nro_control),
+                         0)
+                         ihd_recuperado,
+                     NVL (
+                         sicodif_ga (a.fis_gestion,
+                                     a.fis_gerencia,
+                                     a.fis_nro_control),
+                         0)
+                     + NVL (
+                           sicodif_iva (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                     + NVL (
+                           sicodif_ice (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                     + NVL (
+                           sicodif_ihd (a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control),
+                           0)
+                         total_tributo,
+                     NVL (
+                         sicodif_sancionop (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                         0)
+                         sancionop_recuperado,
+                     --MULTA CONTRAVENCIONAL ADUANERA
+                     NVL (
+                         sicodif_contra_adu (a.fis_gestion,
+                                             a.fis_gerencia,
+                                             a.fis_nro_control),
+                         0)
+                         sancion_contra_adu,
+                     --MULTA CONTRABANDO CONTRAVENCIONAL
+                     --FALTA
+                     NVL (
+                         sicodif_contra_contravencional (a.fis_gestion,
+                                                         a.fis_gerencia,
+                                                         a.fis_nro_control),
+                         0)
+                         sancion_contra_contravencional,
+                     --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
+
+                     NVL (a.fis_usuario_resultados, '-'),
+                     fis_origen_control control_origen,
+                     --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
+                     --to_date(a.fis_fec_registro,'dd/mm/yyyy')
+                     NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'), '-')
+                         fecha_control,
+                     --OTROS DATOS
+                     CASE
+                         WHEN sicodif_25 (s.key_year,
+                                          s.key_cuo,
+                                          s.key_dec,
+                                          s.key_nber) IS NOT NULL
+                         THEN
+                             sicodif_25 (s.key_year,
+                                         s.key_cuo,
+                                         s.key_dec,
+                                         s.key_nber)
+                         ELSE
+                             '-'
+                     END
+                         AS pase_salida,
+                     mercancia (s.key_year,
+                                s.key_cuo,
+                                s.key_dec,
+                                s.key_nber)
+                         mercancias,
+                     NVL (crt_cabecera (s.key_year,
+                                        s.key_cuo,
+                                        s.key_dec,
+                                        s.key_nber), 'ALEATORIO')
+                         criterio_nivel_cab,
+                     --MULTA CONTRABANDO DELITO
+                     --FALTA
+                     NVL (
+                         sicodif_contra_delito (a.fis_gestion,
+                                                a.fis_gerencia,
+                                                a.fis_nro_control),
+                         0)
+                         sancion_contra_delito
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy spy1,
+                     ops$asy.sad_gen s
+             WHERE       s.sad_flw = '1'
+                     AND s.sad_asmt_serial IS NOT NULL
+                     AND s.lst_ope = 'U'
+                     AND s.sad_num = '0'
+                     AND fis_numver = '0'
+                     AND fis_lst_ope = 'U'
+                     AND fis_estado <> 'REGULARIZACION'
+                     AND s.key_year = spy1.key_year(+)
+                     AND s.key_cuo = spy1.key_cuo(+)
+                     AND s.key_dec = spy1.key_dec(+)
+                     AND s.key_nber = spy1.key_nber(+)
+                     AND spy1.spy_sta(+) = '10'
+                     AND spy1.spy_act(+) = '24'
+                     AND s.key_year = a.fis_key_year
+                     AND s.key_cuo = a.fis_key_cuo
+                     AND s.key_dec = a.fis_key_dec
+                     AND s.key_nber = a.fis_key_nber
+                     AND a.sad_reg_year = prm_gestion
+                     AND a.fis_key_cuo = prm_aduana
+                     AND a.sad_reg_serial = 'C'
+                     AND a.sad_reg_nber = prm_numero;
+
+        /*END IF;*/
+
+        RETURN res;
+    END;
+
+    FUNCTION reportebase (prm_gerencia   IN     VARCHAR2,
+                          prm_fec_ini    IN     VARCHAR2,
+                          prm_fec_fin    IN     VARCHAR2,
+                          prm_nit        IN     VARCHAR2,
+                          ct                OUT cursortype)
+        RETURN VARCHAR2
+    IS
+        res    VARCHAR2 (50) := 'CORRECTO';
+        cont   NUMBER (10);
+    BEGIN
+        IF prm_nit IS NULL
+        THEN
+            OPEN ct FOR
+                SELECT   DISTINCT
+                         TO_NUMBER (a.fis_gestion) gestion,
+                         DECODE (a.fis_gerencia,
+                                 'GRLP', 'LA PAZ',
+                                 'GRCB', 'COCHABAMBA',
+                                 'GRSC', 'SANTA CRUZ',
+                                 'GROR', 'ORURO',
+                                 'GRTJ', 'TARIJA',
+                                 'GRPT', 'POTOSI',
+                                 'GNF-DIA')
+                             gerencia,
+                         a.fis_nro_control nro_correlativo,
+                         TO_CHAR (a.fis_fec_registro,'dd/mm/yyyy') fecha_orden_control,
+                         s.key_cuo aduana,
+                         nomadu (s.key_cuo) "DESC ADUANA",
+                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
+                            s.sad_reg_year
+                         || '/'
+                         || s.key_cuo
+                         || '/'
+                         || s.sad_reg_serial
+                         || '-'
+                         || s.sad_reg_nber
+                             "TRAMITE",
+                         NVL(DECODE (spy1.sad_clr,
+                                 0,
+                                 'VERDE',
+                                 1,
+                                 'AZUL',
+                                 2,
+                                 'AMARILLO',
+                                 3,
+                                 'ROJO','-'),'-')
+                             "CANAL",
+                         numid (s.sad_consignee,
+                                s.key_year,
+                                s.key_cuo,
+                                s.key_dec,
+                                s.key_nber,
+                                s.sad_num)
+                             "DOC IMP",
+                         NVL (nomimp (s.sad_consignee,
+                                      s.key_year,
+                                      s.key_cuo,
+                                      s.key_dec,
+                                      s.key_nber,
+                                      s.sad_num), '-')
+                             "IMPORTADOR",
+                         NVL (s.key_dec, ' ') "DOC_DECL",
+                         NVL (nomage (s.key_dec,
+                                      s.key_year,
+                                      s.key_cuo,
+                                      s.key_dec,
+                                      s.key_nber,
+                                      s.sad_num), '-')
+                             "DECLARANTE",
+                         NVL (dirprov (s.sad_exporter,
+                                       s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       s.sad_num), '-')
+                             "DIREC PROVEEDOR",
+                         NVL (nomprov (s.sad_exporter,
+                                       s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       s.sad_num), '-')
+                             "PROVEEDOR",
+                         NVL (a.fis_fob_inicial, 0) fob_funcion,
+                         /*fob_cabecera (s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       0)
+                             fob_funcion,*/
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'GA'
+                                       AND st.saditm_tax_mop = '1'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ga,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'IVA'
+                                       AND st.sad_num = '0'),
+                             0)
+                             iva,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'ICE'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ice,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'IHD'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ihd,
+                         ----SUMATORIAS DE TRIBUTOS
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'GA'
+                                       AND st.saditm_tax_mop = '1'
+                                       AND st.sad_num = '0'),
+                             0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND st.key_dec IS NULL
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'IVA'
+                                         AND st.sad_num = '0'),
+                               0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND st.key_dec IS NULL
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'ICE'
+                                         AND st.sad_num = '0'),
+                               0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND st.key_dec IS NULL
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'IHD'
+                                         AND st.sad_num = '0'),
+                               0)
+                             total_tributos,
+                         --ASIGNACION CONTROL DIFERIDO
+                         NVL (a.fis_fiscalizador, '-') fiscalizador,
+                         NVL (a.fis_usuario_asignacion, '-')
+                             usuario_asignacion,
+                         --NOTIFICACION
+                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_NOTIFICACION",
+                         NVL (a.fis_obs_notificacion, '-')
+                             "OBSERVACION_NOTIFICACION",
+                         NVL (a.fis_tipo_notificacion, '-')
+                             "TIPO_NOTIFICACION",
+                         NVL (a.fis_usuario_notificacion, '-')
+                             "USUARIO_NOTIFICACION",
+                         --RESULTADO CONTROL DIFERIDO
+                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
+                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_LIQUIDACION",
+                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
+                             "TRIBUTO_OMITIDO_GA",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
+                             "TRIBUTO_OMITIDO_IVA",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
+                             "TRIBUTO_OMITIDO_ICE",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
+                             "TRIBUTO_OMITIDO_IEHD",
+                         NVL (
+                               TO_NUMBER (a.fis_tributo_omitido_ga)
+                             + TO_NUMBER (a.fis_tributo_omitido_iva)
+                             + TO_NUMBER (a.fis_tributo_omitido_ice)
+                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
+                             0)
+                             "TOTAL_TRIBUTO_OMITIDO",
+                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
+                             sancion_omision,
+                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
+                             multa_contravencion,
+                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
+                             "MULTA_CONTRA_CONTRA",
+                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
+                             multa_contrabando_delito,
+                         NVL (a.fis_usuario_resultados, '-')
+                             usuarios_registrados,
+                         --ACEPTACION DE PAGO
+                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
+                              '-')
+                             fecha_aceptacion_pago,
+                         NVL (a.fis_usuario_aceptacion, '-')
+                             usuario_aceptacion,
+                         --CONCLUSION DEL CONTROL DIFERIDO
+                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
+                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
+                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
+                             "FECHA_INFORME",
+                         NVL (a.fis_reg_nro_doc_con, '-')
+                             "NRO_DOC_CONCLUSION",
+                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_DOC_CONCLUSION",
+                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_FINALIZACION",
+                         NVL (a.fis_usuario_finalizacion, '-')
+                             "USUARIO_REGISTRO_FINALIZACION",
+                         --OBSERVACIONES ENCONTRADAS
+                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
+                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
+                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
+                         DECODE (a.fis_osinobs, 'on', 'X', '-')
+                             "SIN_OBSERVACION",
+                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
+                         DECODE (a.fis_comision, 'on', 'X', '-')
+                             "OMISION_PAGO",
+                         DECODE (a.fis_ccondel, 'on', 'X', '-')
+                             "CONTRABANDO_DELITO",
+                         DECODE (a.fis_cconcon, 'on', 'X', '-')
+                             "CONTRABANDO_CONTRAVENCIONAL",
+                         DECODE (a.fis_cconadu, 'on', 'X', '-')
+                             "CONTRAVENCION_ADUANERA",
+                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
+                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
+                              '-')
+                             fecha_notificacion_conclusion,
+                         NVL (a.fis_reg_tip_not_doc, '-')
+                             tipo_notificacion_conclusion,
+                         NVL (a.fis_usuario_not_doc_con, '-')
+                             usuario_registro_notificacion,
+                         --ENVIO A LA UNIDAD LEGAL
+                         NVL (
+                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
+                             '-')
+                             "FECHA_ENVIO",
+                         NVL (a.fis_reg_nro_env_legal, '-')
+                             "NRO_DOC_REMISION",
+                         NVL (a.fis_usuario_env_legal, '-')
+                             "USUARIO_UNIDAD_LEGAL",
+                         --ESTADO
+                         fis_estado "ESTADO",
+                         --valores
+                         NVL (
+                             sicodif_ga (a.fis_gestion,
+                                         a.fis_gerencia,
+                                         a.fis_nro_control),
+                             0)
+                             ga_recuperado,
+                         NVL (
+                             sicodif_iva (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             iva_recuperado,
+                         NVL (
+                             sicodif_ice (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             ice_recuperado,
+                         NVL (
+                             sicodif_ihd (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             ihd_recuperado,
+                         NVL (
+                             sicodif_ga (a.fis_gestion,
+                                         a.fis_gerencia,
+                                         a.fis_nro_control),
+                             0)
+                         + NVL (
+                               sicodif_iva (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                         + NVL (
+                               sicodif_ice (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                         + NVL (
+                               sicodif_ihd (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                             total_tributo,
+                         NVL (
+                             sicodif_sancionop (a.fis_gestion,
+                                                a.fis_gerencia,
+                                                a.fis_nro_control),
+                             0)
+                             sancionop_recuperado,
+                         --MULTA CONTRAVENCIONAL ADUANERA
+                         NVL (
+                             sicodif_contra_adu (a.fis_gestion,
+                                                 a.fis_gerencia,
+                                                 a.fis_nro_control),
+                             0)
+                             sancion_contra_adu,
+                         --MULTA CONTRABANDO CONTRAVENCIONAL
+                         --FALTA
+                         NVL (
+                             sicodif_contra_contravencional (
+                                 a.fis_gestion,
+                                 a.fis_gerencia,
+                                 a.fis_nro_control),
+                             0)
+                             sancion_contra_contravencional,
+                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
+
+                         NVL (a.fis_usuario_resultados, '-'),
+                         fis_origen_control control_origen,
+                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
+                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
+                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
+                              '-')
+                             fecha_control,
+                         --OTROS DATOS
+                         CASE
+                             WHEN sicodif_25 (s.key_year,
+                                              s.key_cuo,
+                                              s.key_dec,
+                                              s.key_nber) IS NOT NULL
+                             THEN
+                                 sicodif_25 (s.key_year,
+                                             s.key_cuo,
+                                             s.key_dec,
+                                             s.key_nber)
+                             ELSE
+                                 '-'
+                         END
+                             AS pase_salida,
+                         mercancia (s.key_year,
+                                    s.key_cuo,
+                                    s.key_dec,
+                                    s.key_nber)
+                             mercancias,
+                         NVL (crt_cabecera (s.key_year,
+                                            s.key_cuo,
+                                            s.key_dec,
+                                            s.key_nber), 'ALEATORIO')
+                             criterio_nivel_cab,
+                         --MULTA CONTRABANDO DELITO
+                         --FALTA
+                         NVL (
+                             sicodif_contra_delito (a.fis_gestion,
+                                                    a.fis_gerencia,
+                                                    a.fis_nro_control),
+                             0)
+                             sancion_contra_delito
+                  FROM   sicodif.cd_fiscalizacion a,
+                         ops$asy.sad_spy spy1,
+                         ops$asy.sad_gen s
+                 WHERE       s.sad_flw = '1'
+                         AND s.sad_asmt_serial IS NOT NULL
+                         AND s.lst_ope = 'U'
+                         AND s.sad_num = '0'
+                         AND fis_numver = '0'
+                         AND fis_lst_ope = 'U'
+                         AND fis_estado <> 'REGULARIZACION'
+                         AND s.key_year = spy1.key_year(+)
+                         AND s.key_cuo = spy1.key_cuo(+)
+                         AND s.key_dec IS NULL
+                         AND spy1.key_dec(+) IS NULL
+                         AND s.key_nber = spy1.key_nber(+)
+                         AND spy1.spy_sta(+) = '10'
+                         AND spy1.spy_act(+) = '24'
+                         AND s.key_year = a.fis_key_year
+                         AND s.key_cuo = a.fis_key_cuo
+                         AND a.fis_key_dec IS NULL
+                         AND s.key_nber = a.fis_key_nber
+                         AND a.fis_gerencia LIKE prm_gerencia
+                         AND TRUNC (a.fis_fec_asignacion) BETWEEN TO_DATE (
+                                                                      prm_fec_ini,
+                                                                      'dd/mm/yyyy')
+                                                              AND  TO_DATE (
+                                                                       prm_fec_fin,
+                                                                       'dd/mm/yyyy')
+                UNION
+                SELECT   DISTINCT
+                         TO_NUMBER (a.fis_gestion) gestion,
+                         DECODE (a.fis_gerencia,
+                                 'GRLP', 'LA PAZ',
+                                 'GRCB', 'COCHABAMBA',
+                                 'GRSC', 'SANTA CRUZ',
+                                 'GROR', 'ORURO',
+                                 'GRTJ', 'TARIJA',
+                                 'GRPT', 'POTOSI',
+                                 'GNF-DIA')
+                             gerencia,
+                         a.fis_nro_control nro_correlativo,
+                         TO_CHAR (a.fis_fec_registro,'dd/mm/yyyy') fecha_orden_control,
+                         s.key_cuo aduana,
+                         nomadu (s.key_cuo) "DESC ADUANA",
+                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
+                            s.sad_reg_year
+                         || '/'
+                         || s.key_cuo
+                         || '/'
+                         || s.sad_reg_serial
+                         || '-'
+                         || s.sad_reg_nber
+                             "TRAMITE",
+                          NVL(DECODE (spy1.sad_clr,
+                                 0,
+                                 'VERDE',
+                                 1,
+                                 'AZUL',
+                                 2,
+                                 'AMARILLO',
+                                 3,
+                                 'ROJO','-'),'-')
+                             "CANAL",
+                         numid (s.sad_consignee,
+                                s.key_year,
+                                s.key_cuo,
+                                s.key_dec,
+                                s.key_nber,
+                                s.sad_num)
+                             "DOC IMP",
+                         NVL (nomimp (s.sad_consignee,
+                                      s.key_year,
+                                      s.key_cuo,
+                                      s.key_dec,
+                                      s.key_nber,
+                                      s.sad_num), '-')
+                             "IMPORTADOR",
+                         NVL (s.key_dec, ' ') "DOC_DECL",
+                         NVL (nomage (s.key_dec,
+                                      s.key_year,
+                                      s.key_cuo,
+                                      s.key_dec,
+                                      s.key_nber,
+                                      s.sad_num), '-')
+                             "DECLARANTE",
+                         NVL (dirprov (s.sad_exporter,
+                                       s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       s.sad_num), '-')
+                             "DIREC PROVEEDOR",
+                         NVL (nomprov (s.sad_exporter,
+                                       s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       s.sad_num), '-')
+                             "PROVEEDOR",
+                         NVL (a.fis_fob_inicial, 0) fob_funcion,
+                         /*fob_cabecera (s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       0)
+                             fob_funcion,*/
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'GA'
+                                       AND st.saditm_tax_mop = '1'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ga,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'IVA'
+                                       AND st.sad_num = '0'),
+                             0)
+                             iva,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'ICE'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ice,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'IHD'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ihd,
+                         ----SUMATORIAS DE TRIBUTOS
+
+
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'GA'
+                                       AND st.saditm_tax_mop = '1'
+                                       AND st.sad_num = '0'),
+                             0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND s.key_dec = st.key_dec
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'IVA'
+                                         AND st.sad_num = '0'),
+                               0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND s.key_dec = st.key_dec
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'ICE'
+                                         AND st.sad_num = '0'),
+                               0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND s.key_dec = st.key_dec
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'IHD'
+                                         AND st.sad_num = '0'),
+                               0)
+                             total_tributos,
+                         --ASIGNACION CONTROL DIFERIDO
+                         NVL (a.fis_fiscalizador, '-') fiscalizador,
+                         NVL (a.fis_usuario_asignacion, '-')
+                             usuario_asignacion,
+                         --NOTIFICACION
+                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_NOTIFICACION",
+                         NVL (a.fis_obs_notificacion, '-')
+                             "OBSERVACION_NOTIFICACION",
+                         NVL (a.fis_tipo_notificacion, '-')
+                             "TIPO_NOTIFICACION",
+                         NVL (a.fis_usuario_notificacion, '-')
+                             "USUARIO_NOTIFICACION",
+                         --RESULTADO CONTROL DIFERIDO
+                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
+                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_LIQUIDACION",
+                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
+                             "TRIBUTO_OMITIDO_GA",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
+                             "TRIBUTO_OMITIDO_IVA",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
+                             "TRIBUTO_OMITIDO_ICE",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
+                             "TRIBUTO_OMITIDO_IEHD",
+                         NVL (
+                               TO_NUMBER (a.fis_tributo_omitido_ga)
+                             + TO_NUMBER (a.fis_tributo_omitido_iva)
+                             + TO_NUMBER (a.fis_tributo_omitido_ice)
+                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
+                             0)
+                             "TOTAL_TRIBUTO_OMITIDO",
+                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
+                             sancion_omision,
+                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
+                             multa_contravencion,
+                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
+                             "MULTA_CONTRA_CONTRA",
+                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
+                             multa_contrabando_delito,
+                         NVL (a.fis_usuario_resultados, '-')
+                             usuarios_registrados,
+                         --ACEPTACION DE PAGO
+                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
+                              '-')
+                             fecha_aceptacion_pago,
+                         NVL (a.fis_usuario_aceptacion, '-')
+                             usuario_aceptacion,
+                         --CONCLUSION DEL CONTROL DIFERIDO
+                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
+                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
+                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
+                             "FECHA_INFORME",
+                         NVL (a.fis_reg_nro_doc_con, '-')
+                             "NRO_DOC_CONCLUSION",
+                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_DOC_CONCLUSION",
+                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_FINALIZACION",
+                         NVL (a.fis_usuario_finalizacion, '-')
+                             "USUARIO_REGISTRO_FINALIZACION",
+                         --OBSERVACIONES ENCONTRADAS
+                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
+                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
+                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
+                         DECODE (a.fis_osinobs, 'on', 'X', '-')
+                             "SIN_OBSERVACION",
+                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
+                         DECODE (a.fis_comision, 'on', 'X', '-')
+                             "OMISION_PAGO",
+                         DECODE (a.fis_ccondel, 'on', 'X', '-')
+                             "CONTRABANDO_DELITO",
+                         DECODE (a.fis_cconcon, 'on', 'X', '-')
+                             "CONTRABANDO_CONTRAVENCIONAL",
+                         DECODE (a.fis_cconadu, 'on', 'X', '-')
+                             "CONTRAVENCION_ADUANERA",
+                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
+                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
+                              '-')
+                             fecha_notificacion_conclusion,
+                         NVL (a.fis_reg_tip_not_doc, '-')
+                             tipo_notificacion_conclusion,
+                         NVL (a.fis_usuario_not_doc_con, '-')
+                             usuario_registro_notificacion,
+                         --ENVIO A LA UNIDAD LEGAL
+                         NVL (
+                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
+                             '-')
+                             "FECHA_ENVIO",
+                         NVL (a.fis_reg_nro_env_legal, '-')
+                             "NRO_DOC_REMISION",
+                         NVL (a.fis_usuario_env_legal, '-')
+                             "USUARIO_UNIDAD_LEGAL",
+                         --ESTADO
+                         fis_estado "ESTADO",
+                         --valores
+                         NVL (
+                             sicodif_ga (a.fis_gestion,
+                                         a.fis_gerencia,
+                                         a.fis_nro_control),
+                             0)
+                             ga_recuperado,
+                         NVL (
+                             sicodif_iva (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             iva_recuperado,
+                         NVL (
+                             sicodif_ice (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             ice_recuperado,
+                         NVL (
+                             sicodif_ihd (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             ihd_recuperado,
+                         NVL (
+                             sicodif_ga (a.fis_gestion,
+                                         a.fis_gerencia,
+                                         a.fis_nro_control),
+                             0)
+                         + NVL (
+                               sicodif_iva (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                         + NVL (
+                               sicodif_ice (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                         + NVL (
+                               sicodif_ihd (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                             total_tributo,
+                         NVL (
+                             sicodif_sancionop (a.fis_gestion,
+                                                a.fis_gerencia,
+                                                a.fis_nro_control),
+                             0)
+                             sancionop_recuperado,
+                         --MULTA CONTRAVENCIONAL ADUANERA
+                         NVL (
+                             sicodif_contra_adu (a.fis_gestion,
+                                                 a.fis_gerencia,
+                                                 a.fis_nro_control),
+                             0)
+                             sancion_contra_adu,
+                         --MULTA CONTRABANDO CONTRAVENCIONAL
+                         --FALTA
+                         NVL (
+                             sicodif_contra_contravencional (
+                                 a.fis_gestion,
+                                 a.fis_gerencia,
+                                 a.fis_nro_control),
+                             0)
+                             sancion_contra_contravencional,
+                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
+
+                         NVL (a.fis_usuario_resultados, '-'),
+                         fis_origen_control control_origen,
+                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
+                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
+                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
+                              '-')
+                             fecha_control,
+                         --OTROS DATOS
+                         CASE
+                             WHEN sicodif_25 (s.key_year,
+                                              s.key_cuo,
+                                              s.key_dec,
+                                              s.key_nber) IS NOT NULL
+                             THEN
+                                 sicodif_25 (s.key_year,
+                                             s.key_cuo,
+                                             s.key_dec,
+                                             s.key_nber)
+                             ELSE
+                                 '-'
+                         END
+                             AS pase_salida,
+                         mercancia (s.key_year,
+                                    s.key_cuo,
+                                    s.key_dec,
+                                    s.key_nber)
+                             mercancias,
+                         NVL (crt_cabecera (s.key_year,
+                                            s.key_cuo,
+                                            s.key_dec,
+                                            s.key_nber), 'ALEATORIO')
+                             criterio_nivel_cab,
+                         --MULTA CONTRABANDO DELITO
+                         --FALTA
+                         NVL (
+                             sicodif_contra_delito (a.fis_gestion,
+                                                    a.fis_gerencia,
+                                                    a.fis_nro_control),
+                             0)
+                             sancion_contra_delito
+                  FROM   sicodif.cd_fiscalizacion a,
+                         ops$asy.sad_spy spy1,
+                         ops$asy.sad_gen s
+                 WHERE       s.sad_flw = '1'
+                         AND s.sad_asmt_serial IS NOT NULL
+                         AND s.lst_ope = 'U'
+                         AND s.sad_num = '0'
+                         AND fis_numver = '0'
+                         AND fis_lst_ope = 'U'
+                         AND fis_estado <> 'REGULARIZACION'
+                         AND s.key_year = spy1.key_year(+)
+                         AND s.key_cuo = spy1.key_cuo(+)
+                         AND s.key_dec = spy1.key_dec(+)
+                         AND s.key_nber = spy1.key_nber(+)
+                         AND spy1.spy_sta(+) = '10'
+                         AND spy1.spy_act(+) = '24'
+                         AND s.key_year = a.fis_key_year
+                         AND s.key_cuo = a.fis_key_cuo
+                         AND s.key_dec = a.fis_key_dec
+                         AND s.key_nber = a.fis_key_nber
+                         AND a.fis_gerencia LIKE prm_gerencia
+                         AND TRUNC (a.fis_fec_asignacion) BETWEEN TO_DATE (
+                                                                      prm_fec_ini,
+                                                                      'dd/mm/yyyy')
+                                                              AND  TO_DATE (
+                                                                       prm_fec_fin,
+                                                                       'dd/mm/yyyy');
+        ELSE
+            OPEN ct FOR
+                SELECT   DISTINCT
+                         TO_NUMBER (a.fis_gestion) gestion,
+                         DECODE (a.fis_gerencia,
+                                 'GRLP', 'LA PAZ',
+                                 'GRCB', 'COCHABAMBA',
+                                 'GRSC', 'SANTA CRUZ',
+                                 'GROR', 'ORURO',
+                                 'GRTJ', 'TARIJA',
+                                 'GRPT', 'POTOSI',
+                                 'GNF-DIA')
+                             gerencia,
+                         a.fis_nro_control nro_correlativo,
+                         TO_CHAR (a.fis_fec_registro,'dd/mm/yyyy') fecha_orden_control,
+                         s.key_cuo aduana,
+                         nomadu (s.key_cuo) "DESC ADUANA",
+                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
+                            s.sad_reg_year
+                         || '/'
+                         || s.key_cuo
+                         || '/'
+                         || s.sad_reg_serial
+                         || '-'
+                         || s.sad_reg_nber
+                             "TRAMITE",
+                          NVL(DECODE (spy1.sad_clr,
+                                 0,
+                                 'VERDE',
+                                 1,
+                                 'AZUL',
+                                 2,
+                                 'AMARILLO',
+                                 3,
+                                 'ROJO','-'),'-')
+                             "CANAL",
+                         numid (s.sad_consignee,
+                                s.key_year,
+                                s.key_cuo,
+                                s.key_dec,
+                                s.key_nber,
+                                s.sad_num)
+                             "DOC IMP",
+                         NVL (nomimp (s.sad_consignee,
+                                      s.key_year,
+                                      s.key_cuo,
+                                      s.key_dec,
+                                      s.key_nber,
+                                      s.sad_num), '-')
+                             "IMPORTADOR",
+                         NVL (s.key_dec, ' ') "DOC_DECL",
+                         NVL (nomage (s.key_dec,
+                                      s.key_year,
+                                      s.key_cuo,
+                                      s.key_dec,
+                                      s.key_nber,
+                                      s.sad_num), '-')
+                             "DECLARANTE",
+                         NVL (dirprov (s.sad_exporter,
+                                       s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       s.sad_num), '-')
+                             "DIREC PROVEEDOR",
+                         NVL (nomprov (s.sad_exporter,
+                                       s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       s.sad_num), '-')
+                             "PROVEEDOR",
+                         NVL (a.fis_fob_inicial, 0) fob_funcion,
+                         /*fob_cabecera (s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       0)
+                             fob_funcion,*/
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'GA'
+                                       AND st.saditm_tax_mop = '1'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ga,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'IVA'
+                                       AND st.sad_num = '0'),
+                             0)
+                             iva,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'ICE'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ice,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'IHD'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ihd,
+                         ----SUMATORIAS DE TRIBUTOS
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND st.key_dec IS NULL
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'GA'
+                                       AND st.saditm_tax_mop = '1'
+                                       AND st.sad_num = '0'),
+                             0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND st.key_dec IS NULL
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'IVA'
+                                         AND st.sad_num = '0'),
+                               0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND st.key_dec IS NULL
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'ICE'
+                                         AND st.sad_num = '0'),
+                               0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND st.key_dec IS NULL
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'IHD'
+                                         AND st.sad_num = '0'),
+                               0)
+                             total_tributos,
+                         --ASIGNACION CONTROL DIFERIDO
+                         NVL (a.fis_fiscalizador, '-') fiscalizador,
+                         NVL (a.fis_usuario_asignacion, '-')
+                             usuario_asignacion,
+                         --NOTIFICACION
+                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_NOTIFICACION",
+                         NVL (a.fis_obs_notificacion, '-')
+                             "OBSERVACION_NOTIFICACION",
+                         NVL (a.fis_tipo_notificacion, '-')
+                             "TIPO_NOTIFICACION",
+                         NVL (a.fis_usuario_notificacion, '-')
+                             "USUARIO_NOTIFICACION",
+                         --RESULTADO CONTROL DIFERIDO
+                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
+                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_LIQUIDACION",
+                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
+                             "TRIBUTO_OMITIDO_GA",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
+                             "TRIBUTO_OMITIDO_IVA",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
+                             "TRIBUTO_OMITIDO_ICE",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
+                             "TRIBUTO_OMITIDO_IEHD",
+                         NVL (
+                               TO_NUMBER (a.fis_tributo_omitido_ga)
+                             + TO_NUMBER (a.fis_tributo_omitido_iva)
+                             + TO_NUMBER (a.fis_tributo_omitido_ice)
+                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
+                             0)
+                             "TOTAL_TRIBUTO_OMITIDO",
+                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
+                             sancion_omision,
+                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
+                             multa_contravencion,
+                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
+                             "MULTA_CONTRA_CONTRA",
+                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
+                             multa_contrabando_delito,
+                         NVL (a.fis_usuario_resultados, '-')
+                             usuarios_registrados,
+                         --ACEPTACION DE PAGO
+                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
+                              '-')
+                             fecha_aceptacion_pago,
+                         NVL (a.fis_usuario_aceptacion, '-')
+                             usuario_aceptacion,
+                         --CONCLUSION DEL CONTROL DIFERIDO
+                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
+                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
+                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
+                             "FECHA_INFORME",
+                         NVL (a.fis_reg_nro_doc_con, '-')
+                             "NRO_DOC_CONCLUSION",
+                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_DOC_CONCLUSION",
+                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_FINALIZACION",
+                         NVL (a.fis_usuario_finalizacion, '-')
+                             "USUARIO_REGISTRO_FINALIZACION",
+                         --OBSERVACIONES ENCONTRADAS
+                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
+                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
+                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
+                         DECODE (a.fis_osinobs, 'on', 'X', '-')
+                             "SIN_OBSERVACION",
+                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
+                         DECODE (a.fis_comision, 'on', 'X', '-')
+                             "OMISION_PAGO",
+                         DECODE (a.fis_ccondel, 'on', 'X', '-')
+                             "CONTRABANDO_DELITO",
+                         DECODE (a.fis_cconcon, 'on', 'X', '-')
+                             "CONTRABANDO_CONTRAVENCIONAL",
+                         DECODE (a.fis_cconadu, 'on', 'X', '-')
+                             "CONTRAVENCION_ADUANERA",
+                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
+                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
+                              '-')
+                             fecha_notificacion_conclusion,
+                         NVL (a.fis_reg_tip_not_doc, '-')
+                             tipo_notificacion_conclusion,
+                         NVL (a.fis_usuario_not_doc_con, '-')
+                             usuario_registro_notificacion,
+                         --ENVIO A LA UNIDAD LEGAL
+                         NVL (
+                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
+                             '-')
+                             "FECHA_ENVIO",
+                         NVL (a.fis_reg_nro_env_legal, '-')
+                             "NRO_DOC_REMISION",
+                         NVL (a.fis_usuario_env_legal, '-')
+                             "USUARIO_UNIDAD_LEGAL",
+                         --ESTADO
+                         fis_estado "ESTADO",
+                         --valores
+                         NVL (
+                             sicodif_ga (a.fis_gestion,
+                                         a.fis_gerencia,
+                                         a.fis_nro_control),
+                             0)
+                             ga_recuperado,
+                         NVL (
+                             sicodif_iva (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             iva_recuperado,
+                         NVL (
+                             sicodif_ice (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             ice_recuperado,
+                         NVL (
+                             sicodif_ihd (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             ihd_recuperado,
+                         NVL (
+                             sicodif_ga (a.fis_gestion,
+                                         a.fis_gerencia,
+                                         a.fis_nro_control),
+                             0)
+                         + NVL (
+                               sicodif_iva (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                         + NVL (
+                               sicodif_ice (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                         + NVL (
+                               sicodif_ihd (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                             total_tributo,
+                         NVL (
+                             sicodif_sancionop (a.fis_gestion,
+                                                a.fis_gerencia,
+                                                a.fis_nro_control),
+                             0)
+                             sancionop_recuperado,
+                         --MULTA CONTRAVENCIONAL ADUANERA
+                         NVL (
+                             sicodif_contra_adu (a.fis_gestion,
+                                                 a.fis_gerencia,
+                                                 a.fis_nro_control),
+                             0)
+                             sancion_contra_adu,
+                         --MULTA CONTRABANDO CONTRAVENCIONAL
+                         --FALTA
+                         NVL (
+                             sicodif_contra_contravencional (
+                                 a.fis_gestion,
+                                 a.fis_gerencia,
+                                 a.fis_nro_control),
+                             0)
+                             sancion_contra_contravencional,
+                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
+
+                         NVL (a.fis_usuario_resultados, '-'),
+                         fis_origen_control control_origen,
+                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
+                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
+                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
+                              '-')
+                             fecha_control,
+                         --OTROS DATOS
+                         CASE
+                             WHEN sicodif_25 (s.key_year,
+                                              s.key_cuo,
+                                              s.key_dec,
+                                              s.key_nber) IS NOT NULL
+                             THEN
+                                 sicodif_25 (s.key_year,
+                                             s.key_cuo,
+                                             s.key_dec,
+                                             s.key_nber)
+                             ELSE
+                                 '-'
+                         END
+                             AS pase_salida,
+                         mercancia (s.key_year,
+                                    s.key_cuo,
+                                    s.key_dec,
+                                    s.key_nber)
+                             mercancias,
+                         NVL (crt_cabecera (s.key_year,
+                                            s.key_cuo,
+                                            s.key_dec,
+                                            s.key_nber), 'ALEATORIO')
+                             criterio_nivel_cab,
+                         --MULTA CONTRABANDO DELITO
+                         --FALTA
+                         NVL (
+                             sicodif_contra_delito (a.fis_gestion,
+                                                    a.fis_gerencia,
+                                                    a.fis_nro_control),
+                             0)
+                             sancion_contra_delito
+                  FROM   sicodif.cd_fiscalizacion a,
+                         ops$asy.sad_spy spy1,
+                         ops$asy.sad_gen s
+                 WHERE       s.sad_flw = '1'
+                         AND s.sad_asmt_serial IS NOT NULL
+                         AND s.lst_ope = 'U'
+                         AND s.sad_num = '0'
+                         AND fis_numver = '0'
+                         AND fis_lst_ope = 'U'
+                         AND fis_estado <> 'REGULARIZACION'
+                         AND s.key_year = spy1.key_year(+)
+                         AND s.key_cuo = spy1.key_cuo(+)
+                         AND s.key_dec IS NULL
+                         AND spy1.key_dec(+) IS NULL
+                         AND s.key_nber = spy1.key_nber(+)
+                         AND spy1.spy_sta(+) = '10'
+                         AND spy1.spy_act(+) = '24'
+                         AND s.key_year = a.fis_key_year
+                         AND s.key_cuo = a.fis_key_cuo
+                         AND a.fis_key_dec IS NULL
+                         AND s.key_nber = a.fis_key_nber
+                         AND numid (s.sad_consignee,
+                                    s.key_year,
+                                    s.key_cuo,
+                                    s.key_dec,
+                                    s.key_nber,
+                                    s.sad_num) = prm_nit
+                         AND a.fis_gerencia LIKE prm_gerencia
+                         AND TRUNC (a.fis_fec_asignacion) BETWEEN TO_DATE (
+                                                                      prm_fec_ini,
+                                                                      'dd/mm/yyyy')
+                                                              AND  TO_DATE (
+                                                                       prm_fec_fin,
+                                                                       'dd/mm/yyyy')
+                UNION
+                SELECT   DISTINCT
+                         TO_NUMBER (a.fis_gestion) gestion,
+                         DECODE (a.fis_gerencia,
+                                 'GRLP', 'LA PAZ',
+                                 'GRCB', 'COCHABAMBA',
+                                 'GRSC', 'SANTA CRUZ',
+                                 'GROR', 'ORURO',
+                                 'GRTJ', 'TARIJA',
+                                 'GRPT', 'POTOSI',
+                                 'GNF-DIA')
+                             gerencia,
+                         a.fis_nro_control nro_correlativo,
+                         TO_CHAR (a.fis_fec_registro,'dd/mm/yyyy') fecha_orden_control,
+                         s.key_cuo aduana,
+                         nomadu (s.key_cuo) "DESC ADUANA",
+                            --A.sad_reg_year||'/'||A.fis_key_cuo||'-'||A.sad_reg_serial||'-'||A.sad_reg_nber "TRA_FIS",
+                            s.sad_reg_year
+                         || '/'
+                         || s.key_cuo
+                         || '/'
+                         || s.sad_reg_serial
+                         || '-'
+                         || s.sad_reg_nber
+                             "TRAMITE",
+                          NVL(DECODE (spy1.sad_clr,
+                                 0,
+                                 'VERDE',
+                                 1,
+                                 'AZUL',
+                                 2,
+                                 'AMARILLO',
+                                 3,
+                                 'ROJO','-'),'-')
+                             "CANAL",
+                         numid (s.sad_consignee,
+                                s.key_year,
+                                s.key_cuo,
+                                s.key_dec,
+                                s.key_nber,
+                                s.sad_num)
+                             "DOC IMP",
+                         NVL (nomimp (s.sad_consignee,
+                                      s.key_year,
+                                      s.key_cuo,
+                                      s.key_dec,
+                                      s.key_nber,
+                                      s.sad_num), '-')
+                             "IMPORTADOR",
+                         NVL (s.key_dec, ' ') "DOC_DECL",
+                         NVL (nomage (s.key_dec,
+                                      s.key_year,
+                                      s.key_cuo,
+                                      s.key_dec,
+                                      s.key_nber,
+                                      s.sad_num), '-')
+                             "DECLARANTE",
+                         NVL (dirprov (s.sad_exporter,
+                                       s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       s.sad_num), '-')
+                             "DIREC PROVEEDOR",
+                         NVL (nomprov (s.sad_exporter,
+                                       s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       s.sad_num), '-')
+                             "PROVEEDOR",
+                         NVL (a.fis_fob_inicial, 0) fob_funcion,
+                         /*fob_cabecera (s.key_year,
+                                       s.key_cuo,
+                                       s.key_dec,
+                                       s.key_nber,
+                                       0)
+                             fob_funcion,*/
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'GA'
+                                       AND st.saditm_tax_mop = '1'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ga,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'IVA'
+                                       AND st.sad_num = '0'),
+                             0)
+                             iva,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'ICE'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ice,
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'IHD'
+                                       AND st.sad_num = '0'),
+                             0)
+                             ihd,
+                         ----SUMATORIAS DE TRIBUTOS
+
+
+                         NVL (
+                             (SELECT   SUM (saditm_tax_amount)
+                                FROM   ops$asy.sad_tax st
+                               WHERE       s.key_year = st.key_year
+                                       AND s.key_cuo = st.key_cuo
+                                       AND s.key_dec = st.key_dec
+                                       AND s.key_nber = st.key_nber
+                                       AND st.saditm_tax_code = 'GA'
+                                       AND st.saditm_tax_mop = '1'
+                                       AND st.sad_num = '0'),
+                             0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND s.key_dec = st.key_dec
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'IVA'
+                                         AND st.sad_num = '0'),
+                               0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND s.key_dec = st.key_dec
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'ICE'
+                                         AND st.sad_num = '0'),
+                               0)
+                         + NVL (
+                               (SELECT   SUM (saditm_tax_amount)
+                                  FROM   ops$asy.sad_tax st
+                                 WHERE       s.key_year = st.key_year
+                                         AND s.key_cuo = st.key_cuo
+                                         AND s.key_dec = st.key_dec
+                                         AND s.key_nber = st.key_nber
+                                         AND st.saditm_tax_code = 'IHD'
+                                         AND st.sad_num = '0'),
+                               0)
+                             total_tributos,
+                         --ASIGNACION CONTROL DIFERIDO
+                         NVL (a.fis_fiscalizador, '-') fiscalizador,
+                         NVL (a.fis_usuario_asignacion, '-')
+                             usuario_asignacion,
+                         --NOTIFICACION
+                         NVL (TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_NOTIFICACION",
+                         NVL (a.fis_obs_notificacion, '-')
+                             "OBSERVACION_NOTIFICACION",
+                         NVL (a.fis_tipo_notificacion, '-')
+                             "TIPO_NOTIFICACION",
+                         NVL (a.fis_usuario_notificacion, '-')
+                             "USUARIO_NOTIFICACION",
+                         --RESULTADO CONTROL DIFERIDO
+                         NVL (a.fis_fob_final, 0) fob_fiscalizador,
+                         NVL (TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_LIQUIDACION",
+                         NVL (a.fis_valor_ufv, '-') "VALOR_UFV",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_ga), 0)
+                             "TRIBUTO_OMITIDO_GA",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_iva), 0)
+                             "TRIBUTO_OMITIDO_IVA",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_ice), 0)
+                             "TRIBUTO_OMITIDO_ICE",
+                         NVL (TO_NUMBER (a.fis_tributo_omitido_iehd), 0)
+                             "TRIBUTO_OMITIDO_IEHD",
+                         NVL (
+                               TO_NUMBER (a.fis_tributo_omitido_ga)
+                             + TO_NUMBER (a.fis_tributo_omitido_iva)
+                             + TO_NUMBER (a.fis_tributo_omitido_ice)
+                             + TO_NUMBER (a.fis_tributo_omitido_iehd),
+                             0)
+                             "TOTAL_TRIBUTO_OMITIDO",
+                         NVL (TO_NUMBER (a.fis_sancion_omision), 0)
+                             sancion_omision,
+                         NVL (TO_NUMBER (a.fis_multa_contrava), 0)
+                             multa_contravencion,
+                         NVL (TO_NUMBER (a.fis_multa_contrabc), 0)
+                             "MULTA_CONTRA_CONTRA",
+                         NVL (TO_NUMBER (a.fis_multa_contrabd), 0)
+                             multa_contrabando_delito,
+                         NVL (a.fis_usuario_resultados, '-')
+                             usuarios_registrados,
+                         --ACEPTACION DE PAGO
+                         NVL (TO_CHAR (a.fis_fec_aceptacion, 'dd/mm/yyyy'),
+                              '-')
+                             fecha_aceptacion_pago,
+                         NVL (a.fis_usuario_aceptacion, '-')
+                             usuario_aceptacion,
+                         --CONCLUSION DEL CONTROL DIFERIDO
+                         NVL (a.fis_tipo_doc_con, '-') tipo_doc_conclusion,
+                         NVL (a.fis_reg_nro_inf, '-') numero_informe,
+                         NVL (TO_CHAR (a.fis_reg_fec_inf, 'dd/mm/yyyy'), '-')
+                             "FECHA_INFORME",
+                         NVL (a.fis_reg_nro_doc_con, '-')
+                             "NRO_DOC_CONCLUSION",
+                         NVL (TO_CHAR (a.fis_reg_fec_doc_con, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_DOC_CONCLUSION",
+                         NVL (TO_CHAR (a.fis_fec_finalizacion, 'dd/mm/yyyy'),
+                              '-')
+                             "FECHA_FINALIZACION",
+                         NVL (a.fis_usuario_finalizacion, '-')
+                             "USUARIO_REGISTRO_FINALIZACION",
+                         --OBSERVACIONES ENCONTRADAS
+                         DECODE (a.fis_ovalor, 'on', 'X', '-') "VALOR",
+                         DECODE (a.fis_opartida, 'on', 'X', '-') "PARTIDA",
+                         DECODE (a.fis_oorigen, 'on', 'X', '-') "ORIGEN",
+                         DECODE (a.fis_osinobs, 'on', 'X', '-')
+                             "SIN_OBSERVACION",
+                         --OBSERVACIONES EN CONTRAVENCIONES ENCONTRADAS
+                         DECODE (a.fis_comision, 'on', 'X', '-')
+                             "OMISION_PAGO",
+                         DECODE (a.fis_ccondel, 'on', 'X', '-')
+                             "CONTRABANDO_DELITO",
+                         DECODE (a.fis_cconcon, 'on', 'X', '-')
+                             "CONTRABANDO_CONTRAVENCIONAL",
+                         DECODE (a.fis_cconadu, 'on', 'X', '-')
+                             "CONTRAVENCION_ADUANERA",
+                         --NOTIFICACION DEL DOC DE CONCLUSION AL OPERADOR
+                         NVL (TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy'),
+                              '-')
+                             fecha_notificacion_conclusion,
+                         NVL (a.fis_reg_tip_not_doc, '-')
+                             tipo_notificacion_conclusion,
+                         NVL (a.fis_usuario_not_doc_con, '-')
+                             usuario_registro_notificacion,
+                         --ENVIO A LA UNIDAD LEGAL
+                         NVL (
+                             TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy'),
+                             '-')
+                             "FECHA_ENVIO",
+                         NVL (a.fis_reg_nro_env_legal, '-')
+                             "NRO_DOC_REMISION",
+                         NVL (a.fis_usuario_env_legal, '-')
+                             "USUARIO_UNIDAD_LEGAL",
+                         --ESTADO
+                         fis_estado "ESTADO",
+                         --valores
+                         NVL (
+                             sicodif_ga (a.fis_gestion,
+                                         a.fis_gerencia,
+                                         a.fis_nro_control),
+                             0)
+                             ga_recuperado,
+                         NVL (
+                             sicodif_iva (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             iva_recuperado,
+                         NVL (
+                             sicodif_ice (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             ice_recuperado,
+                         NVL (
+                             sicodif_ihd (a.fis_gestion,
+                                          a.fis_gerencia,
+                                          a.fis_nro_control),
+                             0)
+                             ihd_recuperado,
+                         NVL (
+                             sicodif_ga (a.fis_gestion,
+                                         a.fis_gerencia,
+                                         a.fis_nro_control),
+                             0)
+                         + NVL (
+                               sicodif_iva (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                         + NVL (
+                               sicodif_ice (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                         + NVL (
+                               sicodif_ihd (a.fis_gestion,
+                                            a.fis_gerencia,
+                                            a.fis_nro_control),
+                               0)
+                             total_tributo,
+                         NVL (
+                             sicodif_sancionop (a.fis_gestion,
+                                                a.fis_gerencia,
+                                                a.fis_nro_control),
+                             0)
+                             sancionop_recuperado,
+                         --MULTA CONTRAVENCIONAL ADUANERA
+                         NVL (
+                             sicodif_contra_adu (a.fis_gestion,
+                                                 a.fis_gerencia,
+                                                 a.fis_nro_control),
+                             0)
+                             sancion_contra_adu,
+                         --MULTA CONTRABANDO CONTRAVENCIONAL
+                         --FALTA
+                         NVL (
+                             sicodif_contra_contravencional (
+                                 a.fis_gestion,
+                                 a.fis_gerencia,
+                                 a.fis_nro_control),
+                             0)
+                             sancion_contra_contravencional,
+                         --sicodif_USUARIO(a.fis_gestion,a.fis_gerencia,a.fis_nro_control) USUARIOS,
+
+                         NVL (a.fis_usuario_resultados, '-'),
+                         fis_origen_control control_origen,
+                         --TO_DATE (a.fis_fec_registro, 'DD/MM/yyyy') FECHA_CONTROL
+                         --to_date(a.fis_fec_registro,'dd/mm/yyyy')
+                         NVL (TO_CHAR (a.fis_fec_registro, 'DD/MM/YYYY'),
+                              '-')
+                             fecha_control,
+                         --OTROS DATOS
+                         CASE
+                             WHEN sicodif_25 (s.key_year,
+                                              s.key_cuo,
+                                              s.key_dec,
+                                              s.key_nber) IS NOT NULL
+                             THEN
+                                 sicodif_25 (s.key_year,
+                                             s.key_cuo,
+                                             s.key_dec,
+                                             s.key_nber)
+                             ELSE
+                                 '-'
+                         END
+                             AS pase_salida,
+                         mercancia (s.key_year,
+                                    s.key_cuo,
+                                    s.key_dec,
+                                    s.key_nber)
+                             mercancias,
+                         NVL (crt_cabecera (s.key_year,
+                                            s.key_cuo,
+                                            s.key_dec,
+                                            s.key_nber), 'ALEATORIO')
+                             criterio_nivel_cab,
+                         --MULTA CONTRABANDO DELITO
+                         --FALTA
+                         NVL (
+                             sicodif_contra_delito (a.fis_gestion,
+                                                    a.fis_gerencia,
+                                                    a.fis_nro_control),
+                             0)
+                             sancion_contra_delito
+                  FROM   sicodif.cd_fiscalizacion a,
+                         ops$asy.sad_spy spy1,
+                         ops$asy.sad_gen s
+                 WHERE       s.sad_flw = '1'
+                         AND s.sad_asmt_serial IS NOT NULL
+                         AND s.lst_ope = 'U'
+                         AND s.sad_num = '0'
+                         AND fis_numver = '0'
+                         AND fis_lst_ope = 'U'
+                         AND fis_estado <> 'REGULARIZACION'
+                         AND s.key_year = spy1.key_year(+)
+                         AND s.key_cuo = spy1.key_cuo(+)
+                         AND s.key_dec = spy1.key_dec(+)
+                         AND s.key_nber = spy1.key_nber(+)
+                         AND spy1.spy_sta(+) = '10'
+                         AND spy1.spy_act(+) = '24'
+                         AND s.key_year = a.fis_key_year
+                         AND s.key_cuo = a.fis_key_cuo
+                         AND s.key_dec = a.fis_key_dec
+                         AND s.key_nber = a.fis_key_nber
+                         AND numid (s.sad_consignee,
+                                    s.key_year,
+                                    s.key_cuo,
+                                    s.key_dec,
+                                    s.key_nber,
+                                    s.sad_num) = prm_nit
+                         AND a.fis_gerencia LIKE prm_gerencia
+                         AND TRUNC (a.fis_fec_asignacion) BETWEEN TO_DATE (
+                                                                      prm_fec_ini,
+                                                                      'dd/mm/yyyy')
+                                                              AND  TO_DATE (
+                                                                       prm_fec_fin,
+                                                                       'dd/mm/yyyy');
+        END IF;
+
+
+        RETURN res;
+    END;
+
+
+    FUNCTION reporteblock (prm_aduana    IN     VARCHAR2,
+                           prm_fec_ini   IN     VARCHAR2,
+                           prm_fec_fin   IN     VARCHAR2,
+                           ct               OUT cursortype)
+        RETURN VARCHAR2
+    IS
+        res    VARCHAR2 (50) := '';
+        cont   NUMBER (10);
+    BEGIN
+        OPEN ct FOR
+            SELECT   DECODE (a.fis_gerencia,
+                             'GRLP', 'GERENCIA REGIONAL LA PAZ',
+                             'GRCB', 'GERENCIA REGIONAL COCHABAMBA',
+                             'GRSC', 'GERENCIA REGIONAL SANTA CRUZ',
+                             'GROR', 'GERENCIA REGIONAL ORURO',
+                             'GRTJ', 'GERENCIA REGIONAL TARIJA',
+                             'GRPT', 'GERENCIA REGIONAL POTOSI',
+                             'GERENCIA NACIONAL DE FISCALIZACION ')
+                         gerencia,
+                        a.sad_reg_year
+                     || '/'
+                     || a.fis_key_cuo
+                     || '/C-'
+                     || a.sad_reg_nber,
+                     a.fis_gestion || 'CD' || a.fis_gerencia
+                     || DECODE (LENGTH (a.fis_nro_control),
+                                1, '000' || a.fis_nro_control,
+                                2, '00' || a.fis_nro_control,
+                                3, '0' || a.fis_nro_control,
+                                a.fis_nro_control),
+                     TO_CHAR (g.upd_dat, 'dd/mm/yyyy') || ' ' || g.upd_hor,
+                     DECODE (d.upd_dat, NULL, 'BLOQUEADO', 'LIBERADO'),
+                     TO_CHAR (d.upd_dat, 'dd/mm/yyyy') || ' ' || d.upd_hor,
+                     DECODE (d.upd_dat,
+                             NULL, ' ',
+                             NVL (m.blq_observacion, ' '))
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy g,
+                     ops$asy.sad_spy d,
+                     mira.mir_bloqueo_dui m
+             WHERE       a.fis_key_year = g.key_year
+                     AND a.fis_key_cuo = g.key_cuo
+                     AND a.fis_key_nber = g.key_nber
+                     AND a.fis_key_dec IS NULL
+                     AND g.key_dec IS NULL
+                     AND g.spy_sta = '27'
+                     AND g.spy_act = '72'
+                     AND a.fis_key_year = d.key_year(+)
+                     AND a.fis_key_cuo = d.key_cuo(+)
+                     AND a.fis_key_nber = d.key_nber(+)
+                     AND d.key_dec(+) IS NULL
+                     AND d.spy_sta(+) = '27'
+                     AND d.spy_act(+) = '73'
+                     AND a.fis_lst_ope = 'U'
+                     AND a.fis_numver = 0
+                     AND m.blq_dui_reg_gestion(+) = a.sad_reg_year
+                     AND m.blq_dui_key_cuo(+) = a.fis_key_cuo
+                     AND m.blq_dui_reg_numero(+) = a.sad_reg_nber
+                     AND m.blq_lst_ope(+) = 'U'
+                     AND m.blq_num(+) = 0
+                     AND g.upd_dat BETWEEN TO_DATE (prm_fec_ini,
+                                                    'dd/mm/yyyy')
+                                       AND  TO_DATE (prm_fec_fin,
+                                                     'dd/mm/yyyy')
+                     AND a.fis_key_cuo LIKE prm_aduana
+            UNION
+            SELECT   DECODE (a.fis_gerencia,
+                             'GRLP', 'GERENCIA REGIONAL LA PAZ',
+                             'GRCB', 'GERENCIA REGIONAL COCHABAMBA',
+                             'GRSC', 'GERENCIA REGIONAL SANTA CRUZ',
+                             'GROR', 'GERENCIA REGIONAL ORURO',
+                             'GRTJ', 'GERENCIA REGIONAL TARIJA',
+                             'GRPT', 'GERENCIA REGIONAL POTOSI',
+                             'GERENCIA NACIONAL DE FISCALIZACION ')
+                         gerencia,
+                        a.sad_reg_year
+                     || '/'
+                     || a.fis_key_cuo
+                     || '/C-'
+                     || a.sad_reg_nber,
+                     a.fis_gestion || 'CD' || a.fis_gerencia
+                     || DECODE (LENGTH (a.fis_nro_control),
+                                1, '000' || a.fis_nro_control,
+                                2, '00' || a.fis_nro_control,
+                                3, '0' || a.fis_nro_control,
+                                a.fis_nro_control),
+                     TO_CHAR (g.upd_dat, 'dd/mm/yyyy') || ' ' || g.upd_hor,
+                     DECODE (d.upd_dat, NULL, 'BLOQUEADO', 'LIBERADO'),
+                     TO_CHAR (d.upd_dat, 'dd/mm/yyyy') || ' ' || d.upd_hor,
+                     DECODE (d.upd_dat,
+                             NULL, ' ',
+                             NVL (m.blq_observacion, ' '))
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy g,
+                     ops$asy.sad_spy d,
+                     mira.mir_bloqueo_dui m
+             WHERE       a.fis_key_year = g.key_year
+                     AND a.fis_key_cuo = g.key_cuo
+                     AND a.fis_key_nber = g.key_nber
+                     AND NOT a.fis_key_dec IS NULL
+                     AND a.fis_key_dec = g.key_dec
+                     AND g.spy_sta = '27'
+                     AND g.spy_act = '72'
+                     AND a.fis_key_year = d.key_year(+)
+                     AND a.fis_key_cuo = d.key_cuo(+)
+                     AND a.fis_key_nber = d.key_nber(+)
+                     AND a.fis_key_dec = d.key_dec(+)
+                     AND d.spy_sta(+) = '27'
+                     AND d.spy_act(+) = '73'
+                     AND a.fis_lst_ope = 'U'
+                     AND a.fis_numver = 0
+                     AND m.blq_dui_reg_gestion(+) = a.sad_reg_year
+                     AND m.blq_dui_key_cuo(+) = a.fis_key_cuo
+                     AND m.blq_dui_reg_numero(+) = a.sad_reg_nber
+                     AND m.blq_lst_ope(+) = 'U'
+                     AND m.blq_num(+) = 0
+                     AND g.upd_dat BETWEEN TO_DATE (prm_fec_ini,
+                                                    'dd/mm/yyyy')
+                                       AND  TO_DATE (prm_fec_fin,
+                                                     'dd/mm/yyyy')
+                     AND a.fis_key_cuo LIKE prm_aduana;
+
+        RETURN 'CORRECTO';
+    END;
+
+
+    FUNCTION reporteblockdui (prm_gestion   IN     VARCHAR2,
+                              prm_aduana    IN     VARCHAR2,
+                              prm_numero    IN     VARCHAR2,
+                              ct               OUT cursortype)
+        RETURN VARCHAR2
+    IS
+        res    VARCHAR2 (50) := '';
+        cont   NUMBER (10);
+    BEGIN
+        OPEN ct FOR
+            SELECT   DECODE (a.fis_gerencia,
+                             'GRLP', 'GERENCIA REGIONAL LA PAZ',
+                             'GRCB', 'GERENCIA REGIONAL COCHABAMBA',
+                             'GRSC', 'GERENCIA REGIONAL SANTA CRUZ',
+                             'GROR', 'GERENCIA REGIONAL ORURO',
+                             'GRTJ', 'GERENCIA REGIONAL TARIJA',
+                             'GRPT', 'GERENCIA REGIONAL POTOSI',
+                             'GERENCIA NACIONAL DE FISCALIZACION ')
+                         gerencia,
+                        a.sad_reg_year
+                     || '/'
+                     || a.fis_key_cuo
+                     || '/C-'
+                     || a.sad_reg_nber,
+                     a.fis_gestion || 'CD' || a.fis_gerencia
+                     || DECODE (LENGTH (a.fis_nro_control),
+                                1, '000' || a.fis_nro_control,
+                                2, '00' || a.fis_nro_control,
+                                3, '0' || a.fis_nro_control,
+                                a.fis_nro_control),
+                     TO_CHAR (g.upd_dat, 'dd/mm/yyyy') || ' ' || g.upd_hor,
+                     DECODE (d.upd_dat, NULL, 'BLOQUEADO', 'LIBERADO'),
+                     TO_CHAR (d.upd_dat, 'dd/mm/yyyy') || ' ' || d.upd_hor,
+                     DECODE (d.upd_dat,
+                             NULL, ' ',
+                             NVL (m.blq_observacion, ' '))
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy g,
+                     ops$asy.sad_spy d,
+                     mira.mir_bloqueo_dui m
+             WHERE       a.fis_key_year = g.key_year
+                     AND a.fis_key_cuo = g.key_cuo
+                     AND a.fis_key_nber = g.key_nber
+                     AND a.fis_key_dec IS NULL
+                     AND g.key_dec IS NULL
+                     AND g.spy_sta = '27'
+                     AND g.spy_act = '72'
+                     AND a.fis_key_year = d.key_year(+)
+                     AND a.fis_key_cuo = d.key_cuo(+)
+                     AND a.fis_key_nber = d.key_nber(+)
+                     AND d.key_dec(+) IS NULL
+                     AND d.spy_sta(+) = '27'
+                     AND d.spy_act(+) = '73'
+                     AND a.fis_lst_ope = 'U'
+                     AND a.fis_numver = 0
+                     AND m.blq_dui_reg_gestion(+) = a.sad_reg_year
+                     AND m.blq_dui_key_cuo(+) = a.fis_key_cuo
+                     AND m.blq_dui_reg_numero(+) = a.sad_reg_nber
+                     AND m.blq_lst_ope(+) = 'U'
+                     AND m.blq_num(+) = 0
+                     AND a.sad_reg_year = prm_gestion
+                     AND a.fis_key_cuo = prm_aduana
+                     AND a.sad_reg_nber = prm_numero
+            UNION
+            SELECT   DECODE (a.fis_gerencia,
+                             'GRLP', 'GERENCIA REGIONAL LA PAZ',
+                             'GRCB', 'GERENCIA REGIONAL COCHABAMBA',
+                             'GRSC', 'GERENCIA REGIONAL SANTA CRUZ',
+                             'GROR', 'GERENCIA REGIONAL ORURO',
+                             'GRTJ', 'GERENCIA REGIONAL TARIJA',
+                             'GRPT', 'GERENCIA REGIONAL POTOSI',
+                             'GERENCIA NACIONAL DE FISCALIZACION ')
+                         gerencia,
+                        a.sad_reg_year
+                     || '/'
+                     || a.fis_key_cuo
+                     || '/C-'
+                     || a.sad_reg_nber,
+                     a.fis_gestion || 'CD' || a.fis_gerencia
+                     || DECODE (LENGTH (a.fis_nro_control),
+                                1, '000' || a.fis_nro_control,
+                                2, '00' || a.fis_nro_control,
+                                3, '0' || a.fis_nro_control,
+                                a.fis_nro_control),
+                     TO_CHAR (g.upd_dat, 'dd/mm/yyyy') || ' ' || g.upd_hor,
+                     DECODE (d.upd_dat, NULL, 'BLOQUEADO', 'LIBERADO'),
+                     TO_CHAR (d.upd_dat, 'dd/mm/yyyy') || ' ' || d.upd_hor,
+                     DECODE (d.upd_dat,
+                             NULL, ' ',
+                             NVL (m.blq_observacion, ' '))
+              FROM   sicodif.cd_fiscalizacion a,
+                     ops$asy.sad_spy g,
+                     ops$asy.sad_spy d,
+                     mira.mir_bloqueo_dui m
+             WHERE       a.fis_key_year = g.key_year
+                     AND a.fis_key_cuo = g.key_cuo
+                     AND a.fis_key_nber = g.key_nber
+                     AND NOT a.fis_key_dec IS NULL
+                     AND a.fis_key_dec = g.key_dec
+                     AND g.spy_sta = '27'
+                     AND g.spy_act = '72'
+                     AND a.fis_key_year = d.key_year(+)
+                     AND a.fis_key_cuo = d.key_cuo(+)
+                     AND a.fis_key_nber = d.key_nber(+)
+                     AND a.fis_key_dec = d.key_dec(+)
+                     AND d.spy_sta(+) = '27'
+                     AND d.spy_act(+) = '73'
+                     AND a.fis_lst_ope = 'U'
+                     AND a.fis_numver = 0
+                     AND m.blq_dui_reg_gestion(+) = a.sad_reg_year
+                     AND m.blq_dui_key_cuo(+) = a.fis_key_cuo
+                     AND m.blq_dui_reg_numero(+) = a.sad_reg_nber
+                     AND m.blq_lst_ope(+) = 'U'
+                     AND m.blq_num(+) = 0
+                     AND a.sad_reg_year = prm_gestion
+                     AND a.fis_key_cuo = prm_aduana
+                     AND a.sad_reg_nber = prm_numero;
+
+        RETURN 'CORRECTO';
+    END;
+
+    FUNCTION reporteconcierre (prm_fec_ini   IN     VARCHAR2,
+                               prm_fec_fin   IN     VARCHAR2,
+                               ct               OUT cursortype)
+        RETURN VARCHAR2
+    IS
+        res    VARCHAR2 (50) := '';
+        cont   NUMBER (10);
+    BEGIN
+        OPEN ct FOR
+              SELECT   DISTINCT
+                       u.cuo_nam,
+                          a.sad_reg_year
+                       || '/'
+                       || a.fis_key_cuo
+                       || '/C-'
+                       || a.sad_reg_nber,
+                       a.fis_gestion || 'CD' || a.fis_gerencia
+                       || DECODE (LENGTH (a.fis_nro_control),
+                                  1, '000' || a.fis_nro_control,
+                                  2, '00' || a.fis_nro_control,
+                                  3, '0' || a.fis_nro_control,
+                                  a.fis_nro_control),
+                       TO_CHAR (a.fis_fecha_cierre, 'dd/mm/yyyy hh24:mi'),
+                          a.fis_usuario
+                       || ' : '
+                       || fc.usuapepat
+                       || ' '
+                       || fc.usuapemat
+                       || ' '
+                       || fc.usunombre,
+                          a.fis_fiscalizador
+                       || ' : '
+                       || fa.usuapepat
+                       || ' '
+                       || fa.usuapemat
+                       || ' '
+                       || fa.usunombre,
+                       a.fis_obs_cierre
+                FROM   sicodif.cd_fiscalizacion a,
+                       sicodif.cd_fiscalizacion c,
+                       ops$asy.uncuotab u,
+                       usuario.usuario fc,
+                       usuario.usuario fa
+               WHERE       a.fis_gestion = c.fis_gestion
+                       AND a.fis_gerencia = c.fis_gerencia
+                       AND a.fis_nro_control = c.fis_nro_control
+                       AND a.fis_numver = 0
+                       AND c.fis_estado = 'CIERRE'
+                       AND u.cuo_cod = a.fis_key_cuo
+                       AND u.lst_ope = 'U'
+                       AND fc.usucodusu = a.fis_usuario
+                       AND fc.usu_num = 0
+                       AND fa.usucodusu = a.fis_fiscalizador
+                       AND fa.usu_num = 0
+                       AND a.fis_fecha_cierre BETWEEN TO_DATE (prm_fec_ini,
+                                                               'dd/mm/yyyy')
+                                                  AND  TO_DATE (prm_fec_fin,
+                                                                'dd/mm/yyyy')
+            ORDER BY   1, 2;
+
+        RETURN 'CORRECTO';
+    END;
+
+    FUNCTION reportependientes (prm_gerencia   IN     VARCHAR2,
+                                prm_fec_ini    IN     VARCHAR2,
+                                prm_fec_fin    IN     VARCHAR2,
+                                ct                OUT cursortype)
+        RETURN VARCHAR2
+    IS
+        res    VARCHAR2 (50) := '';
+        cont   NUMBER (10);
+    BEGIN
+        OPEN ct FOR
+              SELECT   tbl.fiscalizador,
+                       SUM (asignado) asig,
+                       SUM (pendiente) pen
+                FROM   (SELECT      a.fis_fiscalizador
+                                 || ' : '
+                                 || fa.usuapepat
+                                 || ' '
+                                 || fa.usuapemat
+                                 || ' '
+                                 || fa.usunombre
+                                     fiscalizador,
+                                 DECODE (a.fis_fec_asignacion, NULL, 0, 1)
+                                     asignado,
+                                 DECODE (a.fis_reg_fec_doc_con, NULL, 1, 0)
+                                     pendiente
+                          FROM   sicodif.cd_fiscalizacion a, usuario.usuario fa
+                         WHERE       a.fis_lst_ope = 'U'
+                                 AND a.fis_numver = 0
+                                 AND fa.usucodusu = a.fis_fiscalizador
+                                 AND fa.usu_num = 0
+                                 AND a.fis_gerencia LIKE prm_gerencia
+                                 AND a.fis_fec_asignacion BETWEEN TO_DATE (
+                                                                      prm_fec_ini,
+                                                                      'dd/mm/yyyy')
+                                                              AND  TO_DATE (
+                                                                       prm_fec_fin,
+                                                                       'dd/mm/yyyy'))
+                       tbl
+            GROUP BY   tbl.fiscalizador
+            ORDER BY   1;
+
+        RETURN 'CORRECTO';
     END;
 END;
 /
