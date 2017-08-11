@@ -4,6 +4,11 @@ PACKAGE pkg_enmienda
 IS
     TYPE cursortype IS REF CURSOR;
 
+    FUNCTION devuelve_gercon (prm_key_year     IN VARCHAR2,
+                              prm_key_cuo      IN VARCHAR2,
+                              prm_reg_serial   IN VARCHAR2)
+        RETURN VARCHAR2;
+
     FUNCTION devuelve_autcon (prm_key_year     IN VARCHAR2,
                               prm_key_cuo      IN VARCHAR2,
                               prm_reg_serial   IN VARCHAR2)
@@ -27,6 +32,64 @@ CREATE OR REPLACE
 PACKAGE BODY pkg_enmienda
 /* Formatted on 6-mar.-2017 2:55:51 (QP5 v5.126) */
 IS
+
+    FUNCTION devuelve_gercon (prm_key_year     IN VARCHAR2,
+                              prm_key_cuo      IN VARCHAR2,
+                              prm_reg_serial   IN VARCHAR2)
+        RETURN VARCHAR2
+    IS
+        res          VARCHAR2 (50) := '';
+        v_key_year   VARCHAR2 (4);
+        v_key_cuo    VARCHAR2 (4);
+        v_key_dec    VARCHAR2 (17);
+        v_key_nber   VARCHAR2 (13);
+        cont         NUMBER (10);
+    BEGIN
+        SELECT   a.key_year,
+                 a.key_cuo,
+                 a.key_dec,
+                 a.key_nber
+          INTO   v_key_year,
+                 v_key_cuo,
+                 v_key_dec,
+                 v_key_nber
+          FROM   ops$asy.sad_gen a
+         WHERE       a.sad_reg_year = prm_key_year
+                 AND a.key_cuo = prm_key_cuo
+                 AND a.sad_reg_serial = 'C'
+                 AND a.sad_reg_nber = prm_reg_serial
+                 AND a.lst_ope = 'U'
+                 AND a.sad_num = 0;
+
+        SELECT   COUNT (1)
+          INTO   cont
+          FROM   cd_fiscalizacion a
+         WHERE       a.fis_key_year = v_key_year
+                 AND a.fis_key_cuo = v_key_cuo
+                 AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
+                 AND a.fis_key_nber = v_key_nber
+                 AND a.fis_lst_ope = 'U'
+                 AND a.fis_numver = 0;
+
+        IF cont = 0
+        THEN
+            res := '';
+        ELSE
+            SELECT   fis_gerencia
+              INTO   res
+              FROM   cd_fiscalizacion a
+             WHERE       a.fis_key_year = v_key_year
+                     AND a.fis_key_cuo = v_key_cuo
+                     AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
+                     AND a.fis_key_nber = v_key_nber
+                     AND a.fis_lst_ope = 'U'
+                     AND a.fis_numver = 0;
+        END IF;
+
+
+        RETURN res;
+    END devuelve_gercon;
+
     FUNCTION devuelve_autcon (prm_key_year     IN VARCHAR2,
                               prm_key_cuo      IN VARCHAR2,
                               prm_reg_serial   IN VARCHAR2)
@@ -67,7 +130,7 @@ IS
 
         IF cont = 0
         THEN
-            res := '2';
+            res := '';
         ELSE
             SELECT   DECODE (fis_justificativo_feccon, NULL, 0, 1)
               INTO   res

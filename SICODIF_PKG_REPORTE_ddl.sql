@@ -2741,7 +2741,7 @@ IS
                                   s.key_nber,
                                   s.sad_num), '-')
                          "IMPORTADOR",
-                     NVL (s.key_dec, ' ') "DOC_DECL",
+                     NVL (s.key_dec, '&nbsp;') "DOC_DECL",
                      NVL (nomage (s.key_dec,
                                   s.key_year,
                                   s.key_cuo,
@@ -3129,7 +3129,7 @@ IS
                                   s.key_nber,
                                   s.sad_num), '-')
                          "IMPORTADOR",
-                     NVL (s.key_dec, ' ') "DOC_DECL",
+                     NVL (s.key_dec, '&nbsp;') "DOC_DECL",
                      NVL (nomage (s.key_dec,
                                   s.key_year,
                                   s.key_cuo,
@@ -3534,7 +3534,7 @@ IS
                                       s.key_nber,
                                       s.sad_num), '-')
                              "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
+                         NVL (s.key_dec, '&nbsp;') "DOC_DECL",
                          NVL (nomage (s.key_dec,
                                       s.key_year,
                                       s.key_cuo,
@@ -3938,7 +3938,7 @@ IS
                                       s.key_nber,
                                       s.sad_num), '-')
                              "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
+                         NVL (s.key_dec, '&nbsp;') "DOC_DECL",
                          NVL (nomage (s.key_dec,
                                       s.key_year,
                                       s.key_cuo,
@@ -4344,7 +4344,7 @@ IS
                                       s.key_nber,
                                       s.sad_num), '-')
                              "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
+                         NVL (s.key_dec, '&nbsp;') "DOC_DECL",
                          NVL (nomage (s.key_dec,
                                       s.key_year,
                                       s.key_cuo,
@@ -4754,7 +4754,7 @@ IS
                                       s.key_nber,
                                       s.sad_num), '-')
                              "IMPORTADOR",
-                         NVL (s.key_dec, ' ') "DOC_DECL",
+                         NVL (s.key_dec, '&nbsp;') "DOC_DECL",
                          NVL (nomage (s.key_dec,
                                       s.key_year,
                                       s.key_cuo,

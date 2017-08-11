@@ -169,7 +169,8 @@ IS
                                    prm_fec_not      IN VARCHAR2,
                                    prm_obs          IN VARCHAR2,
                                    prm_tipo_not     IN VARCHAR2,
-                                   prm_usuario      IN VARCHAR2)
+                                   prm_usuario      IN VARCHAR2,
+                                   prm_observaciones     IN VARCHAR2)
         RETURN VARCHAR2;
 
 
@@ -201,7 +202,8 @@ IS
                                  prm_multa_contrabc         IN VARCHAR2,
                                  prm_multa_contrabd         IN VARCHAR2,
                                  prm_usuario                IN VARCHAR2,
-                                 prm_fobfinal               IN NUMBER)
+                                 prm_fobfinal               IN NUMBER,
+                                     prm_sancion  IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION resultados_control_enm (prm_key_year               IN VARCHAR2,
@@ -216,7 +218,9 @@ IS
                                      prm_multa_contrabc         IN VARCHAR2,
                                      prm_multa_contrabd         IN VARCHAR2,
                                      prm_usuario                IN VARCHAR2,
-                                     prm_fobfinal               IN NUMBER)
+                                     prm_fobfinal               IN NUMBER,
+                                     prm_observaciones     IN VARCHAR2,
+                                     prm_sancion  IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION registra_recibo (prm_gestion          IN VARCHAR2,
@@ -261,7 +265,8 @@ IS
                                    prm_reg_serial        IN VARCHAR2,
                                    prm_reg_fec_not_doc   IN VARCHAR2,
                                    prm_reg_tip_not_doc   IN VARCHAR2,
-                                   prm_usuario           IN VARCHAR2)
+                                   prm_usuario           IN VARCHAR2,
+                                   prm_observaciones     IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION registra_envio_legal (prm_key_year            IN VARCHAR2,
@@ -277,7 +282,8 @@ IS
                                        prm_reg_serial          IN VARCHAR2,
                                        prm_reg_fec_env_legal   IN VARCHAR2,
                                        prm_reg_nro_env_legal   IN VARCHAR2,
-                                       prm_usuario             IN VARCHAR2)
+                                       prm_usuario             IN VARCHAR2,
+                                       prm_observaciones     IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION rechaza_control (prm_key_year     IN VARCHAR2,
@@ -318,16 +324,24 @@ IS
         w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
         w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE)
         RETURN VARCHAR2;
+         FUNCTION restardiashabiles (prm_gerencia   IN VARCHAR2,
+                                prm_dias       IN NUMBER)
+        RETURN VARCHAR2;
+    FUNCTION aumentardiashabiles (prm_gerencia   IN VARCHAR2,
+                                  prm_fecha      IN VARCHAR2,
+                                  prm_dias       IN NUMBER)
+        RETURN VARCHAR2;
 END;
 /
 
 CREATE OR REPLACE 
 PACKAGE BODY pkg_sicodif
-/* Formatted on 6-mar.-2017 2:17:42 (QP5 v5.126) */
+/* Formatted on 19-jul.-2017 10:41:53 (QP5 v5.126) */
 IS
+    /*dirmira CONSTANT VARCHAR2 (100)
+            := 'http://anbsw07.aduana.gob.bo:7601/mira' ;*/
     dirmira CONSTANT VARCHAR2 (100)
-            := 'http://anbsw07.aduana.gob.bo:7601/mira' ;
-
+            := 'http://deslogic01.aduana.gob.bo:7011/mira' ;
 
     FUNCTION devuelve_control (prm_key_year   IN     VARCHAR2,
                                prm_key_cuo    IN     VARCHAR2,
@@ -778,7 +792,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             nvl(cmp.ope_razonsocial,' '))
+                             NVL (cmp.ope_razonsocial, ' '))
                          AS importador,
                      pkg_sicodif.devuelve_fecha_levante (f.fis_key_year,
                                                          f.fis_key_cuo,
@@ -805,8 +819,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE                /*  a.sad_flw = 1
-                                AND */
+             WHERE   /*  a.sad_flw = 1
+                   AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -843,7 +857,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             nvl(cmp.ope_razonsocial,' '))
+                             NVL (cmp.ope_razonsocial, ' '))
                          AS importador,
                      pkg_sicodif.devuelve_fecha_levante (f.fis_key_year,
                                                          f.fis_key_cuo,
@@ -870,9 +884,9 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE                /*  a.sad_flw = 1
-                                AND */
-                         a.lst_ope = 'U'
+             WHERE   /*  a.sad_flw = 1
+                   AND */
+                  a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
                      AND a.key_cuo = f.fis_key_cuo
@@ -922,7 +936,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             nvl(cmp.ope_razonsocial,' '))
+                             NVL (cmp.ope_razonsocial, ' '))
                          AS importador,
                      pkg_sicodif.devuelve_fecha_levante (f.fis_key_year,
                                                          f.fis_key_cuo,
@@ -947,8 +961,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE                    /*a.sad_flw = 1
-                                  AND */
+             WHERE   /*a.sad_flw = 1
+                 AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -982,7 +996,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             nvl(cmp.ope_razonsocial,' '))
+                             NVL (cmp.ope_razonsocial, ' '))
                          AS importador,
                      pkg_sicodif.devuelve_fecha_levante (f.fis_key_year,
                                                          f.fis_key_cuo,
@@ -1007,8 +1021,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE                    /*a.sad_flw = 1
-                                  AND */
+             WHERE   /*a.sad_flw = 1
+                 AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -1078,7 +1092,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             nvl(cmp.ope_razonsocial,' '))
+                             NVL (cmp.ope_razonsocial, ' '))
                          AS importador,
                      --'direccion',
                      /*NVL (
@@ -1175,7 +1189,7 @@ IS
                          AS nit_importador,
                      DECODE (a.sad_consignee,
                              NULL, cns.sad_con_nam,
-                             nvl(cmp.ope_razonsocial,' '))
+                             NVL (cmp.ope_razonsocial, ' '))
                          AS importador,
                      --'direccion',
                      /*NVL (
@@ -2898,8 +2912,8 @@ IS
                            ops$asy.unctytab cty,
                            ops$asy.sad_spy spy,
                            ops$asy.sad_spy spy3
-                   WHERE      /*gen.sad_flw = '1'
-                          AND */
+                   WHERE /*gen.sad_flw = '1'
+                     AND */
                         gen    .sad_asmt_serial IS NOT NULL
                            AND gen.lst_ope = 'U'
                            AND gen.sad_num = '0'
@@ -2930,7 +2944,7 @@ IS
                            AND itm.saditm_cty_origcod = cty.cty_cod
                            AND cty.lst_ope = 'U'
                            AND gen.sad_consignee = cmp.ope_numerodoc(+)
-                     AND cmp.ope_num(+) = 0
+                           AND cmp.ope_num(+) = 0
                            AND gen.key_year = v_key_year
                            AND gen.key_cuo = v_key_cuo
                            AND gen.key_dec = v_key_dec
@@ -2947,8 +2961,8 @@ IS
                            ops$asy.unctytab cty,
                            ops$asy.sad_spy spy,
                            ops$asy.sad_spy spy3
-                   WHERE      /*gen.sad_flw = '1'
-                          AND */
+                   WHERE /*gen.sad_flw = '1'
+                     AND */
                         gen    .sad_asmt_serial IS NOT NULL
                            AND gen.lst_ope = 'U'
                            AND gen.sad_num = '0'
@@ -2983,7 +2997,7 @@ IS
                            AND itm.saditm_cty_origcod = cty.cty_cod
                            AND cty.lst_ope = 'U'
                            AND gen.sad_consignee = cmp.ope_numerodoc(+)
-                     AND cmp.ope_num(+) = 0
+                           AND cmp.ope_num(+) = 0
                            AND gen.key_year = v_key_year
                            AND gen.key_cuo = v_key_cuo
                            --AND gen.key_dec = v_key_dec
@@ -3005,7 +3019,7 @@ IS
                          || ':'
                          || DECODE (gen.sad_consignee,
                                     NULL, cns.sad_con_nam,
-                                    nvl(cmp.ope_razonsocial,' '))
+                                    NVL (cmp.ope_razonsocial, ' '))
                              importador,
                          gen.key_dec || ':' || de.dec_nam declarante,
                          TO_CHAR (gen.sad_reg_date, 'dd/mm/yyyy')
@@ -3149,8 +3163,8 @@ IS
                          ops$asy.sad_spy spy3,
                          ops$asy.sad_spy spy4,
                          cd_fiscalizacion fis
-                 WHERE          /*gen.sad_flw = '1'
-                            AND */
+                 WHERE /*gen.sad_flw = '1'
+                   AND */
                       gen    .sad_asmt_serial IS NOT NULL
                          AND gen.lst_ope = 'U'
                          AND gen.sad_num = '0'
@@ -3212,7 +3226,7 @@ IS
                          || ':'
                          || DECODE (gen.sad_consignee,
                                     NULL, cns.sad_con_nam,
-                                    nvl(cmp.ope_razonsocial,' '))
+                                    NVL (cmp.ope_razonsocial, ' '))
                              importador,
                          gen.key_dec || ':' || deo.sad_dec_nam declarante,
                          TO_CHAR (gen.sad_reg_date, 'dd/mm/yyyy')
@@ -3339,8 +3353,8 @@ IS
                          ops$asy.sad_spy spy3,
                          ops$asy.sad_spy spy4,
                          cd_fiscalizacion fis
-                 WHERE          /*gen.sad_flw = '1'
-                            AND */
+                 WHERE /*gen.sad_flw = '1'
+                   AND */
                       gen    .sad_asmt_serial IS NOT NULL
                          AND gen.lst_ope = 'U'
                          AND gen.sad_num = '0'
@@ -3645,7 +3659,9 @@ IS
                                 NULL, '',
                                 'SIN OBSERVACIONES,')
                      || '<br>Contravenciones encontradas: '
-                     || DECODE (a.fis_comision, NULL, '', 'OMISION DE PAGO, ')
+                     || DECODE (a.fis_comision,
+                                NULL, '',
+                                'OMISION DE PAGO, ')
                      || DECODE (a.fis_ccondel,
                                 NULL, '',
                                 'CONTRABANDO DELITO, ')
@@ -3683,7 +3699,9 @@ IS
                      || DECODE (prm_osinobs, NULL, '', 'SIN OBSERVACIONES,')
                      || '<br>Contravenciones encontradas: '
                      || DECODE (prm_comision, NULL, '', 'OMISION DE PAGO, ')
-                     || DECODE (prm_ccondel, NULL, '', 'CONTRABANDO DELITO, ')
+                     || DECODE (prm_ccondel,
+                                NULL, '',
+                                'CONTRABANDO DELITO, ')
                      || DECODE (prm_cconcon,
                                 NULL, '',
                                 'CONTRABANDO CONTRAVENCIONAL, ')
@@ -4134,21 +4152,28 @@ IS
     END;
 
 
-    FUNCTION notifica_control_enm (prm_key_year     IN VARCHAR2,
-                                   prm_key_cuo      IN VARCHAR2,
-                                   prm_reg_serial   IN VARCHAR2,
-                                   prm_fec_not      IN VARCHAR2,
-                                   prm_obs          IN VARCHAR2,
-                                   prm_tipo_not     IN VARCHAR2,
-                                   prm_usuario      IN VARCHAR2)
+    FUNCTION notifica_control_enm (prm_key_year        IN VARCHAR2,
+                                   prm_key_cuo         IN VARCHAR2,
+                                   prm_reg_serial      IN VARCHAR2,
+                                   prm_fec_not         IN VARCHAR2,
+                                   prm_obs             IN VARCHAR2,
+                                   prm_tipo_not        IN VARCHAR2,
+                                   prm_usuario         IN VARCHAR2,
+                                   prm_observaciones   IN VARCHAR2)
         RETURN VARCHAR2
     IS
-        res          VARCHAR2 (300) := 0;
-        v_key_year   VARCHAR2 (4);
-        v_key_cuo    VARCHAR2 (4);
-        v_key_dec    VARCHAR2 (17);
-        v_key_nber   VARCHAR2 (13);
-        nro          NUMBER (8) := 0;
+        res             VARCHAR2 (300) := 0;
+        v_key_year      VARCHAR2 (4);
+        v_key_cuo       VARCHAR2 (4);
+        v_key_dec       VARCHAR2 (17);
+        v_key_nber      VARCHAR2 (13);
+        nro             NUMBER (8) := 0;
+
+        v_gestion       VARCHAR2 (4);
+        v_gerencia      VARCHAR2 (4);
+        v_nro_control   NUMBER (18);
+        v_original      VARCHAR2 (1000);
+        v_enmendado     VARCHAR2 (1000);
     BEGIN
         SELECT   a.key_year,
                  a.key_cuo,
@@ -4168,6 +4193,36 @@ IS
 
         IF v_key_year IS NOT NULL
         THEN
+            SELECT   fis_gestion,
+                     fis_gerencia,
+                     fis_nro_control,
+                        'Fecha: '
+                     || TO_CHAR (a.fis_fec_notificacion, 'dd/mm/yyyy')
+                     || '<br>Observaci&oacute;n: '
+                     || a.fis_obs_notificacion
+                     || '<br>Tipo de Notificaci&oacute;n: '
+                     || a.fis_tipo_notificacion
+              INTO   v_gestion,
+                     v_gerencia,
+                     v_nro_control,
+                     v_original
+              FROM   cd_fiscalizacion a
+             WHERE       a.fis_key_year = v_key_year
+                     AND a.fis_key_cuo = v_key_cuo
+                     AND a.fis_key_nber = v_key_nber
+                     AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
+                     AND a.fis_numver = 0;
+
+            SELECT      'Fecha: '
+                     || prm_fec_not
+                     || '<br>Observaci&oacute;n: '
+                     || prm_obs
+                     || '<br>Tipo de Notificaci&oacute;n: '
+                     || prm_tipo_not
+              INTO   v_enmendado
+              FROM   DUAL;
+
+
             SELECT   MAX (a.fis_numver)
               INTO   nro
               FROM   cd_fiscalizacion a
@@ -4267,6 +4322,35 @@ IS
                          AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
                          AND a.fis_numver = nro + 1;
 
+
+            SELECT   COUNT (1) + 1
+              INTO   nro
+              FROM   cd_enmiendas a;
+
+            INSERT INTO cd_enmiendas a (a.enm_codigo,
+                                        a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control,
+                                        a.enm_tipo_enmienda,
+                                        a.enm_info_original,
+                                        a.enm_info_enmendado,
+                                        a.enm_observacion,
+                                        a.enm_lst_ope,
+                                        a.enm_usuario,
+                                        a.enm_numver,
+                                        a.enm_fecha)
+              VALUES   (nro,
+                        v_gestion,
+                        v_gerencia,
+                        v_nro_control,
+                        'NOTIFICACION',
+                        v_original,
+                        v_enmendado,
+                        UPPER (prm_observaciones),
+                        'U',
+                        UPPER (prm_usuario),
+                        0,
+                        SYSDATE);
 
             res := 'CORRECTO';
             COMMIT;
@@ -4969,7 +5053,8 @@ IS
                                  prm_multa_contrabc         IN VARCHAR2,
                                  prm_multa_contrabd         IN VARCHAR2,
                                  prm_usuario                IN VARCHAR2,
-                                 prm_fobfinal               IN NUMBER)
+                                 prm_fobfinal               IN NUMBER,
+                                 prm_sancion                IN VARCHAR2)
         RETURN VARCHAR2
     IS
         res                          VARCHAR2 (300) := 0;
@@ -5030,14 +5115,8 @@ IS
             v_tributo_omitido_ufv_iehd :=
                 ROUND (prm_tributo_omitido_iehd / v_valor_ufv, 0);
 
-            v_sancion_omision :=
-                  prm_tributo_omitido_ga
-                + prm_tributo_omitido_iva
-                + prm_tributo_omitido_ice
-                + prm_tributo_omitido_iehd;
 
-            v_sancion_omision_ufv :=
-                ROUND (v_sancion_omision / v_valor_ufv, 0);
+            v_sancion_omision_ufv := ROUND (prm_sancion / v_valor_ufv, 0);
             v_multa_contrava := ROUND (prm_multa_contrava * v_valor_ufv, 0);
             v_multa_contrava_ufv := prm_multa_contrava;
             v_multa_contrabc_ufv :=
@@ -5086,7 +5165,7 @@ IS
                          prm_tributo_omitido_iva,
                          prm_tributo_omitido_ice,
                          prm_tributo_omitido_iehd,
-                         v_sancion_omision,
+                         prm_sancion,
                          v_multa_contrava,
                          prm_multa_contrabc,
                          prm_multa_contrabd,
@@ -5173,7 +5252,9 @@ IS
                                      prm_multa_contrabc         IN VARCHAR2,
                                      prm_multa_contrabd         IN VARCHAR2,
                                      prm_usuario                IN VARCHAR2,
-                                     prm_fobfinal               IN NUMBER)
+                                     prm_fobfinal               IN NUMBER,
+                                     prm_observaciones          IN VARCHAR2,
+                                     prm_sancion                IN VARCHAR2)
         RETURN VARCHAR2
     IS
         res                          VARCHAR2 (300) := 0;
@@ -5195,6 +5276,12 @@ IS
         v_multa_contrabc_ufv         VARCHAR2 (30);
         v_multa_contrabd_ufv         VARCHAR2 (30);
         v_valor_ufv                  VARCHAR2 (30);
+        v_original                   VARCHAR2 (1000);
+        v_enmendado                  VARCHAR2 (1000);
+
+        v_gestion                    VARCHAR2 (4);
+        v_gerencia                   VARCHAR2 (4);
+        v_nro_control                NUMBER (18);
     BEGIN
         SELECT   a.key_year,
                  a.key_cuo,
@@ -5214,6 +5301,62 @@ IS
 
         IF v_key_year IS NOT NULL
         THEN
+            SELECT   fis_gestion,
+                     fis_gerencia,
+                     fis_nro_control,
+                     'FOB Total (USD) Final: ' || a.fis_fob_final
+                     || '<br>Fecha de Liquidaci&oacute;n del documento de conclusi&oacute;n (VC-RD): '
+                     || TO_CHAR (a.fis_fec_liquidacion, 'dd/mm/yyyy')
+                     || '<br>Tributo Omitido GA: '
+                     || a.fis_tributo_omitido_ga
+                     || '<br>Tributo Omitido IVA: '
+                     || a.fis_tributo_omitido_iva
+                     || '<br>Tributo Omitido ICE: '
+                     || a.fis_tributo_omitido_ice
+                     || '<br>Tributo Omitido IEHD: '
+                     || a.fis_tributo_omitido_iehd
+                     || '<br>Sanci&oacute;n por Omisi&oacute;n de Pago: '
+                     || a.fis_sancion_omision
+                     || '<br>Multa por Contravenci&oacute;n Aduanera: '
+                     || a.fis_multa_contrava
+                     || '<br>Multa por Contrabando Contravencional: '
+                     || a.fis_multa_contrabc
+                     || '<br>Multa por Contrabando Delito: '
+                     || a.fis_multa_contrabd
+              INTO   v_gestion,
+                     v_gerencia,
+                     v_nro_control,
+                     v_original
+              FROM   cd_fiscalizacion a
+             WHERE       a.fis_key_year = v_key_year
+                     AND a.fis_key_cuo = v_key_cuo
+                     AND a.fis_key_nber = v_key_nber
+                     AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
+                     AND a.fis_numver = 0;
+
+            SELECT   'FOB Total (USD) Final: ' || prm_fobfinal
+                     || '<br>Fecha de Liquidaci&oacute;n del documento de conclusi&oacute;n (VC-RD): '
+                     || prm_fec_liquidacion
+                     || '<br>Tributo Omitido GA: '
+                     || prm_tributo_omitido_ga
+                     || '<br>Tributo Omitido IVA: '
+                     || prm_tributo_omitido_iva
+                     || '<br>Tributo Omitido ICE: '
+                     || prm_tributo_omitido_ice
+                     || '<br>Tributo Omitido IEHD: '
+                     || prm_tributo_omitido_iehd
+                     || '<br>Sanci&oacute;n por Omisi&oacute;n de Pago: '
+                     || prm_sancion
+                     || '<br>Multa por Contravenci&oacute;n Aduanera: '
+                     || prm_multa_contrava
+                     || '<br>Multa por Contrabando Contravencional: '
+                     || prm_multa_contrabc
+                     || '<br>Multa por Contrabando Delito: '
+                     || prm_multa_contrabd
+              INTO   v_enmendado
+              FROM   DUAL;
+
+
             SELECT   a.rat_exc
               INTO   v_valor_ufv
               FROM   ops$asy.unrattab a
@@ -5234,14 +5377,7 @@ IS
             v_tributo_omitido_ufv_iehd :=
                 ROUND (prm_tributo_omitido_iehd / v_valor_ufv, 0);
 
-            v_sancion_omision :=
-                  prm_tributo_omitido_ga
-                + prm_tributo_omitido_iva
-                + prm_tributo_omitido_ice
-                + prm_tributo_omitido_iehd;
-
-            v_sancion_omision_ufv :=
-                ROUND (v_sancion_omision / v_valor_ufv, 0);
+            v_sancion_omision_ufv := ROUND (prm_sancion / v_valor_ufv, 0);
             v_multa_contrava := ROUND (prm_multa_contrava * v_valor_ufv, 0);
             v_multa_contrava_ufv := prm_multa_contrava;
             v_multa_contrabc_ufv :=
@@ -5290,7 +5426,7 @@ IS
                          prm_tributo_omitido_iva,
                          prm_tributo_omitido_ice,
                          prm_tributo_omitido_iehd,
-                         v_sancion_omision,
+                         prm_sancion,
                          v_multa_contrava,
                          prm_multa_contrabc,
                          prm_multa_contrabd,
@@ -5348,6 +5484,34 @@ IS
                          AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
                          AND a.fis_numver = nro + 1;
 
+            SELECT   COUNT (1) + 1
+              INTO   nro
+              FROM   cd_enmiendas a;
+
+            INSERT INTO cd_enmiendas a (a.enm_codigo,
+                                        a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control,
+                                        a.enm_tipo_enmienda,
+                                        a.enm_info_original,
+                                        a.enm_info_enmendado,
+                                        a.enm_observacion,
+                                        a.enm_lst_ope,
+                                        a.enm_usuario,
+                                        a.enm_numver,
+                                        a.enm_fecha)
+              VALUES   (nro,
+                        v_gestion,
+                        v_gerencia,
+                        v_nro_control,
+                        'RESULTADOS',
+                        v_original,
+                        v_enmendado,
+                        UPPER (prm_observaciones),
+                        'U',
+                        UPPER (prm_usuario),
+                        0,
+                        SYSDATE);
 
             res := 'CORRECTO';
             COMMIT;
@@ -5396,8 +5560,9 @@ IS
           FROM   ops$asy.bo_sad_payment a
          WHERE       TO_CHAR (a.sad_rcpt_date, 'yyyy') = prm_rec_gestion
                  AND a.key_cuo = prm_rec_aduana
-                 AND a.sad_rcpt_nber = prm_rec_nro_recibo
-                 AND a.sad_num = 0;
+                 AND a.sad_rcpt_nber = prm_rec_nro_recibo;
+
+        --AND a.sad_num = 0;
 
         IF cont > 0
         THEN
@@ -5407,7 +5572,7 @@ IS
              WHERE       TO_CHAR (a.sad_rcpt_date, 'yyyy') = prm_rec_gestion
                      AND a.key_cuo = prm_rec_aduana
                      AND a.sad_rcpt_nber = prm_rec_nro_recibo
-                     AND a.sad_num = 0
+                     --AND a.sad_num = 0
                      AND ROWNUM = 1;
 
             SELECT   a.fis_fec_notificacion
@@ -6092,15 +6257,22 @@ IS
                                    prm_reg_serial        IN VARCHAR2,
                                    prm_reg_fec_not_doc   IN VARCHAR2,
                                    prm_reg_tip_not_doc   IN VARCHAR2,
-                                   prm_usuario           IN VARCHAR2)
+                                   prm_usuario           IN VARCHAR2,
+                                   prm_observaciones     IN VARCHAR2)
         RETURN VARCHAR2
     IS
-        res          VARCHAR2 (300) := 0;
-        v_key_year   VARCHAR2 (4);
-        v_key_cuo    VARCHAR2 (4);
-        v_key_dec    VARCHAR2 (17);
-        v_key_nber   VARCHAR2 (13);
-        nro          NUMBER (8) := 0;
+        res             VARCHAR2 (300) := 0;
+        v_key_year      VARCHAR2 (4);
+        v_key_cuo       VARCHAR2 (4);
+        v_key_dec       VARCHAR2 (17);
+        v_key_nber      VARCHAR2 (13);
+        nro             NUMBER (8) := 0;
+        v_original      VARCHAR2 (1000);
+        v_enmendado     VARCHAR2 (1000);
+
+        v_gestion       VARCHAR2 (4);
+        v_gerencia      VARCHAR2 (4);
+        v_nro_control   NUMBER (18);
     BEGIN
         SELECT   a.key_year,
                  a.key_cuo,
@@ -6120,6 +6292,31 @@ IS
 
         IF v_key_year IS NOT NULL
         THEN
+            SELECT   fis_gestion,
+                     fis_gerencia,
+                     fis_nro_control,
+                        'Fecha de Notificaci&oacute;n: '
+                     || TO_CHAR(a.fis_reg_fec_not_doc,'dd/mm/yyyy')
+                     || '<br>Tipo de Notificaci&oacute;n: '
+                     || a.fis_reg_tip_not_doc
+              INTO   v_gestion,
+                     v_gerencia,
+                     v_nro_control,
+                     v_original
+              FROM   cd_fiscalizacion a
+             WHERE       a.fis_key_year = v_key_year
+                     AND a.fis_key_cuo = v_key_cuo
+                     AND a.fis_key_nber = v_key_nber
+                     AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
+                     AND a.fis_numver = 0;
+
+            SELECT      'Fecha de Notificaci&oacute;n: '
+                     || prm_reg_fec_not_doc
+                     || '<br>Tipo de Notificaci&oacute;n: '
+                     || prm_reg_tip_not_doc
+              INTO   v_enmendado
+              FROM   DUAL;
+
             SELECT   MAX (a.fis_numver)
               INTO   nro
               FROM   cd_fiscalizacion a
@@ -6219,6 +6416,35 @@ IS
                          AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
                          AND a.fis_numver = nro + 1;
 
+
+            SELECT   COUNT (1) + 1
+              INTO   nro
+              FROM   cd_enmiendas a;
+
+            INSERT INTO cd_enmiendas a (a.enm_codigo,
+                                        a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control,
+                                        a.enm_tipo_enmienda,
+                                        a.enm_info_original,
+                                        a.enm_info_enmendado,
+                                        a.enm_observacion,
+                                        a.enm_lst_ope,
+                                        a.enm_usuario,
+                                        a.enm_numver,
+                                        a.enm_fecha)
+              VALUES   (nro,
+                        v_gestion,
+                        v_gerencia,
+                        v_nro_control,
+                        'NOTIFICACION CONCLUSION',
+                        v_original,
+                        v_enmendado,
+                        UPPER (prm_observaciones),
+                        'U',
+                        UPPER (prm_usuario),
+                        0,
+                        SYSDATE);
 
             res := 'CORRECTO';
             COMMIT;
@@ -6392,15 +6618,22 @@ IS
                                        prm_reg_serial          IN VARCHAR2,
                                        prm_reg_fec_env_legal   IN VARCHAR2,
                                        prm_reg_nro_env_legal   IN VARCHAR2,
-                                       prm_usuario             IN VARCHAR2)
+                                       prm_usuario             IN VARCHAR2,
+                                       prm_observaciones       IN VARCHAR2)
         RETURN VARCHAR2
     IS
-        res          VARCHAR2 (300) := 0;
-        v_key_year   VARCHAR2 (4);
-        v_key_cuo    VARCHAR2 (4);
-        v_key_dec    VARCHAR2 (17);
-        v_key_nber   VARCHAR2 (13);
-        nro          NUMBER (8) := 0;
+        res             VARCHAR2 (300) := 0;
+        v_key_year      VARCHAR2 (4);
+        v_key_cuo       VARCHAR2 (4);
+        v_key_dec       VARCHAR2 (17);
+        v_key_nber      VARCHAR2 (13);
+        nro             NUMBER (8) := 0;
+        v_original      VARCHAR2 (1000);
+        v_enmendado     VARCHAR2 (1000);
+
+        v_gestion       VARCHAR2 (4);
+        v_gerencia      VARCHAR2 (4);
+        v_nro_control   NUMBER (18);
     BEGIN
         SELECT   a.key_year,
                  a.key_cuo,
@@ -6420,6 +6653,31 @@ IS
 
         IF v_key_year IS NOT NULL
         THEN
+            SELECT   fis_gestion,
+                     fis_gerencia,
+                     fis_nro_control,
+                        'Fecha de Remisi&oacute;n:'
+                     || to_char(a.fis_reg_fec_env_legal,'dd/mm/yyyy')
+                     || '<br>N&uacute;mero de Documento de remisi&oacute;n: '
+                     || a.fis_reg_nro_env_legal
+              INTO   v_gestion,
+                     v_gerencia,
+                     v_nro_control,
+                     v_original
+              FROM   cd_fiscalizacion a
+             WHERE       a.fis_key_year = v_key_year
+                     AND a.fis_key_cuo = v_key_cuo
+                     AND a.fis_key_nber = v_key_nber
+                     AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
+                     AND a.fis_numver = 0;
+
+            SELECT      'Fecha de Remisi&oacute;n:'
+                     || prm_reg_fec_env_legal
+                     || '<br>N&uacute;mero de Documento de remisi&oacute;n: '
+                     || prm_reg_nro_env_legal
+              INTO   v_enmendado
+              FROM   DUAL;
+
             SELECT   MAX (a.fis_numver)
               INTO   nro
               FROM   cd_fiscalizacion a
@@ -6519,6 +6777,34 @@ IS
                          AND NVL (a.fis_key_dec, '-') = NVL (v_key_dec, '-')
                          AND a.fis_numver = nro + 1;
 
+            SELECT   COUNT (1) + 1
+              INTO   nro
+              FROM   cd_enmiendas a;
+
+            INSERT INTO cd_enmiendas a (a.enm_codigo,
+                                        a.fis_gestion,
+                                        a.fis_gerencia,
+                                        a.fis_nro_control,
+                                        a.enm_tipo_enmienda,
+                                        a.enm_info_original,
+                                        a.enm_info_enmendado,
+                                        a.enm_observacion,
+                                        a.enm_lst_ope,
+                                        a.enm_usuario,
+                                        a.enm_numver,
+                                        a.enm_fecha)
+              VALUES   (nro,
+                        v_gestion,
+                        v_gerencia,
+                        v_nro_control,
+                        'ENVIO LEGAL',
+                        v_original,
+                        v_enmendado,
+                        UPPER (prm_observaciones),
+                        'U',
+                        UPPER (prm_usuario),
+                        0,
+                        SYSDATE);
 
             res := 'CORRECTO';
             COMMIT;
@@ -7351,6 +7637,114 @@ IS
         WHEN NO_DATA_FOUND
         THEN
             RETURN '-';
+    END;
+
+
+    FUNCTION restardiashabiles (prm_gerencia IN VARCHAR2, prm_dias IN NUMBER)
+        RETURN VARCHAR2
+    IS
+        v_valor              DATE;
+        v_fecharegistro      DATE;
+        v_fechavencimiento   DATE;
+        v_fechatemp          DATE;
+        v_plazo              NUMBER;
+        v_i                  NUMBER;
+        v_cant               NUMBER;
+        v_aduana             VARCHAR2 (4);
+    BEGIN
+        v_plazo := prm_dias;
+        v_i := 1;
+        v_fechatemp := SYSDATE - 1;
+
+        SELECT   DECODE (prm_gerencia,
+                         'GNF', '201',
+                         'GRLP', '201',
+                         'GROR', '401',
+                         'GRCB', '301',
+                         'GRSC', '701',
+                         'GRTJ', '601',
+                         'GRPT', '501',
+                         '201')
+          INTO   v_aduana
+          FROM   DUAL;
+
+
+        WHILE v_i <= v_plazo
+        LOOP
+            SELECT   COUNT ( * )
+              INTO   v_cant
+              FROM   ops$asy.unholtab
+             WHERE       cuo_cod = v_aduana
+                     AND hol_day = v_fechatemp
+                     AND lst_ope = 'U';
+
+            IF v_cant = 0
+            THEN                                            --Si no es feriado
+                v_i := v_i + 1;
+            END IF;
+
+            v_fechavencimiento := v_fechatemp;
+            v_fechatemp := v_fechatemp - 1;
+        END LOOP;
+
+        RETURN TO_CHAR (v_fechavencimiento, 'dd/mm/yyyy');
+    END;
+
+    FUNCTION aumentardiashabiles (prm_gerencia   IN VARCHAR2,
+                                  prm_fecha      IN VARCHAR2,
+                                  prm_dias       IN NUMBER)
+        RETURN VARCHAR2
+    IS
+        v_valor              DATE;
+        v_fecharegistro      DATE;
+        v_fechavencimiento   DATE;
+        v_fechatemp          DATE;
+        v_plazo              NUMBER;
+        v_i                  NUMBER;
+        v_cant               NUMBER;
+        v_aduana             VARCHAR2 (4);
+    BEGIN
+        IF prm_fecha IS NULL
+        THEN
+            RETURN NULL;
+        ELSE
+            v_plazo := prm_dias;
+            v_i := 1;
+            v_fechatemp := TO_DATE (prm_fecha, 'dd/mm/yyyy') + 1;
+
+            SELECT   DECODE (prm_gerencia,
+                             'GNF', '201',
+                             'GRL', '201',
+                             'GRO', '401',
+                             'GRC', '301',
+                             'GRS', '701',
+                             'GRT', '601',
+                             'GRP', '501',
+                             '201')
+              INTO   v_aduana
+              FROM   DUAL;
+
+
+            WHILE v_i <= v_plazo
+            LOOP
+                SELECT   COUNT ( * )
+                  INTO   v_cant
+                  FROM   ops$asy.unholtab
+                 WHERE       cuo_cod = v_aduana
+                         AND hol_day = v_fechatemp
+                         AND lst_ope = 'U';
+
+                IF v_cant = 0
+                THEN                                        --Si no es feriado
+                    v_i := v_i + 1;
+                END IF;
+
+                v_fechavencimiento := v_fechatemp;
+                v_fechatemp := v_fechatemp + 1;
+            END LOOP;
+
+            RETURN TO_CHAR (v_fechavencimiento, 'dd/mm/yyyy');
+        END IF;
     END;
 END;
 /
