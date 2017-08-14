@@ -336,7 +336,7 @@ END;
 
 CREATE OR REPLACE 
 PACKAGE BODY pkg_sicodif
-/* Formatted on 19-jul.-2017 10:41:53 (QP5 v5.126) */
+/* Formatted on 11-ago.-2017 17:04:28 (QP5 v5.126) */
 IS
     /*dirmira CONSTANT VARCHAR2 (100)
             := 'http://anbsw07.aduana.gob.bo:7601/mira' ;*/
@@ -819,8 +819,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE   /*  a.sad_flw = 1
-                   AND */
+             WHERE                /*  a.sad_flw = 1
+                                AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -884,8 +884,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE   /*  a.sad_flw = 1
-                   AND */
+             WHERE                /*  a.sad_flw = 1
+                                AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -961,8 +961,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE   /*a.sad_flw = 1
-                 AND */
+             WHERE                    /*a.sad_flw = 1
+                                  AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -1021,8 +1021,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE   /*a.sad_flw = 1
-                 AND */
+             WHERE                    /*a.sad_flw = 1
+                                  AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -2912,8 +2912,8 @@ IS
                            ops$asy.unctytab cty,
                            ops$asy.sad_spy spy,
                            ops$asy.sad_spy spy3
-                   WHERE /*gen.sad_flw = '1'
-                     AND */
+                   WHERE      /*gen.sad_flw = '1'
+                          AND */
                         gen    .sad_asmt_serial IS NOT NULL
                            AND gen.lst_ope = 'U'
                            AND gen.sad_num = '0'
@@ -2961,8 +2961,8 @@ IS
                            ops$asy.unctytab cty,
                            ops$asy.sad_spy spy,
                            ops$asy.sad_spy spy3
-                   WHERE /*gen.sad_flw = '1'
-                     AND */
+                   WHERE      /*gen.sad_flw = '1'
+                          AND */
                         gen    .sad_asmt_serial IS NOT NULL
                            AND gen.lst_ope = 'U'
                            AND gen.sad_num = '0'
@@ -3163,8 +3163,8 @@ IS
                          ops$asy.sad_spy spy3,
                          ops$asy.sad_spy spy4,
                          cd_fiscalizacion fis
-                 WHERE /*gen.sad_flw = '1'
-                   AND */
+                 WHERE          /*gen.sad_flw = '1'
+                            AND */
                       gen    .sad_asmt_serial IS NOT NULL
                          AND gen.lst_ope = 'U'
                          AND gen.sad_num = '0'
@@ -3353,8 +3353,8 @@ IS
                          ops$asy.sad_spy spy3,
                          ops$asy.sad_spy spy4,
                          cd_fiscalizacion fis
-                 WHERE /*gen.sad_flw = '1'
-                   AND */
+                 WHERE          /*gen.sad_flw = '1'
+                            AND */
                       gen    .sad_asmt_serial IS NOT NULL
                          AND gen.lst_ope = 'U'
                          AND gen.sad_num = '0'
@@ -5546,6 +5546,10 @@ IS
         v_key_cuo              VARCHAR2 (4);
         v_key_dec              VARCHAR2 (17);
         v_key_nber             VARCHAR2 (13);
+        vc_key_year            VARCHAR2 (4);
+        vc_key_cuo             VARCHAR2 (4);
+        vc_key_dec             VARCHAR2 (17);
+        vc_key_nber            VARCHAR2 (13);
         nro                    NUMBER (8) := 0;
         gerencia               VARCHAR2 (4);
         cont                   NUMBER (8) := 0;
@@ -5563,11 +5567,18 @@ IS
                  AND a.sad_rcpt_nber = prm_rec_nro_recibo;
 
         --AND a.sad_num = 0;
-
         IF cont > 0
         THEN
-            SELECT   sad_rcpt_date
-              INTO   v_fecha_recibo
+            SELECT   sad_rcpt_date,
+                     key_year,
+                     key_cuo,
+                     key_dec,
+                     key_nber
+              INTO   v_fecha_recibo,
+                     v_key_year,
+                     v_key_cuo,
+                     v_key_dec,
+                     v_key_nber
               FROM   ops$asy.bo_sad_payment a
              WHERE       TO_CHAR (a.sad_rcpt_date, 'yyyy') = prm_rec_gestion
                      AND a.key_cuo = prm_rec_aduana
@@ -5586,79 +5597,106 @@ IS
 
             IF v_fecha_recibo >= v_fecha_notificacion
             THEN
-                SELECT   COUNT (1)
-                  INTO   cont
-                  FROM   cd_recibos a
-                 WHERE       fis_gestion = prm_gestion
-                         AND fis_gerencia = prm_gerencia
-                         AND fis_nro_control = prm_nro_control
-                         AND rec_tipo_deuda = prm_tipo_deuda
-                         AND rec_gestion = prm_rec_gestion
-                         AND rec_aduana = prm_rec_aduana
-                         AND rec_nro_recibo = prm_rec_nro_recibo
-                         AND rec_lst_ope = 'U'
-                         AND rec_numver = 0;
-
-
-
-                IF cont = 0
+                IF v_key_nber IS NOT NULL
                 THEN
-                    SELECT   NVL (SUM (rec_monto), 0) + prm_monto
-                      INTO   v_val_registro
-                      FROM   cd_recibos a
-                     WHERE       rec_gestion = prm_rec_gestion
-                             AND rec_aduana = prm_rec_aduana
-                             AND rec_nro_recibo = prm_rec_nro_recibo
-                             AND rec_lst_ope = 'U'
-                             AND rec_numver = 0;
-
-                    SELECT   SUM (a.sad_pco_amount)
-                      INTO   v_val_recibo
-                      FROM   ops$asy.bo_sad_payment a
-                     WHERE   sad_rcpt_nber = prm_rec_nro_recibo
-                             AND TO_CHAR (sad_rcpt_date, 'yyyy') =
-                                    prm_rec_gestion
-                             AND key_cuo = prm_rec_aduana;
-
-                    IF v_val_registro <= v_val_recibo
+                    IF     v_key_year = vc_key_year
+                       AND v_key_cuo = vc_key_cuo
+                       AND NVL (v_key_dec, 0) = NVL (vc_key_dec, 0)
+                       AND v_key_nber = vc_key_nber
                     THEN
-                        SELECT   DECODE (MAX (a.rec_codigo),
-                                         NULL, 0,
-                                         MAX (a.rec_codigo))
-                          INTO   nro
-                          FROM   cd_recibos a;
+                        SELECT   COUNT (1)
+                          INTO   cont
+                          FROM   cd_recibos a
+                         WHERE       fis_gestion = prm_gestion
+                                 AND fis_gerencia = prm_gerencia
+                                 AND fis_nro_control = prm_nro_control
+                                 AND rec_tipo_deuda = prm_tipo_deuda
+                                 AND rec_gestion = prm_rec_gestion
+                                 AND rec_aduana = prm_rec_aduana
+                                 AND rec_nro_recibo = prm_rec_nro_recibo
+                                 AND rec_lst_ope = 'U'
+                                 AND rec_numver = 0;
 
-                        INSERT INTO cd_recibos a (a.rec_codigo,
-                                                  a.fis_gestion,
-                                                  a.fis_gerencia,
-                                                  a.fis_nro_control,
-                                                  a.rec_tipo_deuda,
-                                                  a.rec_monto,
-                                                  a.rec_fecha_pago,
-                                                  a.rec_lst_ope,
-                                                  a.rec_usuario,
-                                                  a.rec_numver,
-                                                  a.rec_fecha,
-                                                  a.rec_gestion,
-                                                  a.rec_aduana,
-                                                  a.rec_nro_recibo)
-                          VALUES   (nro + 1,
-                                    prm_gestion,
-                                    prm_gerencia,
-                                    prm_nro_control,
-                                    prm_tipo_deuda,
-                                    prm_monto,
-                                    SYSDATE,
-                                    'U',
-                                    prm_usuario,
-                                    0,
-                                    SYSDATE,
-                                    prm_rec_gestion,
-                                    prm_rec_aduana,
-                                    prm_rec_nro_recibo);
 
-                        res := 'CORRECTO';
-                        COMMIT;
+
+                        IF cont = 0
+                        THEN
+                            SELECT   NVL (SUM (rec_monto), 0) + prm_monto
+                              INTO   v_val_registro
+                              FROM   cd_recibos a
+                             WHERE       rec_gestion = prm_rec_gestion
+                                     AND rec_aduana = prm_rec_aduana
+                                     AND rec_nro_recibo = prm_rec_nro_recibo
+                                     AND rec_lst_ope = 'U'
+                                     AND rec_numver = 0;
+
+                            SELECT   SUM (a.sad_pco_amount)
+                              INTO   v_val_recibo
+                              FROM   ops$asy.bo_sad_payment a
+                             WHERE   sad_rcpt_nber = prm_rec_nro_recibo
+                                     AND TO_CHAR (sad_rcpt_date, 'yyyy') =
+                                            prm_rec_gestion
+                                     AND key_cuo = prm_rec_aduana;
+
+                            IF v_val_registro <= v_val_recibo
+                            THEN
+                                SELECT   DECODE (MAX (a.rec_codigo),
+                                                 NULL, 0,
+                                                 MAX (a.rec_codigo))
+                                  INTO   nro
+                                  FROM   cd_recibos a;
+
+                                INSERT INTO cd_recibos a (a.rec_codigo,
+                                                          a.fis_gestion,
+                                                          a.fis_gerencia,
+                                                          a.fis_nro_control,
+                                                          a.rec_tipo_deuda,
+                                                          a.rec_monto,
+                                                          a.rec_fecha_pago,
+                                                          a.rec_lst_ope,
+                                                          a.rec_usuario,
+                                                          a.rec_numver,
+                                                          a.rec_fecha,
+                                                          a.rec_gestion,
+                                                          a.rec_aduana,
+                                                          a.rec_nro_recibo)
+                                  VALUES   (nro + 1,
+                                            prm_gestion,
+                                            prm_gerencia,
+                                            prm_nro_control,
+                                            prm_tipo_deuda,
+                                            prm_monto,
+                                            SYSDATE,
+                                            'U',
+                                            prm_usuario,
+                                            0,
+                                            SYSDATE,
+                                            prm_rec_gestion,
+                                            prm_rec_aduana,
+                                            prm_rec_nro_recibo);
+
+                                res := 'CORRECTO';
+                                COMMIT;
+                            ELSE
+                                res :=
+                                       'ERRORRECIBO '
+                                    || prm_rec_gestion
+                                    || ' '
+                                    || prm_rec_aduana
+                                    || ' R-'
+                                    || prm_rec_nro_recibo
+                                    || ', LA SUMA DE LOS MONTOS REGISTRADOS ES MAYOR AL VALOR DEL RECIBO';
+                            END IF;
+                        ELSE
+                            res :=
+                                   'ERRORRECIBO '
+                                || prm_rec_gestion
+                                || ' '
+                                || prm_rec_aduana
+                                || ' R-'
+                                || prm_rec_nro_recibo
+                                || ' YA SE ENCUENTRA REGISTRADO, CON EL MISMO CONCEPTO DE PAGO';
+                        END IF;
                     ELSE
                         res :=
                                'ERRORRECIBO '
@@ -5667,17 +5705,102 @@ IS
                             || prm_rec_aduana
                             || ' R-'
                             || prm_rec_nro_recibo
-                            || ', LA SUMA DE LOS MONTOS REGISTRADOS ES MAYOR AL VALOR DEL RECIBO';
+                            || ' EL RECIBO NO CORRESPONDE CON LA DECLARACION QUE SE ESTA FISCALIZANDO';
                     END IF;
                 ELSE
-                    res :=
-                           'ERRORRECIBO '
-                        || prm_rec_gestion
-                        || ' '
-                        || prm_rec_aduana
-                        || ' R-'
-                        || prm_rec_nro_recibo
-                        || ' YA SE ENCUENTRA REGISTRADO, CON EL MISMO CONCEPTO DE PAGO';
+                    SELECT   COUNT (1)
+                      INTO   cont
+                      FROM   cd_recibos a
+                     WHERE       fis_gestion = prm_gestion
+                             AND fis_gerencia = prm_gerencia
+                             AND fis_nro_control = prm_nro_control
+                             AND rec_tipo_deuda = prm_tipo_deuda
+                             AND rec_gestion = prm_rec_gestion
+                             AND rec_aduana = prm_rec_aduana
+                             AND rec_nro_recibo = prm_rec_nro_recibo
+                             AND rec_lst_ope = 'U'
+                             AND rec_numver = 0;
+
+
+
+                    IF cont = 0
+                    THEN
+                        SELECT   NVL (SUM (rec_monto), 0) + prm_monto
+                          INTO   v_val_registro
+                          FROM   cd_recibos a
+                         WHERE       rec_gestion = prm_rec_gestion
+                                 AND rec_aduana = prm_rec_aduana
+                                 AND rec_nro_recibo = prm_rec_nro_recibo
+                                 AND rec_lst_ope = 'U'
+                                 AND rec_numver = 0;
+
+                        SELECT   SUM (a.sad_pco_amount)
+                          INTO   v_val_recibo
+                          FROM   ops$asy.bo_sad_payment a
+                         WHERE   sad_rcpt_nber = prm_rec_nro_recibo
+                                 AND TO_CHAR (sad_rcpt_date, 'yyyy') =
+                                        prm_rec_gestion
+                                 AND key_cuo = prm_rec_aduana;
+
+                        IF v_val_registro <= v_val_recibo
+                        THEN
+                            SELECT   DECODE (MAX (a.rec_codigo),
+                                             NULL, 0,
+                                             MAX (a.rec_codigo))
+                              INTO   nro
+                              FROM   cd_recibos a;
+
+                            INSERT INTO cd_recibos a (a.rec_codigo,
+                                                      a.fis_gestion,
+                                                      a.fis_gerencia,
+                                                      a.fis_nro_control,
+                                                      a.rec_tipo_deuda,
+                                                      a.rec_monto,
+                                                      a.rec_fecha_pago,
+                                                      a.rec_lst_ope,
+                                                      a.rec_usuario,
+                                                      a.rec_numver,
+                                                      a.rec_fecha,
+                                                      a.rec_gestion,
+                                                      a.rec_aduana,
+                                                      a.rec_nro_recibo)
+                              VALUES   (nro + 1,
+                                        prm_gestion,
+                                        prm_gerencia,
+                                        prm_nro_control,
+                                        prm_tipo_deuda,
+                                        prm_monto,
+                                        SYSDATE,
+                                        'U',
+                                        prm_usuario,
+                                        0,
+                                        SYSDATE,
+                                        prm_rec_gestion,
+                                        prm_rec_aduana,
+                                        prm_rec_nro_recibo);
+
+                            res := 'CORRECTO';
+                            COMMIT;
+                        ELSE
+                            res :=
+                                   'ERRORRECIBO '
+                                || prm_rec_gestion
+                                || ' '
+                                || prm_rec_aduana
+                                || ' R-'
+                                || prm_rec_nro_recibo
+                                || ', LA SUMA DE LOS MONTOS REGISTRADOS ES MAYOR AL VALOR DEL RECIBO';
+                        END IF;
+                    ELSE
+                        res :=
+                               'ERRORRECIBO '
+                            || prm_rec_gestion
+                            || ' '
+                            || prm_rec_aduana
+                            || ' R-'
+                            || prm_rec_nro_recibo
+                            || ' YA SE ENCUENTRA REGISTRADO, CON EL MISMO CONCEPTO DE PAGO';
+                    END IF;
                 END IF;
             ELSE
                 res :=
@@ -6296,7 +6419,7 @@ IS
                      fis_gerencia,
                      fis_nro_control,
                         'Fecha de Notificaci&oacute;n: '
-                     || TO_CHAR(a.fis_reg_fec_not_doc,'dd/mm/yyyy')
+                     || TO_CHAR (a.fis_reg_fec_not_doc, 'dd/mm/yyyy')
                      || '<br>Tipo de Notificaci&oacute;n: '
                      || a.fis_reg_tip_not_doc
               INTO   v_gestion,
@@ -6657,7 +6780,7 @@ IS
                      fis_gerencia,
                      fis_nro_control,
                         'Fecha de Remisi&oacute;n:'
-                     || to_char(a.fis_reg_fec_env_legal,'dd/mm/yyyy')
+                     || TO_CHAR (a.fis_reg_fec_env_legal, 'dd/mm/yyyy')
                      || '<br>N&uacute;mero de Documento de remisi&oacute;n: '
                      || a.fis_reg_nro_env_legal
               INTO   v_gestion,
