@@ -1,6 +1,6 @@
 CREATE OR REPLACE 
 PACKAGE pkg_sicodif
-/* Formatted on 5-mar.-2017 23:33:21 (QP5 v5.126) */
+/* Formatted on 14-ago.-2017 17:47:10 (QP5 v5.126) */
 IS
     TYPE cursortype IS REF CURSOR;
 
@@ -163,14 +163,14 @@ IS
                                prm_usuario      IN VARCHAR2)
         RETURN VARCHAR2;
 
-    FUNCTION notifica_control_enm (prm_key_year     IN VARCHAR2,
-                                   prm_key_cuo      IN VARCHAR2,
-                                   prm_reg_serial   IN VARCHAR2,
-                                   prm_fec_not      IN VARCHAR2,
-                                   prm_obs          IN VARCHAR2,
-                                   prm_tipo_not     IN VARCHAR2,
-                                   prm_usuario      IN VARCHAR2,
-                                   prm_observaciones     IN VARCHAR2)
+    FUNCTION notifica_control_enm (prm_key_year        IN VARCHAR2,
+                                   prm_key_cuo         IN VARCHAR2,
+                                   prm_reg_serial      IN VARCHAR2,
+                                   prm_fec_not         IN VARCHAR2,
+                                   prm_obs             IN VARCHAR2,
+                                   prm_tipo_not        IN VARCHAR2,
+                                   prm_usuario         IN VARCHAR2,
+                                   prm_observaciones   IN VARCHAR2)
         RETURN VARCHAR2;
 
 
@@ -203,7 +203,7 @@ IS
                                  prm_multa_contrabd         IN VARCHAR2,
                                  prm_usuario                IN VARCHAR2,
                                  prm_fobfinal               IN NUMBER,
-                                     prm_sancion  IN VARCHAR2)
+                                 prm_sancion                IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION resultados_control_enm (prm_key_year               IN VARCHAR2,
@@ -219,8 +219,8 @@ IS
                                      prm_multa_contrabd         IN VARCHAR2,
                                      prm_usuario                IN VARCHAR2,
                                      prm_fobfinal               IN NUMBER,
-                                     prm_observaciones     IN VARCHAR2,
-                                     prm_sancion  IN VARCHAR2)
+                                     prm_observaciones          IN VARCHAR2,
+                                     prm_sancion                IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION registra_recibo (prm_gestion          IN VARCHAR2,
@@ -283,7 +283,7 @@ IS
                                        prm_reg_fec_env_legal   IN VARCHAR2,
                                        prm_reg_nro_env_legal   IN VARCHAR2,
                                        prm_usuario             IN VARCHAR2,
-                                       prm_observaciones     IN VARCHAR2)
+                                       prm_observaciones       IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION rechaza_control (prm_key_year     IN VARCHAR2,
@@ -324,9 +324,10 @@ IS
         w_key_dec    IN ops$asy.sad_gen.key_dec%TYPE,
         w_key_nber   IN ops$asy.sad_gen.key_nber%TYPE)
         RETURN VARCHAR2;
-         FUNCTION restardiashabiles (prm_gerencia   IN VARCHAR2,
-                                prm_dias       IN NUMBER)
+
+    FUNCTION restardiashabiles (prm_gerencia IN VARCHAR2, prm_dias IN NUMBER)
         RETURN VARCHAR2;
+
     FUNCTION aumentardiashabiles (prm_gerencia   IN VARCHAR2,
                                   prm_fecha      IN VARCHAR2,
                                   prm_dias       IN NUMBER)
@@ -336,7 +337,7 @@ END;
 
 CREATE OR REPLACE 
 PACKAGE BODY pkg_sicodif
-/* Formatted on 11-ago.-2017 17:04:28 (QP5 v5.126) */
+/* Formatted on 18-ago.-2017 11:20:34 (QP5 v5.126) */
 IS
     /*dirmira CONSTANT VARCHAR2 (100)
             := 'http://anbsw07.aduana.gob.bo:7601/mira' ;*/
@@ -479,7 +480,7 @@ IS
                     FROM   ops$asy.uncuotab a
                    WHERE       a.lst_ope = 'U'
                            AND a.cuo_cod NOT IN ('ALL', 'CUO01')
-                           AND SUBSTR (a.cuo_cod, 1, 1) IN ('3', '1')
+                           AND SUBSTR (a.cuo_cod, 1, 1) IN ('3')
                 ORDER BY   1;
         END IF;
 
@@ -819,8 +820,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE                /*  a.sad_flw = 1
-                                AND */
+             WHERE   /*  a.sad_flw = 1
+                   AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -884,8 +885,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE                /*  a.sad_flw = 1
-                                AND */
+             WHERE   /*  a.sad_flw = 1
+                   AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -961,8 +962,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE                    /*a.sad_flw = 1
-                                  AND */
+             WHERE   /*a.sad_flw = 1
+                 AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -1021,8 +1022,8 @@ IS
                      ops$asy.sad_gen a,
                      ops$asy.sad_occ_cns cns,
                      ops$asy.bo_oce_opecab cmp
-             WHERE                    /*a.sad_flw = 1
-                                  AND */
+             WHERE   /*a.sad_flw = 1
+                 AND */
                   a      .lst_ope = 'U'
                      AND a.sad_num = 0
                      AND a.key_year = f.fis_key_year
@@ -2843,7 +2844,6 @@ IS
                      AND b.key_cuo = a.rec_aduana
                      AND b.sad_rcpt_nber = a.rec_nro_recibo
                      AND b.sad_rcpt_serial = 'R'
-                     AND b.sad_num = 0
                      AND a.fis_gestion = prm_key_year
                      AND a.fis_gerencia = prm_key_cuo
                      AND a.fis_nro_control = prm_reg_serial
@@ -2912,8 +2912,8 @@ IS
                            ops$asy.unctytab cty,
                            ops$asy.sad_spy spy,
                            ops$asy.sad_spy spy3
-                   WHERE      /*gen.sad_flw = '1'
-                          AND */
+                   WHERE /*gen.sad_flw = '1'
+                     AND */
                         gen    .sad_asmt_serial IS NOT NULL
                            AND gen.lst_ope = 'U'
                            AND gen.sad_num = '0'
@@ -2961,8 +2961,8 @@ IS
                            ops$asy.unctytab cty,
                            ops$asy.sad_spy spy,
                            ops$asy.sad_spy spy3
-                   WHERE      /*gen.sad_flw = '1'
-                          AND */
+                   WHERE /*gen.sad_flw = '1'
+                     AND */
                         gen    .sad_asmt_serial IS NOT NULL
                            AND gen.lst_ope = 'U'
                            AND gen.sad_num = '0'
@@ -3163,8 +3163,8 @@ IS
                          ops$asy.sad_spy spy3,
                          ops$asy.sad_spy spy4,
                          cd_fiscalizacion fis
-                 WHERE          /*gen.sad_flw = '1'
-                            AND */
+                 WHERE /*gen.sad_flw = '1'
+                   AND */
                       gen    .sad_asmt_serial IS NOT NULL
                          AND gen.lst_ope = 'U'
                          AND gen.sad_num = '0'
@@ -3353,8 +3353,8 @@ IS
                          ops$asy.sad_spy spy3,
                          ops$asy.sad_spy spy4,
                          cd_fiscalizacion fis
-                 WHERE          /*gen.sad_flw = '1'
-                            AND */
+                 WHERE /*gen.sad_flw = '1'
+                   AND */
                       gen    .sad_asmt_serial IS NOT NULL
                          AND gen.lst_ope = 'U'
                          AND gen.sad_num = '0'
@@ -4375,17 +4375,18 @@ IS
                              prm_usuario      IN VARCHAR2)
         RETURN VARCHAR2
     IS
-        res          VARCHAR2 (300) := 0;
-        v_key_year   VARCHAR2 (4);
-        v_key_cuo    VARCHAR2 (4);
-        v_key_dec    VARCHAR2 (17);
-        v_key_nber   VARCHAR2 (13);
-        nro          NUMBER (8) := 0;
-        nrocd        NUMBER (8) := 0;
+        res               VARCHAR2 (300) := 0;
+        v_key_year        VARCHAR2 (4);
+        v_key_cuo         VARCHAR2 (4);
+        v_key_dec         VARCHAR2 (17);
+        v_key_nber        VARCHAR2 (13);
+        nro               NUMBER (8) := 0;
+        nrocd             NUMBER (8) := 0;
 
-        cd_year      VARCHAR2 (4);
-        cd_ger       VARCHAR2 (4);
-        cd_nro       NUMBER (8);
+        cd_year           VARCHAR2 (4);
+        cd_ger            VARCHAR2 (4);
+        cd_nro            NUMBER (8);
+        cd_fiscalizador   VARCHAR2 (30);
     BEGIN
         SELECT   a.key_year,
                  a.key_cuo,
@@ -4405,8 +4406,14 @@ IS
 
         IF v_key_year IS NOT NULL
         THEN
-            SELECT   a.fis_gestion, a.fis_gerencia, fis_nro_control
-              INTO   cd_year, cd_ger, cd_nro
+            SELECT   a.fis_gestion,
+                     a.fis_gerencia,
+                     fis_nro_control,
+                     fis_fiscalizador
+              INTO   cd_year,
+                     cd_ger,
+                     cd_nro,
+                     cd_fiscalizador
               FROM   cd_fiscalizacion a
              WHERE       a.fis_key_year = v_key_year
                      AND a.fis_key_cuo = v_key_cuo
@@ -4616,7 +4623,27 @@ IS
                              AND a.fis_numver = nro + 1;
             END IF;
 
-
+            /*  ACTUALIZAR EL ESTADO DE FICHA INFORMATIVA EN EL SISTEMA MIRA  */
+            IF cd_ger =
+                   'GNF'
+            THEN
+                mira.pkg_fisca.graba_mira_fis (prm_key_year,
+                                               prm_key_cuo,
+                                               prm_reg_serial,
+                                               'DIFERIDO_GNF',
+                                               cd_fiscalizador,
+                                               'REGISTRADO POR SICODIF',
+                                               prm_usuario);
+            ELSE
+                mira.pkg_fisca.graba_mira_fis (prm_key_year,
+                                               prm_key_cuo,
+                                               prm_reg_serial,
+                                               'DIFERIDO',
+                                               cd_fiscalizador,
+                                               'REGISTRADO POR SICODIF',
+                                               prm_usuario);
+            END IF;
+            /*  *****************   */
             res := 'CORRECTO';
             COMMIT;
         ELSE
@@ -5586,8 +5613,16 @@ IS
                      --AND a.sad_num = 0
                      AND ROWNUM = 1;
 
-            SELECT   a.fis_fec_notificacion
-              INTO   v_fecha_notificacion
+            SELECT   a.fis_fec_notificacion,
+                     a.fis_key_year,
+                     a.fis_key_cuo,
+                     a.fis_key_dec,
+                     a.fis_key_nber
+              INTO   v_fecha_notificacion,
+                     vc_key_year,
+                     vc_key_cuo,
+                     vc_key_dec,
+                     vc_key_nber
               FROM   cd_fiscalizacion a
              WHERE       fis_gestion = prm_gestion
                      AND fis_gerencia = prm_gerencia
